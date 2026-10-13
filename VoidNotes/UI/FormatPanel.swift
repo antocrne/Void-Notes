@@ -9,11 +9,11 @@ struct WeightChoice: Identifiable {
     var id: String { label }
 
     static let all = [
-        WeightChoice(label: "Léger", weight: .light, font: .light),
-        WeightChoice(label: "Normal", weight: nil, font: .regular),
-        WeightChoice(label: "Moyen", weight: .medium, font: .medium),
-        WeightChoice(label: "Semi-gras", weight: .semibold, font: .semibold),
-        WeightChoice(label: "Gras", weight: .bold, font: .bold),
+        WeightChoice(label: String(localized: "Léger"), weight: .light, font: .light),
+        WeightChoice(label: String(localized: "Normal"), weight: nil, font: .regular),
+        WeightChoice(label: String(localized: "Moyen"), weight: .medium, font: .medium),
+        WeightChoice(label: String(localized: "Semi-gras"), weight: .semibold, font: .semibold),
+        WeightChoice(label: String(localized: "Gras"), weight: .bold, font: .bold),
     ]
 }
 
@@ -160,7 +160,7 @@ struct FormatPanel: View {
             section("Graisse", detail: WeightChoice.all.first { $0.weight == weight }?.label) {
                 HStack(spacing: 4) {
                     ForEach(WeightChoice.all) { choice in
-                        Tile(help: choice.label, selected: choice.weight == weight) { act { $0.setWeight(choice.weight) } } label: {
+                        Tile(verbatimHelp: choice.label, selected: choice.weight == weight) { act { $0.setWeight(choice.weight) } } label: {
                             Text("Aa").font(.system(size: 14, weight: choice.font))
                         }
                     }
@@ -176,7 +176,7 @@ struct FormatPanel: View {
                     Tile(help: "Séparateur", selected: false) { act { $0.insertDivider() } } label: { symbol("minus") }
                 }
             }
-            section("Lien", detail: wrongAddress ? "Adresse non reconnue" : nil) {
+            section("Lien", detail: wrongAddress ? String(localized: "Adresse non reconnue") : nil) {
                 let link = editor?.currentLink
                 HStack(spacing: 4) {
                     TextField("Adresse du lien", text: $address, prompt: Text(verbatim: "void.app, nom@exemple.fr…"))
@@ -233,7 +233,7 @@ struct FormatPanel: View {
     }
 
     /// A group of controls under its name; `detail` says the current choice.
-    private func section(_ title: String, detail: String? = nil, @ViewBuilder content: () -> some View) -> some View {
+    private func section(_ title: LocalizedStringKey, detail: String? = nil, @ViewBuilder content: () -> some View) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Text(title)
@@ -250,7 +250,7 @@ struct FormatPanel: View {
 
 /// A paragraph style, written the way it looks, with its shortcut.
 private struct StyleRow: View {
-    let name: String
+    let name: LocalizedStringKey
     let size: CGFloat
     let weight: Font.Weight
     let shortcut: String
@@ -284,7 +284,9 @@ private struct StyleRow: View {
 
 /// A square control of the panel: on in the accent color.
 private struct Tile<Label: View>: View {
-    let help: String
+    var help: LocalizedStringKey = ""
+    /// In place of `help`, a text already translated.
+    var verbatimHelp: String?
     let selected: Bool
     let action: () -> Void
     @ViewBuilder let label: Label
@@ -302,8 +304,8 @@ private struct Tile<Label: View>: View {
         }
         .buttonStyle(.plain)
         .onHover { hovering = $0 }
-        .help(help)
-        .accessibilityLabel(help)
+        .help(verbatimHelp.map { Text($0) } ?? Text(help))
+        .accessibilityLabel(verbatimHelp.map { Text($0) } ?? Text(help))
         .accessibilityAddTraits(selected ? .isSelected : [])
     }
 }

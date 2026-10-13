@@ -52,7 +52,7 @@ struct NoteEditor: NSViewRepresentable {
         if textView.searchWords != words { textView.searchWords = words }
         textView.setProofreading(spelling: checksSpelling, grammar: checksGrammar)
         textView.albumHeight = note.photos.isEmpty ? 0 : NotePhotoAlbumSection.height
-        textView.meta = note.deleted == nil ? (note.archived ? "Archivée  ·  " : "") + NoteDate.meta(created: note.created, modified: note.modified)
+        textView.meta = note.deleted == nil ? (note.archived ? String(localized: "Archivée  ·  ") : "") + NoteDate.meta(created: note.created, modified: note.modified)
             : NoteDate.trashMeta(daysLeft: store.daysLeft(note))
         textView.metaHelp = NoteDate.fullMeta(created: note.created, modified: note.modified)
         textView.onChange = { [weak textView] in

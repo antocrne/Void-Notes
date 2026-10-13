@@ -102,7 +102,7 @@ final class NoteAttachmentCell: NSTextAttachmentCell {
 
     /// Under the name: "PDF · 1,2 Mo".
     private func detail(exists: Bool) -> String {
-        guard exists, let url else { return "Fichier introuvable" }
+        guard exists, let url else { return String(localized: "Fichier introuvable") }
         let kind = (name as NSString).pathExtension.uppercased()
         let bytes = (try? url.resourceValues(forKeys: [.fileSizeKey]))?.fileSize ?? 0
         let size = ByteCountFormatter.string(fromByteCount: Int64(bytes), countStyle: .file)

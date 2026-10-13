@@ -210,7 +210,7 @@ final class NoteStore {
             try FileManager.default.removeItem(at: url)
             changed()
         } catch {
-            errorMessage = "La note n'a pas pu être supprimée du disque : \(error.localizedDescription)"
+            errorMessage = String(localized: "La note n'a pas pu être supprimée du disque : \(error.localizedDescription)")
         }
     }
 
@@ -234,7 +234,7 @@ final class NoteStore {
 
     /// Why a later version's note stays where it is.
     static func laterVersionMessage(_ title: String) -> String {
-        "« \(title) » a été écrite par une version plus récente de Void Notes : elle n'est montrée qu'en lecture. Mettez l'app à jour pour la supprimer."
+        String(localized: "« \(title) » a été écrite par une version plus récente de Void Notes : elle n'est montrée qu'en lecture. Mettez l'app à jour pour la supprimer.")
     }
 
     /// Takes a note out of the trash, back to its folder if it is still there.
@@ -330,7 +330,7 @@ final class NoteStore {
         // A name is one path component, whatever the file was called.
         let name = name.replacingOccurrences(of: "/", with: "-").replacingOccurrences(of: ":", with: "-")
         let base = (name as NSString).deletingPathExtension, ext = (name as NSString).pathExtension
-        var candidate = name.isEmpty ? "Fichier" : name, number = 2
+        var candidate = name.isEmpty ? String(localized: "Fichier") : name, number = 2
         while FileManager.default.fileExists(atPath: folder.appendingPathComponent(candidate).path) {
             candidate = ext.isEmpty ? "\(base) \(number)" : "\(base) \(number).\(ext)"
             number += 1
@@ -340,7 +340,7 @@ final class NoteStore {
             try write(folder.appendingPathComponent(candidate))
             return candidate
         } catch {
-            errorMessage = "« \(name) » n'a pas pu être joint à la note : \(error.localizedDescription)"
+            errorMessage = String(localized: "« \(name) » n'a pas pu être joint à la note : \(error.localizedDescription)")
             return nil
         }
     }
@@ -610,7 +610,7 @@ final class NoteStore {
             try encoder.encode(SpacesFile(spaces: spaces)).write(to: spacesURL, options: .atomic)
             changed()
         } catch {
-            errorMessage = "Les espaces n'ont pas pu être enregistrés : \(error.localizedDescription)"
+            errorMessage = String(localized: "Les espaces n'ont pas pu être enregistrés : \(error.localizedDescription)")
         }
     }
 
@@ -639,7 +639,7 @@ final class NoteStore {
             try encoder.encode(FoldersFile(folders: folders)).write(to: foldersURL, options: .atomic)
             changed()
         } catch {
-            errorMessage = "Les dossiers n'ont pas pu être enregistrés : \(error.localizedDescription)"
+            errorMessage = String(localized: "Les dossiers n'ont pas pu être enregistrés : \(error.localizedDescription)")
         }
     }
 
@@ -745,7 +745,7 @@ final class NoteStore {
                 unsaved.remove(id)
             } catch {
                 // Stays in `unsaved`: tried again with the next change.
-                errorMessage = "La note « \(note.title) » n'a pas pu être enregistrée : \(error.localizedDescription)"
+                errorMessage = String(localized: "La note « \(note.title) » n'a pas pu être enregistrée : \(error.localizedDescription)")
             }
         }
     }

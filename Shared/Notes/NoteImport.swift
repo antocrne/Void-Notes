@@ -20,7 +20,7 @@ enum NoteImport {
     /// More than a URL should ever carry; the rest is dropped.
     static let maxLength = 100_000
     /// What the address of the page is written after.
-    static let sourceLabel = "Source : "
+    static let sourceLabel = String(localized: "Source : ")
     /// Where the sender leaves the image (`image=` gives its name): a URL can't carry it. Read
     /// once, then cleared. Named pasteboards are read without the system's paste alert.
     static let imagePasteboard = "app.void.notes.incoming"
@@ -109,7 +109,7 @@ enum NoteImport {
             .filter { $0 != Note.attachmentCharacter && !$0.isNewline }
             .replacingOccurrences(of: "/", with: "-").replacingOccurrences(of: ":", with: "-")
             .trimmingCharacters(in: .whitespaces)
-        return (base.isEmpty ? "Image" : String(base.prefix(80))) + "." + (type.preferredFilenameExtension ?? "png")
+        return (base.isEmpty ? String(localized: "Image") : String(base.prefix(80))) + "." + (type.preferredFilenameExtension ?? "png")
     }
 
     /// Reads the image left on the pasteboard, and clears it.

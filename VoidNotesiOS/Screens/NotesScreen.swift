@@ -157,17 +157,17 @@ struct NotesScreen: View {
         Group {
             switch row {
             case .allNotes:
-                FoldRow(symbol: "tray.full", name: "Toutes les notes", depth: 0, expanded: model.showsAllNotes) { model.toggleAllNotes() }
+                FoldRow(symbol: "tray.full", name: String(localized: "Toutes les notes"), depth: 0, expanded: model.showsAllNotes) { model.toggleAllNotes() }
             case .folder(let folder, let depth):
                 FolderRow(folder: folder, depth: depth, chooseIcon: { iconFolder = folder })
             case .note(let note, let depth, _):
                 NoteRow(note: note, depth: depth)
             case .archive:
-                FoldRow(symbol: "archivebox", name: "Archives", depth: 0, expanded: model.showsArchive, dimmed: true, animated: false) {
+                FoldRow(symbol: "archivebox", name: String(localized: "Archives"), depth: 0, expanded: model.showsArchive, dimmed: true, animated: false) {
                     FoldMotion.fold("archive", open: !model.showsArchive, veiled: $veiled) { model.toggleArchive() }
                 }
             case .trash:
-                FoldRow(symbol: "trash", name: "Corbeille", depth: 0, expanded: model.showsTrash, dimmed: true, animated: false) {
+                FoldRow(symbol: "trash", name: String(localized: "Corbeille"), depth: 0, expanded: model.showsTrash, dimmed: true, animated: false) {
                     FoldMotion.fold("trash", open: !model.showsTrash, veiled: $veiled) { model.toggleTrash() }
                 }
                 .contextMenu {
@@ -430,7 +430,7 @@ private struct NoteRow: View {
     var body: some View {
         Button { model.open(note.id) } label: {
             HStack(spacing: 8) {
-                Text(note.isBlank ? "Nouvelle note" : note.title)
+                Text(note.isBlank ? String(localized: "Nouvelle note") : note.title)
                     .font(.callout)
                     .foregroundStyle(note.isBlank ? Theme.secondaryText : Theme.primaryText)
                     .lineLimit(1)
@@ -699,10 +699,10 @@ private struct SpaceBar: View {
 
 /// Name and icon of a space: to make one, or to change one.
 private struct SpaceForm: View {
-    let title: String
+    let title: LocalizedStringKey
     @State var name: String
     @State var icon: String
-    let confirm: String
+    let confirm: LocalizedStringKey
     let done: (String, String) -> Void
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focused: Bool

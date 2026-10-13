@@ -1,0 +1,23 @@
+{
+  "sourceLanguage" : "fr",
+  "strings" : {
+    "NSFaceIDUsageDescription" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Void Notes uses Face ID to show your locked notes."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Void Notes utilise Face ID pour afficher vos notes verrouillées."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

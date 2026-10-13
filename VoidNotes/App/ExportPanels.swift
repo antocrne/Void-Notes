@@ -9,12 +9,12 @@ enum ExportPanels {
     static func export(_ note: Note, store: NoteStore) {
         let folder = NoteExport.needsFolder(note, store: store)
         let panel = NSSavePanel()
-        panel.title = "Exporter en Markdown"
-        panel.prompt = "Exporter"
+        panel.title = String(localized: "Exporter en Markdown")
+        panel.prompt = String(localized: "Exporter")
         panel.canCreateDirectories = true
         panel.nameFieldStringValue = NoteMarkdown.fileName(for: note)
         if folder {
-            panel.message = "La note a des images ou des fichiers : un dossier est créé, avec le fichier Markdown et une copie de ses fichiers."
+            panel.message = String(localized: "La note a des images ou des fichiers : un dossier est créé, avec le fichier Markdown et une copie de ses fichiers.")
         } else {
             panel.allowedContentTypes = [UTType(filenameExtension: "md") ?? .plainText]
         }
@@ -28,9 +28,9 @@ enum ExportPanels {
     /// folder chosen.
     static func exportAll(store: NoteStore) {
         let panel = NSOpenPanel()
-        panel.title = "Exporter toutes les notes"
-        panel.prompt = "Exporter ici"
-        panel.message = "Un dossier « Void Notes » y est créé : une note par fichier Markdown, rangées comme dans la liste. La corbeille et les notes verrouillées n'en font pas partie."
+        panel.title = String(localized: "Exporter toutes les notes")
+        panel.prompt = String(localized: "Exporter ici")
+        panel.message = String(localized: "Un dossier « Void Notes » y est créé : une note par fichier Markdown, rangées comme dans la liste. La corbeille et les notes verrouillées n'en font pas partie.")
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
         panel.canCreateDirectories = true
@@ -40,9 +40,9 @@ enum ExportPanels {
             NSWorkspace.shared.activateFileViewerSelecting([folder])
             guard locked > 0 else { return }
             let alert = NSAlert()
-            alert.messageText = "Export terminé"
-            alert.informativeText = locked == 1 ? "Une note verrouillée n'a pas été exportée : ouvrez-la, puis Fichier → « Exporter en Markdown… »."
-                : "\(locked) notes verrouillées n'ont pas été exportées : ouvrez-les une à une, puis Fichier → « Exporter en Markdown… »."
+            alert.messageText = String(localized: "Export terminé")
+            alert.informativeText = locked == 1 ? String(localized: "Une note verrouillée n'a pas été exportée : ouvrez-la, puis Fichier → « Exporter en Markdown… ».")
+                : String(localized: "\(locked) notes verrouillées n'ont pas été exportées : ouvrez-les une à une, puis Fichier → « Exporter en Markdown… ».")
             alert.runModal()
         }
     }
@@ -53,7 +53,7 @@ enum ExportPanels {
             do {
                 try write(url)
             } catch {
-                NoteStore.shared.errorMessage = "L'export n'a pas pu être écrit : \(error.localizedDescription)"
+                NoteStore.shared.errorMessage = String(localized: "L'export n'a pas pu être écrit : \(error.localizedDescription)")
             }
         }
         if let window = NSApp.keyWindow ?? NSApp.mainWindow {

@@ -122,7 +122,7 @@ struct NoteTextEditor: UIViewRepresentable {
         let spelling: UITextSpellCheckingType = checksSpelling ? .yes : .no
         if textView.spellCheckingType != spelling { textView.spellCheckingType = spelling }
         textView.albumHeight = note.photos.isEmpty ? 0 : NotePhotoAlbumSection.height
-        textView.meta = note.deleted == nil ? (note.archived ? "Archivée  ·  " : "") + NoteDate.meta(created: note.created, modified: note.modified)
+        textView.meta = note.deleted == nil ? (note.archived ? String(localized: "Archivée  ·  ") : "") + NoteDate.meta(created: note.created, modified: note.modified)
             : NoteDate.trashMeta(daysLeft: store.daysLeft(note))
         textView.onChange = { [weak textView] in
             if let textView { onChange(textView.content) }
@@ -206,7 +206,7 @@ struct FormatBar: View {
         controller.refresh()
     }
 
-    private func toggle(_ label: String, _ symbol: String, on: Bool, action: @escaping (NoteUITextView) -> Void) -> some View {
+    private func toggle(_ label: LocalizedStringKey, _ symbol: String, on: Bool, action: @escaping (NoteUITextView) -> Void) -> some View {
         Button { act(action) } label: {
             Label(label, systemImage: on ? "checkmark" : symbol)
         }
@@ -216,7 +216,7 @@ struct FormatBar: View {
         Rectangle().fill(Theme.stroke).frame(width: 1, height: 20).padding(.horizontal, 3)
     }
 
-    private func button(_ symbol: String, _ label: String, on: Bool, action: @escaping (NoteUITextView) -> Void) -> some View {
+    private func button(_ symbol: String, _ label: LocalizedStringKey, on: Bool, action: @escaping (NoteUITextView) -> Void) -> some View {
         Button {
             if let textView = controller.textView { action(textView) }
             controller.refresh()
@@ -241,10 +241,10 @@ struct FormatBar: View {
 
         var label: String {
             switch self {
-            case .title: "Titre"
-            case .heading: "Sous-titre"
-            case .subheading: "Intertitre"
-            case .body: "Texte"
+            case .title: String(localized: "Titre")
+            case .heading: String(localized: "Sous-titre")
+            case .subheading: String(localized: "Intertitre")
+            case .body: String(localized: "Texte")
             }
         }
 

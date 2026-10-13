@@ -1,14 +1,28 @@
 import SwiftUI
 
-/// Réglages (⌘,): theme, accent color, tint of the window, and where the notes are. Every change
-/// applies at once.
+/// Réglages (⌘,): language, theme, accent color, tint of the window, and where the notes are.
+/// Every change applies at once — but the language, from the next launch.
 struct SettingsView: View {
     @Environment(AppSettings.self) private var settings
     @Environment(NoteStore.self) private var store
     @Environment(SyncEngine.self) private var sync
+    @State private var language = AppLanguage.current
 
     var body: some View {
         Form {
+            Section {
+                Picker("Langue", selection: $language) {
+                    ForEach(AppLanguage.allCases) { Text($0.label).tag($0) }
+                }
+                .onChange(of: language) { AppLanguage.choose(language) }
+                if language.needsRelaunch {
+                    HStack {
+                        Text("Void Notes doit redémarrer pour changer de langue.").font(.caption).foregroundStyle(.secondary)
+                        Spacer()
+                        Button("Redémarrer Void Notes") { AppLanguage.relaunch() }
+                    }
+                }
+            }
             Section("Apparence") {
                 LabeledContent("Thème") { ThemePicker() }
                 LabeledContent("Couleur") { AccentPicker() }
@@ -62,7 +76,7 @@ struct SettingsView: View {
                 LabeledContent {
                     Button(sync.folderURL == nil ? "Choisir un dossier…" : "Changer…") { Task { await sync.chooseFolder() } }
                 } label: {
-                    Text(sync.folderURL?.lastPathComponent ?? "Aucun dossier")
+                    Text(sync.folderURL?.lastPathComponent ?? String(localized: "Aucun dossier"))
                     Text(syncStatus)
                 }
                 if sync.conflictCount > 0 {
@@ -93,14 +107,14 @@ struct SettingsView: View {
 
     private var syncStatus: String {
         switch sync.status {
-        case .notConfigured: "Les notes ne sont que sur ce Mac"
-        case .folderUnavailable: "Dossier introuvable : choisissez-le de nouveau"
-        case .syncing: "Synchronisation…"
-        case .upToDate: sync.lastSyncAt.map { "À jour — \($0.formatted(date: .omitted, time: .shortened))" } ?? "En attente"
-        case .waitingForDownload: "iCloud Drive télécharge la dernière version…"
-        case .outdated: "Dossier écrit par une version plus récente : mettez Void Notes à jour sur ce Mac"
-        case .laterNoteHere: "Suspendue : une note de ce Mac vient d'une version plus récente de Void Notes ; mettez l'app à jour"
-        case .failed(let reason): "Échec : \(reason)"
+        case .notConfigured: String(localized: "Les notes ne sont que sur ce Mac")
+        case .folderUnavailable: String(localized: "Dossier introuvable : choisissez-le de nouveau")
+        case .syncing: String(localized: "Synchronisation…")
+        case .upToDate: sync.lastSyncAt.map { String(localized: "À jour — \($0.formatted(date: .omitted, time: .shortened))") } ?? String(localized: "En attente")
+        case .waitingForDownload: String(localized: "iCloud Drive télécharge la dernière version…")
+        case .outdated: String(localized: "Dossier écrit par une version plus récente : mettez Void Notes à jour sur ce Mac")
+        case .laterNoteHere: String(localized: "Suspendue : une note de ce Mac vient d'une version plus récente de Void Notes ; mettez l'app à jour")
+        case .failed(let reason): String(localized: "Échec : \(reason)")
         }
     }
 

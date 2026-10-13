@@ -4,7 +4,7 @@ import Foundation
 /// (`Note.folder`), a folder never lists its notes.
 struct Folder: Identifiable, Codable, Equatable {
     static let defaultIcon = "folder"
-    static let defaultName = "Nouveau dossier"
+    static var defaultName: String { String(localized: "Nouveau dossier") }
 
     /// The icons offered for a folder (SF Symbols).
     static let icons = [

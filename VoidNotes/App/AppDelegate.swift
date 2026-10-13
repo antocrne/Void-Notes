@@ -30,6 +30,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationWillTerminate(_ notification: Notification) {
         MainActor.assumeIsolated { NotesModel.shared.prepareToQuit() }
+        AppLanguage.relaunchIfRequested()
     }
 
     /// With its icon in the menu bar, the app stays there when its window is closed.

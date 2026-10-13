@@ -4,7 +4,8 @@ import SwiftUI
 
 /// Debug builds only: `-selfTest YES` checks the storage, the saved format and the formatting
 /// as you type (by typing in a real text view), prints one line per check and quits with the
-/// number of failures.
+/// number of failures. The checks read the French interface: launch with `-AppleLanguages '(fr)'`
+/// to keep it whatever the system's language.
 @MainActor
 enum SelfTest {
     private static var failures = 0

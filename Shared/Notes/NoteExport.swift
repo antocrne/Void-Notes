@@ -6,7 +6,7 @@ import Foundation
 @MainActor
 enum NoteExport {
     /// Where a note's files go, next to its Markdown.
-    static let filesFolder = "fichiers"
+    static let filesFolder = String(localized: "fichiers", comment: "Folder of a note's files, next to its exported Markdown")
 
     /// The images and files of the note that are there to be copied.
     private static func files(of note: Note, store: NoteStore) -> [String] {
@@ -43,7 +43,7 @@ enum NoteExport {
     /// subfolder, and « Archives ». Returns that folder, and how many locked notes were left out.
     static func writeAll(store: NoteStore, in directory: URL, now: Date = .now) throws -> (folder: URL, locked: Int) {
         let manager = FileManager.default
-        let date = now.formatted(.dateTime.day().month(.wide).year().locale(Locale(identifier: "fr_FR")))
+        let date = now.formatted(.dateTime.day().month(.wide).year())
         let root = unique(directory, "Void Notes – \(date)", ext: nil)
         try manager.createDirectory(at: root, withIntermediateDirectories: true)
         var locked = 0
@@ -54,9 +54,9 @@ enum NoteExport {
             }
             var folder = root
             if store.spaces.count > 1, let space = store.space(note.space) {
-                folder.appendPathComponent(NoteMarkdown.safeName(space.name, otherwise: "Espace"), isDirectory: true)
+                folder.appendPathComponent(NoteMarkdown.safeName(space.name, otherwise: String(localized: "Espace")), isDirectory: true)
             }
-            if note.archived { folder.appendPathComponent("Archives", isDirectory: true) }
+            if note.archived { folder.appendPathComponent(String(localized: "Archives"), isDirectory: true) }
             for name in folderPath(of: note.folder, store: store) {
                 folder.appendPathComponent(NoteMarkdown.safeName(name, otherwise: "Dossier"), isDirectory: true)
             }

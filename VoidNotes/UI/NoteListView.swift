@@ -339,7 +339,7 @@ private struct NoteRow: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            Text(note.isBlank ? "Nouvelle note" : note.title)
+            Text(note.isBlank ? String(localized: "Nouvelle note") : note.title)
                 .font(.system(size: 13))
                 .foregroundStyle(selected ? Theme.accent : note.isBlank ? Theme.secondaryText : Theme.primaryText)
                 .lineLimit(1)
@@ -420,8 +420,8 @@ private struct NoteRow: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel(note.isBlank ? "Nouvelle note" : note.title)
-        .accessibilityValue([note.pinned ? "Épinglée" : nil, note.locked ? "Verrouillée" : nil, NoteDate.label(note.modified)].compactMap { $0 }.joined(separator: ", "))
+        .accessibilityLabel(note.isBlank ? String(localized: "Nouvelle note") : note.title)
+        .accessibilityValue([note.pinned ? String(localized: "Épinglée") : nil, note.locked ? String(localized: "Verrouillée") : nil, NoteDate.label(note.modified)].compactMap { $0 }.joined(separator: ", "))
         .accessibilityAddTraits(selected ? [.isButton, .isSelected] : .isButton)
         .accessibilityAction { model.open(note.id) }
     }

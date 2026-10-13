@@ -78,7 +78,7 @@ final class NoteTextView: NSTextView, NSTextViewDelegate {
         textView.textContainerInset = NSSize(width: minimumMargin, height: topMargin)
         textView.delegate = textView
         textView.accent = .violet
-        textView.setAccessibilityLabel("Texte de la note")
+        textView.setAccessibilityLabel(String(localized: "Texte de la note"))
 
         let scrollView = NSScrollView()
         scrollView.drawsBackground = false
@@ -815,8 +815,8 @@ final class NoteTextView: NSTextView, NSTextViewDelegate {
         let panel = NSOpenPanel()
         panel.allowsMultipleSelection = true
         panel.canChooseDirectories = false
-        panel.prompt = "Joindre"
-        panel.message = "PDF ou tout autre fichier : une copie est gardée avec la note. Les images vont dans son album."
+        panel.prompt = String(localized: "Joindre")
+        panel.message = String(localized: "PDF ou tout autre fichier : une copie est gardée avec la note. Les images vont dans son album.")
         panel.beginSheetModal(for: window) { [weak self] response in
             guard response == .OK else { return }
             self?.attach(files: panel.urls)
@@ -831,8 +831,8 @@ final class NoteTextView: NSTextView, NSTextViewDelegate {
         panel.allowsMultipleSelection = true
         panel.canChooseDirectories = false
         panel.allowedContentTypes = [.image]
-        panel.prompt = "Ajouter"
-        panel.message = "Les images vont dans l'album de la note, sous son titre : une copie est gardée avec elle."
+        panel.prompt = String(localized: "Ajouter")
+        panel.message = String(localized: "Les images vont dans l'album de la note, sous son titre : une copie est gardée avec elle.")
         panel.beginSheetModal(for: window) { [weak self] response in
             guard response == .OK else { return }
             self?.attach(files: panel.urls)
@@ -1183,7 +1183,7 @@ final class NoteTextView: NSTextView, NSTextViewDelegate {
         ]
         let origin = textContainerOrigin
         let x = origin.x + (textContainer?.lineFragmentPadding ?? 0) + (block == .quote ? NoteFormat.quoteIndent : 0)
-        ((block == .title ? "Titre" : "Écrivez…") as NSString).draw(at: NSPoint(x: x, y: origin.y), withAttributes: attributes)
+        ((block == .title ? String(localized: "Titre") : String(localized: "Écrivez…")) as NSString).draw(at: NSPoint(x: x, y: origin.y), withAttributes: attributes)
     }
 }
 

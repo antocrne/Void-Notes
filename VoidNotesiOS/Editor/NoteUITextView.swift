@@ -94,7 +94,7 @@ final class NoteUITextView: UITextView, UITextViewDelegate, UIGestureRecognizerD
         dataDetectorTypes = []
         textContainerInset = UIEdgeInsets(top: Self.topInset, left: Self.horizontalInset, bottom: 48, right: Self.horizontalInset)
         delegate = self
-        accessibilityLabel = "Texte de la note"
+        accessibilityLabel = String(localized: "Texte de la note")
 
         metaLabel.font = .monospacedSystemFont(ofSize: NoteFormat.metaSize, weight: .regular)
         metaLabel.textColor = Theme.secondaryTextNS
@@ -799,7 +799,7 @@ final class NoteUITextView: UITextView, UITextViewDelegate, UIGestureRecognizerD
         placeholder.isHidden = textStorage.length > 0
         if textStorage.length == 0 {
             placeholder.font = NoteFormat.font(block: block, weight: nil, italic: false)
-            placeholder.text = block == .title ? "Titre" : "Écrivez…"
+            placeholder.text = block == .title ? String(localized: "Titre") : String(localized: "Écrivez…")
             placeholder.sizeToFit()
             placeholder.frame.origin = CGPoint(x: origin.x + padding + (block == .quote ? NoteFormat.quoteIndent : 0), y: origin.y)
         }

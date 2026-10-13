@@ -526,9 +526,9 @@ final class NotesModel {
         if !note.locked {
             guard canAuthenticate() else {
                 #if os(macOS)
-                store.errorMessage = "Cette note ne pourrait plus être déverrouillée : ce Mac n'a ni Touch ID ni mot de passe de session."
+                store.errorMessage = String(localized: "Cette note ne pourrait plus être déverrouillée : ce Mac n'a ni Touch ID ni mot de passe de session.")
                 #else
-                store.errorMessage = "Cette note ne pourrait plus être déverrouillée : cet iPhone n'a ni Face ID ni code."
+                store.errorMessage = String(localized: "Cette note ne pourrait plus être déverrouillée : cet iPhone n'a ni Face ID ni code.")
                 #endif
                 return
             }
@@ -541,7 +541,7 @@ final class NotesModel {
     /// the note in the window by then.
     func unlock(_ id: UUID) {
         guard let note = store.note(id) ?? store.trashed(id), isConcealed(note) else { return }
-        authenticate("déverrouiller une note") { [weak self] success in
+        authenticate(String(localized: "déverrouiller une note")) { [weak self] success in
             guard let self, success, self.selectedID == id, (self.store.note(id) ?? self.store.trashed(id))?.locked == true else { return }
             self.unlocked.insert(id)
             self.editorFocusRequest += 1
@@ -556,7 +556,7 @@ final class NotesModel {
             unlocked.remove(id)
             return store.setLocked(false, for: id)
         }
-        authenticate("retirer le verrou d'une note") { [weak self] success in
+        authenticate(String(localized: "retirer le verrou d'une note")) { [weak self] success in
             if success { self?.store.setLocked(false, for: id) }
         }
     }

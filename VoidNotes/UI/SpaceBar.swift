@@ -67,7 +67,7 @@ private struct SpaceIconButton: View {
     @State private var confirmingDeletion = false
 
     var body: some View {
-        ChromeButton(symbol: OutlineSymbol.name(space.icon), help: space.name, active: selected) {
+        ChromeButton(symbol: OutlineSymbol.name(space.icon), verbatimHelp: space.name, active: selected) {
             withAnimation(Theme.quick) { model.switchSpace(to: space.id) }
         }
         .symbolVariant(selected ? .fill : .none)
@@ -99,10 +99,10 @@ private struct SpaceIconButton: View {
 /// Name and icon of a space: to make one, or to change one. `done` gets the name typed, or nil
 /// when the form is cancelled.
 private struct SpaceForm: View {
-    let title: String
+    let title: LocalizedStringKey
     @State var name: String
     @State var icon: String
-    let confirm: String
+    let confirm: LocalizedStringKey
     let done: (String?, String) -> Void
     @FocusState private var focused: Bool
 

@@ -9,15 +9,15 @@ enum ChromeTint: String, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .none: "Neutre"
-        case .rose: "Rose"
-        case .peach: "Pêche"
-        case .lemon: "Citron"
-        case .sage: "Sauge"
-        case .mint: "Menthe"
-        case .sky: "Ciel"
-        case .lavender: "Lavande"
-        case .mauve: "Mauve"
+        case .none: String(localized: "Neutre")
+        case .rose: String(localized: "Rose")
+        case .peach: String(localized: "Pêche")
+        case .lemon: String(localized: "Citron")
+        case .sage: String(localized: "Sauge")
+        case .mint: String(localized: "Menthe")
+        case .sky: String(localized: "Ciel")
+        case .lavender: String(localized: "Lavande")
+        case .mauve: String(localized: "Mauve")
         }
     }
 
@@ -265,7 +265,7 @@ struct ChromeTintPicker: View {
             .contentShape(Circle())
         }
         .buttonStyle(.plain)
-        .help(complementary ? "\(tint.label) — complémentaire de votre couleur" : tint.label)
+        .help(complementary ? String(localized: "\(tint.label) — complémentaire de votre couleur") : tint.label)
         .accessibilityLabel(tint.label)
         .accessibilityHint(complementary ? Text("Complémentaire de votre couleur") : Text(""))
         .accessibilityAddTraits(selected ? .isSelected : [])

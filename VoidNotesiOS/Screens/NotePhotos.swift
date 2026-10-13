@@ -164,7 +164,7 @@ private struct NotePhotoViewer: View {
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
             .background(Color.black)
-            .navigationTitle(photos.firstIndex(of: start).map { "\($0 + 1) sur \(photos.count)" } ?? "")
+            .navigationTitle(photos.firstIndex(of: start).map { String(localized: "\($0 + 1) sur \(photos.count)") } ?? "")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.black, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
