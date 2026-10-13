@@ -446,7 +446,21 @@ enum SelfTest {
         let listed = NoteDirectory.entries(of: store)
         check("Liste pour Void : la plus récente en tête, pas de note verrouillée, titre et espace",
               listed.first?.title == "Seule" && !listed.contains { $0.id == kept.id } && listed.count <= NoteDirectory.limit
-              && listed.first?.space == store.spaces[0].name, "\(listed.map(\.title))")
+              && listed.first?.space == store.spaces[0].id && listed.first?.folder == nil, "\(listed.map(\.title))")
+        // Its tree: the folders that lead to a note, in the order of the list; an empty one left out.
+        let work = store.createFolder(named: "Travail", space: model.currentSpaceID)
+        let trips = store.createFolder(named: "Voyages", in: work.id, space: model.currentSpaceID)
+        _ = store.createFolder(named: "Vide", space: model.currentSpaceID)
+        let filed = store.create(in: trips.id, space: model.currentSpaceID)
+        store.update(filed.id, content: NoteContent(text: "Lisbonne"))
+        store.setPinned(true, for: daily.id)
+        let tree = NoteDirectory.payload(of: store)
+        let lisbon = tree.notes.first { $0.id == filed.id }
+        check("Arborescence pour Void : espaces, dossier et sous-dossier menant à une note, dossier vide absent, épinglée en tête",
+              tree.version == 2 && tree.spaces.map(\.id) == store.spaces.map(\.id)
+              && tree.folders.map(\.name) == ["Travail", "Voyages"] && tree.folders.last?.parent == work.id
+              && lisbon?.folder == trips.id && lisbon?.title == "Lisbonne" && tree.notes.first?.id == daily.id && tree.notes.first?.pinned == true,
+              "\(tree.folders.map(\.name)) · \(tree.notes.map(\.title))")
     }
 
     // MARK: Trash
