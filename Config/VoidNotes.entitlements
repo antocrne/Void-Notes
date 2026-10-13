@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Void Notes is sandboxed: the notes live in its container. -->
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<!-- "Joindre un fichier…": reads the files chosen in the panel, to copy them next to the note.
+	     Synchronisation: reads and writes the folder chosen in Réglages (in iCloud Drive). -->
+	<key>com.apple.security.files.user-selected.read-write</key>
+	<true/>
+	<!-- The chosen folder is found again at the next launch. -->
+	<key>com.apple.security.files.bookmarks.app-scope</key>
+	<true/>
+</dict>
+</plist>
