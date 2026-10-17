@@ -51,11 +51,6 @@ struct NoteScreen: View {
                         EmptyView()
                     } else {
                         Group {
-                            #if BETA
-                            if Listener.isAvailable, !note.isReadOnly {
-                                ListenButton(listener: .shared, note: note)
-                            }
-                            #endif
                             if !note.isReadOnly {
                                 Menu {
                                     Button("Photothèque", systemImage: "photo.on.rectangle") { choosingPhotos = true }

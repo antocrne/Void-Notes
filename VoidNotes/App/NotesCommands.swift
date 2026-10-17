@@ -22,12 +22,10 @@ struct NotesCommands: Commands {
             Button("Joindre un fichier…") { editor?.chooseAttachments() }
                 .keyboardShortcut("a", modifiers: [.command, .shift])
                 .disabled(model.selected == nil || model.selected?.isReadOnly == true || model.selected?.deleted != nil)
-            #if BETA
             // At once, in the language and to the source of last time (the note's button offers them).
             Button(Listener.shared.isListening ? "Arrêter l'écoute" : "Écouter et transcrire") { Listener.shared.toggle(in: model.selectedID) }
                 .keyboardShortcut("d", modifiers: [.command, .shift])
                 .disabled(!Listener.shared.isListening && (Listener.shared.isActive || !Listener.shared.canListen(in: model.selected) || model.selected.map { model.isConcealed($0) } == true))
-            #endif
             Divider()
             Button(model.selected.map { model.isConcealed($0) } == true ? "Déverrouiller la note…" : model.selected?.locked == true ? "Verrouiller maintenant" : "Verrouiller la note") {
                 withAnimation(Theme.quick) { model.toggleLock() }

@@ -92,13 +92,6 @@ final class SyncEngine {
     /// A new folder: the first synchronisation does as a first device would (no file: what is
     /// here is written; a file: both are put together).
     func useFolder(_ url: URL) async {
-        #if BETA
-        // The beta keeps its notes apart: never in the folder Void Notes synchronises with.
-        guard !BetaFolder.isVoidNotesFolder(url) else {
-            status = .failed(BetaFolder.refusal)
-            return
-        }
-        #endif
         do {
             try SyncFolderAccess.remember(url)
         } catch {
@@ -106,9 +99,6 @@ final class SyncEngine {
             status = .failed(error.localizedDescription)
             return
         }
-        #if BETA
-        BetaFolder.mark(url)
-        #endif
         folderURL?.stopAccessingSecurityScopedResource()
         state.reset()
         connectFolder()

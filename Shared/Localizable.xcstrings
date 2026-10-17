@@ -3201,18 +3201,18 @@
         }
       }
     },
-    "Le son du Mac est resté muet pendant toute l'écoute. Si un appel ou une vidéo jouait, autorisez Void Notes Beta dans Réglages Système → Confidentialité et sécurité → Enregistrement audio du système." : {
+    "Le son du Mac est resté muet pendant toute l'écoute. Si un appel ou une vidéo jouait, autorisez Void Notes dans Réglages Système → Confidentialité et sécurité → Enregistrement audio du système." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The Mac's sound stayed silent for the whole listening. If a call or a video was playing, allow Void Notes Beta in System Settings → Privacy & Security → System Audio Recording."
+            "value" : "The Mac's sound stayed silent for the whole listening. If a call or a video was playing, allow Void Notes in System Settings → Privacy & Security → System Audio Recording."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Le son du Mac est resté muet pendant toute l'écoute. Si un appel ou une vidéo jouait, autorisez Void Notes Beta dans Réglages Système → Confidentialité et sécurité → Enregistrement audio du système."
+            "value" : "Le son du Mac est resté muet pendant toute l'écoute. Si un appel ou une vidéo jouait, autorisez Void Notes dans Réglages Système → Confidentialité et sécurité → Enregistrement audio du système."
           }
         }
       }
@@ -3229,6 +3229,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le son du Mac n'a pas pu être capté (%@, code %lld)."
+          }
+        }
+      }
+    },
+    "Le son du Mac n'est plus capté depuis que la sortie audio a changé." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Mac's sound is no longer heard since the audio output changed."
           }
         }
       }
@@ -5983,38 +5993,6 @@
         }
       }
     },
-    "Un dossier d'iCloud Drive propre à la bêta, autre que celui de Void Notes, le même que sur le Mac. Les notes restent aussi sur cet iPhone ; arrêter ne supprime rien." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "An iCloud Drive folder of the beta's own, not Void Notes' one, the same as on the Mac. The notes also stay on this iPhone; stopping deletes nothing."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un dossier d'iCloud Drive propre à la bêta, autre que celui de Void Notes, le même que sur le Mac. Les notes restent aussi sur cet iPhone ; arrêter ne supprime rien."
-          }
-        }
-      }
-    },
-    "Un dossier d'iCloud Drive propre à la bêta, autre que celui de Void Notes, le même sur chaque appareil. Les notes restent aussi sur ce Mac ; arrêter ne supprime rien." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "An iCloud Drive folder of the beta's own, not Void Notes' one, the same on every device. The notes also stay on this Mac; stopping deletes nothing."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un dossier d'iCloud Drive propre à la bêta, autre que celui de Void Notes, le même sur chaque appareil. Les notes restent aussi sur ce Mac ; arrêter ne supprime rien."
-          }
-        }
-      }
-    },
     "Un dossier d'iCloud Drive, le même sur chaque appareil. Les notes restent aussi sur ce Mac ; arrêter ne supprime rien." : {
       "localizations" : {
         "en" : {
@@ -6495,22 +6473,6 @@
         }
       }
     },
-    "ce dossier est celui de Void Notes ; choisissez-en un autre pour la bêta" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "this is Void Notes' folder; choose another one for the beta"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ce dossier est celui de Void Notes ; choisissez-en un autre pour la bêta"
-          }
-        }
-      }
-    },
     "complémentaire de votre couleur" : {
       "localizations" : {
         "en" : {
@@ -6812,22 +6774,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Écoute %@"
-          }
-        }
-      }
-    },
-    "Écoute (bêta)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Listening (beta)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écoute (bêta)"
           }
         }
       }

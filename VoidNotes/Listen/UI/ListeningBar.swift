@@ -296,7 +296,7 @@ struct ListenSettingsSection: View {
                 }
             }
         } header: {
-            Text("Écoute (bêta)")
+            Text("Écoute")
         } footer: {
             Group {
                 if Listener.isAvailable {

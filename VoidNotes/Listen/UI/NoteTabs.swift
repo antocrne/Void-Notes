@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// The tab each note shows (the beta): its own text, its transcript, its summary — so that what
+/// The tab each note shows: its own text, its transcript, its summary — so that what
 /// the listening heard, its summary and what one writes never get mixed. Remembered while the app
 /// runs; a note opens on its own text.
 @MainActor @Observable

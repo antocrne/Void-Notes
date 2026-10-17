@@ -1,21 +1,18 @@
 import SwiftUI
 
-/// Réglages (⌘,): language, theme, accent color, tint of the window, and where the notes are —
-/// in tabs in the beta, which has more of them. Every change applies at once — but the language,
+/// Réglages (⌘,): language, theme, accent color, tint of the window, the listening, and where the
+/// notes are — a tab per subject. Every change applies at once — but the language,
 /// from the next launch.
 struct SettingsView: View {
     @Environment(AppSettings.self) private var settings
     @Environment(NoteStore.self) private var store
     @Environment(SyncEngine.self) private var sync
     @State private var language = AppLanguage.current
-    #if BETA
     /// The tab shown: the one left last time.
     @AppStorage("settingsTab") private var tab = "general"
-    #endif
 
     var body: some View {
-        #if BETA
-        // The beta's settings outgrew one panel: a tab per subject, as in the system's apps.
+        // A tab per subject, as in the system's apps.
         TabView(selection: $tab) {
             page { languageSection; listSection; notesSection }
                 .tabItem { Label("Général", systemImage: "gearshape") }
@@ -33,16 +30,6 @@ struct SettingsView: View {
                 .tabItem { Label("Synchronisation", systemImage: "arrow.triangle.2.circlepath") }
                 .tag("sync")
         }
-        #else
-        page {
-            languageSection
-            appearanceSection
-            listSection
-            writingSection
-            notesSection
-            syncSection
-        }
-        #endif
     }
 
     private func page(@ViewBuilder _ sections: () -> some View) -> some View {
@@ -154,13 +141,8 @@ struct SettingsView: View {
         } header: {
             Text("Synchronisation")
         } footer: {
-            #if BETA
-            Text("Un dossier d'iCloud Drive propre à la bêta, autre que celui de Void Notes, le même sur chaque appareil. Les notes restent aussi sur ce Mac ; arrêter ne supprime rien.")
-                .font(.caption).foregroundStyle(.secondary)
-            #else
             Text("Un dossier d'iCloud Drive, le même sur chaque appareil. Les notes restent aussi sur ce Mac ; arrêter ne supprime rien.")
                 .font(.caption).foregroundStyle(.secondary)
-            #endif
         }
     }
 

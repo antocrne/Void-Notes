@@ -36,9 +36,7 @@ enum SelfTest {
         proofreading()
         await window()
         await tint()
-        #if BETA
         failures += await ListenSelfTest.run()
-        #endif
         print(failures == 0 ? "Auto-test : tout passe." : "Auto-test : \(failures) échec(s).")
         exit(Int32(failures))
     }
@@ -162,7 +160,6 @@ enum SelfTest {
         let porto = model.selectedID!
         store.update(porto, content: NoteContent(text: "Porto"))
         check("Dossiers : une nouvelle note va dans le dossier de la note ouverte", store.note(porto)?.folder == portugal.id)
-        #if BETA
         model.toggle(portugal.id)
         model.newNote()
         let underTravel = model.selected?.folder
@@ -172,7 +169,6 @@ enum SelfTest {
               underTravel == travel.id && model.selected?.folder == nil, "\(String(describing: underTravel)) \(String(describing: model.selected?.folder))")
         model.toggle(travel.id)
         model.toggle(portugal.id)
-        #endif
         model.newNote(in: nil)
         let loose = model.selectedID!
         store.update(loose, content: NoteContent(text: "Sans dossier"))

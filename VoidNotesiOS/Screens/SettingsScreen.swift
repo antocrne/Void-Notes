@@ -13,20 +13,6 @@ struct SettingsScreen: View {
 
     var body: some View {
         NavigationStack {
-            #if BETA
-            // The beta's settings outgrew one page: a page per subject, as in the system's apps.
-            Form {
-                Section {
-                    link("Général", symbol: "gearshape") { languageSection; listSection; notesSection }
-                    link("Apparence", symbol: "paintpalette") { appearanceSection }
-                    link("Écriture", symbol: "character.cursor.ibeam") { writingSection }
-                    link("Écoute", symbol: "waveform") { ListenSettingsSection() }
-                    link("Synchronisation", symbol: "arrow.triangle.2.circlepath") { syncSection }
-                }
-            }
-            .modifier(SettingsPage(title: "Réglages"))
-            .toolbar { ToolbarItem(placement: .confirmationAction) { Button("OK") { dismiss() } } }
-            #else
             Form {
                 appearanceSection
                 languageSection
@@ -37,7 +23,6 @@ struct SettingsScreen: View {
             }
             .modifier(SettingsPage(title: "Réglages"))
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("OK") { dismiss() } } }
-            #endif
         }
         .fileImporter(isPresented: $choosingFolder, allowedContentTypes: [.folder]) { result in
             if case .success(let url) = result {
@@ -146,11 +131,7 @@ struct SettingsScreen: View {
         } header: {
             Text("Synchronisation")
         } footer: {
-            #if BETA
-            Text("Un dossier d'iCloud Drive propre à la bêta, autre que celui de Void Notes, le même que sur le Mac. Les notes restent aussi sur cet iPhone ; arrêter ne supprime rien.")
-            #else
             Text("Le dossier « Void Notes » d'iCloud Drive, le même que sur le Mac. Les notes restent aussi sur cet iPhone ; arrêter ne supprime rien.")
-            #endif
         }
     }
 

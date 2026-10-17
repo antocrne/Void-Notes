@@ -56,6 +56,16 @@ enum Voices {
         #endif
     }
 
+    /// The first time, the models are fetched while the listening goes on — not once it has
+    /// ended, where they would make the voices wait — then let go until it ends.
+    static func fetchModels() async {
+        #if canImport(VoidVoices)
+        guard !VoiceFinder.hasModels else { return }
+        try? await VoiceFinder.shared.prepare()
+        await VoiceFinder.shared.release()
+        #endif
+    }
+
     /// Lets the models go, once the voices of a listening are found.
     static func release() async {
         #if canImport(VoidVoices)

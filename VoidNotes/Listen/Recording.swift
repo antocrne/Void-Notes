@@ -166,7 +166,7 @@ enum Recording {
 /// thread).
 final class Recorder: @unchecked Sendable {
     let url: URL
-    private let queue = DispatchQueue(label: "app.void.notes.beta.recorder", qos: .utility)
+    private let queue = DispatchQueue(label: "app.void.notes.recorder", qos: .utility)
     private var file: AVAudioFile?
 
     /// `format`: that of the buffers handed over (the transcriber's).

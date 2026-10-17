@@ -11,9 +11,11 @@ APP="$DERIVED/Build/Products/Release/Void Notes.app"
 
 echo "→ Compilation Release…"
 # The Mac target alone: the scheme also builds the iPhone app, whose signing needs a provisioning
-# profile that xcodebuild can't make on its own (Xcode can).
-xcodebuild -project VoidNotes.xcodeproj -target VoidNotes -configuration Release \
-  SYMROOT="$DERIVED/Build/Products" OBJROOT="$DERIVED/Build/Intermediates.noindex" build -quiet
+# profile that xcodebuild can't make on its own (Xcode can). arm64 alone, like the app: without it
+# the separation of voices' package (Packages/VoidVoices) is built for Intel too. Its dependency
+# (FluidAudio) is fetched by Xcode the first time.
+xcodebuild -project VoidNotes.xcodeproj -target VoidNotes -configuration Release -arch arm64 \
+  COMPILER_INDEX_STORE_ENABLE=NO SYMROOT="$DERIVED/Build/Products" OBJROOT="$DERIVED/Build/Intermediates.noindex" build -quiet
 
 VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' "$APP/Contents/Info.plist")
 DMG="$ROOT/build/Void-Notes-$VERSION.dmg"

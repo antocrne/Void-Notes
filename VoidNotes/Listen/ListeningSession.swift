@@ -70,8 +70,8 @@ final class ListeningSession: @unchecked Sendable {
     /// Starts listening to `source`. A final result is a sentence or so the transcriber won't
     /// revise, with when its first word starts and its last one ends (seconds since the start); a
     /// volatile one is its guess at the words still being said. `recordings`: the folder the sound
-    /// is written to, or nil not to keep it. `warning`: the Mac's sound could not be heard, and
-    /// the listening goes on with the microphone alone.
+    /// is written to, or nil not to keep it. `warning`: the Mac's sound could not be heard — at
+    /// the start, or no more after the output changed —, and the listening goes on without it.
     static func start(locale: Locale, source: ListenSource, recordings folder: URL?,
                       onFinal: @escaping @MainActor (ListenChannel, String, TimeInterval, TimeInterval) -> Void,
                       onVolatile: @escaping @MainActor (ListenChannel, String) -> Void,
@@ -81,7 +81,7 @@ final class ListeningSession: @unchecked Sendable {
         let start = mach_absolute_time()
         for kind in source.channels {
             do {
-                let channel = try await open(kind, start: start, locale: locale, recordings: folder, onFinal: onFinal, onVolatile: onVolatile)
+                let channel = try await open(kind, start: start, locale: locale, recordings: folder, onFinal: onFinal, onVolatile: onVolatile, warning: warning)
                 started.append(channel)
             } catch {
                 // The Mac's sound failing is no reason to lose the listening: it goes on with the
@@ -99,7 +99,8 @@ final class ListeningSession: @unchecked Sendable {
 
     private static func open(_ kind: ListenChannel, start: UInt64, locale: Locale, recordings folder: URL?,
                              onFinal: @escaping @MainActor (ListenChannel, String, TimeInterval, TimeInterval) -> Void,
-                             onVolatile: @escaping @MainActor (ListenChannel, String) -> Void) async throws -> Channel {
+                             onVolatile: @escaping @MainActor (ListenChannel, String) -> Void,
+                             warning: @escaping @MainActor (Error) -> Void) async throws -> Channel {
         // `.fastResults`: without it the transcriber reads in long stretches, and the first words
         // came after 12 s, a sentence ended in silence only at the next stretch (measured on
         // 2026-10-14 with the same speech: 35 results either way, so no more work). With it, the
@@ -151,7 +152,7 @@ final class ListeningSession: @unchecked Sendable {
             input = Microphone(target: format, onBuffer: take)
         case .mac:
             #if os(macOS)
-            input = MacSound(target: format, onBuffer: take)
+            input = MacSound(target: format, onBuffer: take, onLost: { _ in Task { @MainActor in warning(ListenError.macSoundLost) } })
             #else
             throw ListenError.noMicrophone
             #endif

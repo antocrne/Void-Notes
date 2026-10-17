@@ -87,7 +87,7 @@ struct NoteContent: Codable, Equatable {
     }
 }
 
-/// What a note holds besides its own text (the beta, for now): the transcript of what its
+/// What a note holds besides its own text: the transcript of what its
 /// listenings heard, and their summary — each shown in a tab of its own, under the title.
 enum NotePart: String, CaseIterable {
     case notes, transcript, summary
@@ -101,7 +101,7 @@ struct Note: Identifiable, Equatable {
     /// The images of the note's album, shown under its title: their names in the note's
     /// attachments folder, in the order they show.
     var photos: [String] = [] { didSet { summarize() } }
-    /// The sound recorded in the note (what the listening heard, the beta for now): their names
+    /// The sound recorded in the note (what the listening heard): their names
     /// in the note's attachments folder, in the order they were made. Shown in a section of their
     /// own, under the title, never in the text.
     var recordings: [String] = [] { didSet { summarize() } }
@@ -173,7 +173,7 @@ struct Note: Identifiable, Equatable {
     /// in one of `names` — those of the folders it is in, say —, whatever the case and the accents.
     /// A locked note is found by its title only (and by those names).
     func matches(_ words: [String], alsoIn names: [String] = []) -> Bool {
-        // Its transcript and its summary too (the beta's listenings).
+        // Its transcript and its summary too (what the listenings heard).
         let fields = (locked ? [title] : [content.text, transcript?.text ?? "", summary?.text ?? ""]) + names
         return words.allSatisfy { word in
             fields.contains { $0.range(of: word, options: [.caseInsensitive, .diacriticInsensitive]) != nil }

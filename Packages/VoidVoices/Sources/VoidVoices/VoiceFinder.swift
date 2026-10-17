@@ -22,6 +22,9 @@ public actor VoiceFinder {
     public static let shared = VoiceFinder()
 
     private var manager: OfflineDiarizerManager?
+    /// The models being fetched or loaded: asked twice meanwhile (during a listening, then at its
+    /// end), they are fetched once.
+    private var loading: Task<OfflineDiarizerManager, Error>?
 
     /// Whether the models are on this device already: the first separation downloads them.
     public nonisolated static var hasModels: Bool {
@@ -32,9 +35,15 @@ public actor VoiceFinder {
 
     /// Loads the models — downloading them the first time.
     public func prepare() async throws {
-        let manager = self.manager ?? OfflineDiarizerManager(config: OfflineDiarizerConfig())
-        try await manager.prepareModels()
-        self.manager = manager
+        guard manager == nil else { return }
+        let task = loading ?? Task {
+            let manager = OfflineDiarizerManager(config: OfflineDiarizerConfig())
+            try await manager.prepareModels()
+            return manager
+        }
+        loading = task
+        defer { loading = nil }
+        manager = try await task.value
     }
 
     /// The turns of each voice in the recording at `url`, in order.

@@ -80,9 +80,6 @@ enum NoteDirectory {
     private static var published: Payload?
 
     static func publish(_ store: NoteStore) {
-        #if BETA
-        // The pasteboard is Void Notes' own: Void sends to its notes, never to the beta's.
-        #else
         #if DEBUG
         // The sample notes stay in their window.
         if DebugLaunch.isRequested { return }
@@ -93,7 +90,6 @@ enum NoteDirectory {
         board.clearContents()
         board.setData(data, forType: NSPasteboard.PasteboardType(pasteboard))
         published = payload
-        #endif
     }
     #else
     static func publish(_ store: NoteStore) {}

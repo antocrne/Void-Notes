@@ -50,32 +50,3 @@ extension NoteUITextView: TranscriptHost {
     var isComposing: Bool { markedTextRange != nil }
 }
 #endif
-
-/// The beta never synchronises in Void Notes' folder: its notes stay its own. A folder chosen in
-/// the beta gets a mark; a folder that holds Void Notes' file without that mark is refused.
-enum BetaFolder {
-    static let markName = ".void-notes-beta"
-
-    /// Void Notes synchronises in this folder: its file is there, and the beta's mark isn't (nor
-    /// what iCloud Drive leaves in place of a file it hasn't downloaded).
-    static func isVoidNotesFolder(_ url: URL) -> Bool {
-        let scoped = url.startAccessingSecurityScopedResource()
-        defer { if scoped { url.stopAccessingSecurityScopedResource() } }
-        let names = Set((try? FileManager.default.contentsOfDirectory(atPath: url.path)) ?? [])
-        func has(_ name: String) -> Bool { names.contains(name) || names.contains(".\(name).icloud") }
-        return has(SyncFile.fileName) && !has(markName)
-    }
-
-    /// The folder is the beta's from now on.
-    static func mark(_ url: URL) {
-        let scoped = url.startAccessingSecurityScopedResource()
-        defer { if scoped { url.stopAccessingSecurityScopedResource() } }
-        let mark = url.appendingPathComponent(markName)
-        guard !FileManager.default.fileExists(atPath: mark.path) else { return }
-        try? Data("Dossier de synchronisation de Void Notes Beta.\n".utf8).write(to: mark, options: .atomic)
-    }
-
-    static var refusal: String {
-        String(localized: "ce dossier est celui de Void Notes ; choisissez-en un autre pour la bêta")
-    }
-}

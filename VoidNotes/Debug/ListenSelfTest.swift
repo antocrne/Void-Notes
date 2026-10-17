@@ -3,7 +3,7 @@ import AppKit
 import AVFoundation
 import SwiftUI
 
-/// Debug builds of the beta only: the listening's part of `-selfTest YES`. Where the words go
+/// Debug builds only: the listening's part of `-selfTest YES`. Where the words go
 /// (pure rules, then in a real text view, then in a note that isn't shown), and once from end to
 /// end: a French voice, synthesised, played in place of the microphone, transcribed on the Mac.
 @MainActor

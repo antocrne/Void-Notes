@@ -123,6 +123,8 @@ enum ListenError: LocalizedError {
     case macSound(String, OSStatus)
     /// The Mac's sound stayed silent for the whole listening: most often, the permission refused.
     case macSilent
+    /// The output changed during the listening, and the Mac's sound couldn't be taken on the new one.
+    case macSoundLost
 
     var errorDescription: String? {
         switch self {
@@ -144,8 +146,10 @@ enum ListenError: LocalizedError {
             String(localized: "Le modèle de transcription en \(ListenLanguage.name(id)) n'est pas encore sur l'appareil.")
         case .macSound(let step, let code):
             String(localized: "Le son du Mac n'a pas pu être capté (\(step), code \(Int(code))).")
+        case .macSoundLost:
+            String(localized: "Le son du Mac n'est plus capté depuis que la sortie audio a changé.")
         case .macSilent:
-            String(localized: "Le son du Mac est resté muet pendant toute l'écoute. Si un appel ou une vidéo jouait, autorisez Void Notes Beta dans Réglages Système → Confidentialité et sécurité → Enregistrement audio du système.")
+            String(localized: "Le son du Mac est resté muet pendant toute l'écoute. Si un appel ou une vidéo jouait, autorisez Void Notes dans Réglages Système → Confidentialité et sécurité → Enregistrement audio du système.")
         }
     }
 }

@@ -67,11 +67,6 @@ struct NotesScreen: View {
                 NoteScreen()
             }
         }
-        #if BETA
-        // Above the keyboard in a note, above the spaces in the list.
-        .safeAreaInset(edge: .bottom, spacing: 0) { ListeningOverlay() }
-        .modifier(ListeningAlerts(listener: .shared))
-        #endif
         .sheet(isPresented: $showsSettings) { SettingsScreen() }
         // A note just put in the trash: « Annuler » for a few seconds, above the spaces.
         .overlay(alignment: .bottom) {

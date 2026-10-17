@@ -7,7 +7,7 @@ import AVFoundation
 import UIKit
 #endif
 
-/// Listening to what is said and writing it in a note, as it is said (bêta).
+/// Listening to what is said and writing it in a note, as it is said.
 ///
 /// The words go to the note's transcript — apart from what is written in it, in a tab of its own
 /// (`NotePart`) —, after a line that says when the listening began: one can go on writing in the
@@ -151,7 +151,9 @@ final class Listener {
                 locale: locale, source: source, recordings: records ? folder : nil,
                 onFinal: { [weak self] channel, text, start, end in self?.heard(HeardSentence(channel: channel, text: text, start: start, end: end)) },
                 onVolatile: { [weak self] channel, text in self?.saying(text, on: channel) },
-                warning: { [weak self] error in self?.notice = error.localizedDescription + " " + String(localized: "L'écoute continue avec le micro.") }
+                warning: { [weak self] error in
+                    self?.notice = error.localizedDescription + (source == .mac ? "" : " " + String(localized: "L'écoute continue avec le micro."))
+                }
             )
             // The note went meanwhile (deleted on another device).
             guard store.note(id) != nil else {
@@ -175,6 +177,7 @@ final class Listener {
             begin(in: id)
             startMeter()
             watchSession()
+            if ListenPreferences.separatesVoices, Voices.isAvailable, !Voices.hasModels { Task { await Voices.fetchModels() } }
             announce(String(localized: "Écoute commencée"))
         } catch ListenError.notInstalled(let language) {
             phase = .idle

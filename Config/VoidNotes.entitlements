@@ -12,5 +12,12 @@
 	<!-- The chosen folder is found again at the next launch. -->
 	<key>com.apple.security.files.bookmarks.app-scope</key>
 	<true/>
+	<!-- The listening: what the microphone hears is transcribed on the Mac. -->
+	<key>com.apple.security.device.audio-input</key>
+	<true/>
+	<!-- Separating the voices: their models (about 20 MB) are downloaded once from Hugging Face.
+	     Nothing of what is heard goes with the request. -->
+	<key>com.apple.security.network.client</key>
+	<true/>
 </dict>
 </plist>

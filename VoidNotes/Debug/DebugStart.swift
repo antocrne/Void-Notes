@@ -84,7 +84,6 @@ extension DebugLaunch {
                 editor.setSelectedRange(NSRange(location: 0, length: 0))
             }
         }
-        #if BETA
         // `-listening YES`: listening in the note shown — two sentences heard, words in flight.
         if UserDefaults.standard.bool(forKey: "listening") {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -146,7 +145,6 @@ extension DebugLaunch {
             panel.setContentSize(panel.contentView?.fittingSize ?? panel.frame.size)
             panel.orderFront(nil)
         }
-        #endif
         // Time for what was typed to be read by the spelling checker.
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             for (index, window) in NSApp.windows.filter({ $0.isVisible && $0.contentView != nil }).enumerated() {

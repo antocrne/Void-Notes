@@ -75,12 +75,7 @@ final class AppSettings {
         showsAllNotes = d.bool(forKey: "showsAllNotes")
         checksSpelling = d.object(forKey: "checksSpelling") as? Bool ?? true
         checksGrammar = d.object(forKey: "checksGrammar") as? Bool ?? true
-        #if BETA
-        // The beta's icon would stand next to Void Notes' in the menu bar: off unless asked for.
-        showsQuickNote = d.object(forKey: "showsQuickNote") as? Bool ?? false
-        #else
         showsQuickNote = d.object(forKey: "showsQuickNote") as? Bool ?? true
-        #endif
         #if DEBUG
         // `-theme light -accent pink -tint lavender -tintAmount 0.12 -tintGradient NO` on the
         // command line, for the debug launches.

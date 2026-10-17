@@ -108,11 +108,6 @@ struct NoteTextEditor: UIViewRepresentable {
         textView.inputAccessoryView = bar.view
         context.coordinator.bar = bar
 
-        #if BETA
-        // Listening in this note: the words go on in this text view.
-        Listener.shared.register(textView, for: id)
-        #endif
-
         // A note just made takes the keyboard; one that is read doesn't.
         if note.isBlank, textView.isEditable {
             DispatchQueue.main.async { [weak textView] in textView?.becomeFirstResponder() }

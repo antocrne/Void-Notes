@@ -265,24 +265,129 @@ final class Microphone: AudioInput, @unchecked Sendable {
 final class MacSound: AudioInput, @unchecked Sendable {
     private let target: AVAudioFormat
     private let onBuffer: (AVAudioPCMBuffer, UInt64) -> Void
+    /// The Mac's sound couldn't be taken again after the output changed: nothing more of it is heard.
+    private let onLost: (Error) -> Void
     private let meter = SoundLevel()
     private var tapID = AudioObjectID(kAudioObjectUnknown)
     private var aggregateID = AudioObjectID(kAudioObjectUnknown)
     private var procID: AudioDeviceIOProcID?
-    private let queue = DispatchQueue(label: "app.void.notes.beta.mac-sound", qos: .userInitiated)
+    private let queue = DispatchQueue(label: "app.void.notes.mac-sound", qos: .userInitiated)
+    /// Where the output's changes are handled, one at a time.
+    private let control = DispatchQueue(label: "app.void.notes.mac-sound.output", qos: .userInitiated)
+    /// The tap and its device, made and undone from the main thread (start, stop) and from
+    /// `control` (the output changed).
+    private let lock = NSLock()
+    private var running = false
+    private var rebuild: DispatchWorkItem?
+    private var outputListener: AudioObjectPropertyListenerBlock?
 
-    init(target: AVAudioFormat, onBuffer: @escaping (AVAudioPCMBuffer, UInt64) -> Void) {
+    /// Seconds between tries when the tap can't be made again at once: a Bluetooth headset takes
+    /// a moment to be ready after it becomes the output.
+    static let retryDelays: [Double] = [0.5, 1, 2, 4]
+    /// The output's changes come in bursts (the default output, then the system one): one rebuild.
+    static let settle: Double = 0.3
+
+    init(target: AVAudioFormat, onBuffer: @escaping (AVAudioPCMBuffer, UInt64) -> Void, onLost: @escaping (Error) -> Void = { _ in }) {
         self.target = target
         self.onBuffer = onBuffer
+        self.onLost = onLost
     }
 
     var level: Float { meter.level }
     var loudest: Float { meter.loudest }
 
     func start() throws {
+        try lock.withLock {
+            try build()
+            running = true
+        }
+        followOutput()
+    }
+
+    func stop() {
+        unfollowOutput()
+        lock.withLock {
+            running = false
+            rebuild?.cancel()
+            rebuild = nil
+            teardown()
+        }
+        meter.reset()
+    }
+
+    // MARK: The output changing
+
+    /// The tap's device is laid on the output of when it was made: when the output changes
+    /// (headphones plugged in, AirPods connecting, the speakers chosen again) or goes away, it
+    /// would hand over nothing more, without a word. It is made again on the new output; the
+    /// moment between is silence on the listening's clock (`SoundClock`).
+    private func followOutput() {
+        let listener: AudioObjectPropertyListenerBlock = { [weak self] _, _ in self?.outputChanged() }
+        outputListener = listener
+        for selector in Self.outputSelectors {
+            var address = AudioObjectPropertyAddress(mSelector: selector, mScope: kAudioObjectPropertyScopeGlobal, mElement: kAudioObjectPropertyElementMain)
+            AudioObjectAddPropertyListenerBlock(AudioObjectID(kAudioObjectSystemObject), &address, control, listener)
+        }
+    }
+
+    private func unfollowOutput() {
+        guard let listener = outputListener else { return }
+        outputListener = nil
+        for selector in Self.outputSelectors {
+            var address = AudioObjectPropertyAddress(mSelector: selector, mScope: kAudioObjectPropertyScopeGlobal, mElement: kAudioObjectPropertyElementMain)
+            AudioObjectRemovePropertyListenerBlock(AudioObjectID(kAudioObjectSystemObject), &address, control, listener)
+        }
+    }
+
+    private static let outputSelectors = [kAudioHardwarePropertyDefaultOutputDevice, kAudioHardwarePropertyDefaultSystemOutputDevice]
+
+    private func outputChanged() {
+        schedule(after: Self.settle, attempt: 0)
+    }
+
+    private func schedule(after delay: Double, attempt: Int) {
+        lock.withLock {
+            guard running else { return }
+            rebuild?.cancel()
+            let work = DispatchWorkItem { [weak self] in self?.rebuildNow(attempt: attempt) }
+            rebuild = work
+            control.asyncAfter(deadline: .now() + delay, execute: work)
+        }
+    }
+
+    private func rebuildNow(attempt: Int) {
+        let failure: Error? = lock.withLock {
+            guard running else { return nil }
+            teardown()
+            do {
+                try build()
+                return nil
+            } catch {
+                return error
+            }
+        }
+        guard let failure else { return }
+        if attempt < Self.retryDelays.count {
+            schedule(after: Self.retryDelays[attempt], attempt: attempt + 1)
+        } else if lock.withLock({ running }) {
+            onLost(failure)
+        }
+    }
+
+    #if DEBUG
+    /// Debug builds only: the output changed, as the system would say it (the self-test).
+    func pretendOutputChanged() { outputChanged() }
+    /// The tap is there (made, or made again).
+    var isTapping: Bool { lock.withLock { aggregateID != kAudioObjectUnknown } }
+    #endif
+
+    // MARK: The tap
+
+    /// Called with `lock` held.
+    private func build() throws {
         let description = CATapDescription(stereoGlobalTapButExcludeProcesses: Self.ownProcessObject().map { [$0] } ?? [])
         description.uuid = UUID()
-        description.name = "Void Notes Beta"
+        description.name = "Void Notes"
         description.isPrivate = true
         description.muteBehavior = .unmuted
 
@@ -297,7 +402,7 @@ final class MacSound: AudioInput, @unchecked Sendable {
                                                  mElement: kAudioObjectPropertyElementMain)
         status = AudioObjectGetPropertyData(tapID, &address, 0, nil, &size, &streamDescription)
         guard status == noErr, let format = AVAudioFormat(streamDescription: &streamDescription) else {
-            stop()
+            teardown()
             throw ListenError.macSound("format", status)
         }
 
@@ -305,12 +410,12 @@ final class MacSound: AudioInput, @unchecked Sendable {
         do {
             outputUID = try Self.defaultOutputDeviceUID()
         } catch {
-            stop()
+            teardown()
             throw error
         }
         let aggregate: [String: Any] = [
-            kAudioAggregateDeviceNameKey: "Void Notes Beta",
-            kAudioAggregateDeviceUIDKey: "app.void.notes.beta.\(UUID().uuidString)",
+            kAudioAggregateDeviceNameKey: "Void Notes",
+            kAudioAggregateDeviceUIDKey: "app.void.notes.\(UUID().uuidString)",
             kAudioAggregateDeviceMainSubDeviceKey: outputUID,
             kAudioAggregateDeviceIsPrivateKey: true,
             kAudioAggregateDeviceIsStackedKey: false,
@@ -324,7 +429,7 @@ final class MacSound: AudioInput, @unchecked Sendable {
         var aggregateDevice = AudioObjectID(kAudioObjectUnknown)
         status = AudioHardwareCreateAggregateDevice(aggregate as CFDictionary, &aggregateDevice)
         guard status == noErr else {
-            stop()
+            teardown()
             throw ListenError.macSound("aggregate", status)
         }
         aggregateID = aggregateDevice
@@ -339,17 +444,18 @@ final class MacSound: AudioInput, @unchecked Sendable {
             if let converted = converter.convert(buffer) { self.onBuffer(converted, heard) }
         }
         guard status == noErr else {
-            stop()
+            teardown()
             throw ListenError.macSound("io", status)
         }
         status = AudioDeviceStart(aggregateID, procID)
         guard status == noErr else {
-            stop()
+            teardown()
             throw ListenError.macSound("start", status)
         }
     }
 
-    func stop() {
+    /// Called with `lock` held.
+    private func teardown() {
         if aggregateID != kAudioObjectUnknown {
             if let procID {
                 AudioDeviceStop(aggregateID, procID)
@@ -363,7 +469,6 @@ final class MacSound: AudioInput, @unchecked Sendable {
             AudioHardwareDestroyProcessTap(tapID)
             tapID = AudioObjectID(kAudioObjectUnknown)
         }
-        meter.reset()
     }
 
     private static func ownProcessObject() -> AudioObjectID? {

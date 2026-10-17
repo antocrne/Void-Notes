@@ -720,36 +720,6 @@ final class NoteUITextView: UITextView, UITextViewDelegate, UIGestureRecognizerD
         setTyping(body)
     }
 
-    #if BETA
-    // MARK: Listening (bêta)
-
-    /// Writes what the listening heard (`Listener`) at `location`, formatted like a paste — no
-    /// typing rule reads it. The cursor stays where it is, or goes on after the words, in view,
-    /// if it was there.
-    func insertTranscript(_ text: NSAttributedString, at location: Int) {
-        let selection = selectedRange
-        let follows = selection.length == 0 && selection.location == location
-        replace(NSRange(location: location, length: 0), with: text)
-        if follows {
-            scrollRangeToVisible(selectedRange)
-        } else {
-            selectedRange = TranscriptText.moved(selection, byInserting: text.length, at: location)
-        }
-    }
-
-    /// Edits after the listening (the voices named, renamed), the cursor kept where it was.
-    func editRecording(_ edits: [(NSRange, NSAttributedString)]) {
-        guard isEditable, !edits.isEmpty else { return }
-        let selection = selectedRange
-        undoManager?.beginUndoGrouping()
-        for (range, text) in edits.sorted(by: { $0.0.location > $1.0.location }) { replace(range, with: text) }
-        undoManager?.endUndoGrouping()
-        let after = RecordingText.selection(selection, after: edits)
-        selectedRange = NSRange(location: min(after.location, textStorage.length), length: 0)
-        setNeedsLayout()
-    }
-    #endif
-
     // MARK: Taps
 
     /// A tap on a checklist box doesn't move the cursor or bring the keyboard.

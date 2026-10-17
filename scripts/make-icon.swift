@@ -4,16 +4,13 @@
 // lines of text follow — a note at first glance, of the Void family.
 // Usage: swift scripts/make-icon.swift [output folder] [--preview file.png]
 //        swift scripts/make-icon.swift --ios   (one full square for the iPhone app: iOS rounds it)
-//        add --beta: the same icon with a « BETA » badge, into Beta/BetaAssets.xcassets (Void Notes Beta)
 import AppKit
 import CoreGraphics
 
 let args = Array(CommandLine.arguments.dropFirst())
 let previewPath = args.firstIndex(of: "--preview").map { args[$0 + 1] }
 let ios = args.contains("--ios")
-let beta = args.contains("--beta")
-let output = URL(fileURLWithPath: args.first.flatMap { $0.hasPrefix("--") ? nil : $0 }
-    ?? (beta ? "Beta/BetaAssets.xcassets/AppIconBeta.appiconset" : "VoidNotes/Resources/Assets.xcassets/AppIcon.appiconset"))
+let output = URL(fileURLWithPath: args.first.flatMap { $0.hasPrefix("--") ? nil : $0 } ?? "VoidNotes/Resources/Assets.xcassets/AppIcon.appiconset")
 
 func color(_ hex: UInt32, _ a: CGFloat = 1) -> CGColor {
     CGColor(srgbRed: CGFloat((hex >> 16) & 0xFF) / 255, green: CGFloat((hex >> 8) & 0xFF) / 255, blue: CGFloat(hex & 0xFF) / 255, alpha: a)
@@ -106,28 +103,6 @@ func render(_ px: Int) -> Data {
     }
     ctx.restoreGState()
 
-    // Void Notes Beta: a badge across the foot of the page, in Void's orange, so that the two
-    // apps never pass for each other in the Dock or on the home screen.
-    if beta {
-        let badgeH = body.height * 0.17, badgeW = body.width * 0.5
-        let badge = CGRect(x: center.x - badgeW / 2, y: body.minY + body.height * 0.075, width: badgeW, height: badgeH)
-        ctx.saveGState()
-        ctx.setShadow(offset: CGSize(width: 0, height: -s * 0.006), blur: s * 0.02, color: color(0x000000, 0.5))
-        ctx.addPath(CGPath(roundedRect: badge, cornerWidth: badgeH / 2, cornerHeight: badgeH / 2, transform: nil))
-        ctx.setFillColor(color(0xE7B188))
-        ctx.fillPath()
-        ctx.restoreGState()
-        NSGraphicsContext.saveGraphicsState()
-        NSGraphicsContext.current = NSGraphicsContext(cgContext: ctx, flipped: false)
-        let font = NSFont.systemFont(ofSize: badgeH * 0.56, weight: .heavy)
-        let kern = badgeH * 0.06
-        let label = NSAttributedString(string: "BETA", attributes: [.font: font, .foregroundColor: NSColor(cgColor: color(0x131316))!, .kern: kern])
-        let size = label.size()
-        // The last letter's spacing is no part of the word.
-        label.draw(at: CGPoint(x: badge.midX - (size.width - kern) / 2, y: badge.midY - size.height / 2 + font.descender * 0.1))
-        NSGraphicsContext.restoreGraphicsState()
-    }
-
     // Hairline highlight on the icon's edge.
     if !ios {
         ctx.addPath(path)
@@ -161,7 +136,7 @@ if let previewPath {
 }
 
 if ios {
-    let folder = URL(fileURLWithPath: beta ? "Beta/BetaAssets.xcassets/AppIconBetaiOS.appiconset" : "VoidNotesiOS/Assets.xcassets/AppIcon.appiconset")
+    let folder = URL(fileURLWithPath: "VoidNotesiOS/Assets.xcassets/AppIcon.appiconset")
     try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
     try! render(1024).write(to: folder.appendingPathComponent("icon.png"))
     let contents: [String: Any] = ["images": [["filename": "icon.png", "idiom": "universal", "platform": "ios", "size": "1024x1024"]], "info": ["author": "xcode", "version": 1]]

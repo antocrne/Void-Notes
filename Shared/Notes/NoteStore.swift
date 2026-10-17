@@ -66,14 +66,9 @@ struct NoteFile: Codable, Equatable {
 @MainActor @Observable
 final class NoteStore {
     /// 2: dividers, highlighting, weights. 3: the note's folder. 4: its space. 5: the trash and
-    /// attachments. 6: the "Source :" line. 7: the album of images. 8: locked notes. 9: archived notes. 10: links. 11: pinned notes. 12: struck-through text, inline code, indented list items. Earlier files
-    /// read as they are. 13, in the beta only for now: the recordings — Void Notes reads and keeps
-    /// them, but goes on writing 12, so that its notes stay as they are for its earlier versions.
-    #if BETA
+    /// attachments. 6: the "Source :" line. 7: the album of images. 8: locked notes. 9: archived notes. 10: links. 11: pinned notes. 12: struck-through text, inline code, indented list items. 13: the recordings, the
+    /// transcript and the summary (0.2.1). Earlier files read as they are.
     nonisolated static let formatVersion = 13
-    #else
-    nonisolated static let formatVersion = 12
-    #endif
     /// A note stays this long in the trash before it is deleted for good.
     nonisolated static let trashDays = 30
     /// Typing pauses this long before the note is written.
