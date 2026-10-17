@@ -33,19 +33,34 @@
         }
       }
     },
-    "%@ / %@" : {
-      "extractionState" : "stale",
+    "« %@ » a été écrite par une version plus récente de Void Notes : elle n'est montrée qu'en lecture. Mettez l'app à jour pour la supprimer." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ / %@"
+            "value" : "“%@” was written by a newer version of Void Notes: it is shown read-only. Update the app to delete it."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ / %@"
+            "value" : "« %@ » a été écrite par une version plus récente de Void Notes : elle n'est montrée qu'en lecture. Mettez l'app à jour pour la supprimer."
+          }
+        }
+      }
+    },
+    "« %@ » n'a pas pu être joint à la note : %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%1$@” could not be attached to the note: %2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "« %@ » n'a pas pu être joint à la note : %@"
           }
         }
       }
@@ -66,6 +81,23 @@
         }
       }
     },
+    "%@ / %@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ / %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ / %@"
+          }
+        }
+      }
+    },
     "%lld copies en conflit attendent dans le dossier" : {
       "localizations" : {
         "en" : {
@@ -78,6 +110,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld copies en conflit attendent dans le dossier"
+          }
+        }
+      }
+    },
+    "%lld éléments sélectionnés" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld items selected"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld éléments sélectionnés"
           }
         }
       }
@@ -162,22 +210,6 @@
         }
       }
     },
-    "%lld éléments sélectionnés" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld items selected"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld éléments sélectionnés"
-          }
-        }
-      }
-    },
     "+%lld" : {
       "localizations" : {
         "en" : {
@@ -242,6 +274,54 @@
         }
       }
     },
+    "À jour — %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Up to date — %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À jour — %@"
+          }
+        }
+      }
+    },
+    "À l'écoute" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À l'écoute"
+          }
+        }
+      }
+    },
+    "À la fin de l'écoute, chaque voix est nommée dans la note : « Voix 1 », « Voix 2 »… ou « Moi » et « Eux » avec le son du Mac." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When listening ends, each voice is named in the note: “Voice 1”, “Voice 2”… or “Me” and “Them” with the Mac's sound."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À la fin de l'écoute, chaque voix est nommée dans la note : « Voix 1 », « Voix 2 »… ou « Moi » et « Eux » avec le son du Mac."
+          }
+        }
+      }
+    },
     "Aa" : {
       "localizations" : {
         "en" : {
@@ -259,6 +339,7 @@
       }
     },
     "Actions" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -306,6 +387,22 @@
         }
       }
     },
+    "Afficher « Toutes les notes »" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show “All Notes”"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher « Toutes les notes »"
+          }
+        }
+      }
+    },
     "Afficher dans le Finder" : {
       "localizations" : {
         "en" : {
@@ -338,22 +435,6 @@
         }
       }
     },
-    "Afficher « Toutes les notes »" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show “All Notes”"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afficher « Toutes les notes »"
-          }
-        }
-      }
-    },
     "Ajoute une note à Void Notes, sans l'ouvrir. La première ligne est le titre ; « - [ ] », « **gras** » et les autres marques Markdown sont lues." : {
       "localizations" : {
         "en" : {
@@ -366,6 +447,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ajoute une note à Void Notes, sans l'ouvrir. La première ligne est le titre ; « - [ ] », « **gras** » et les autres marques Markdown sont lues."
+          }
+        }
+      }
+    },
+    "Ajoutée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Added"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutée"
           }
         }
       }
@@ -514,22 +611,6 @@
         }
       }
     },
-    "Ajoutée" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Added"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajoutée"
-          }
-        }
-      }
-    },
     "Annuler" : {
       "localizations" : {
         "en" : {
@@ -658,6 +739,22 @@
         }
       }
     },
+    "Archivée  ·  " : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archived  ·  "
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivée  ·  "
+          }
+        }
+      }
+    },
     "Archiver" : {
       "localizations" : {
         "en" : {
@@ -718,22 +815,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Archives"
-          }
-        }
-      }
-    },
-    "Archivée  ·  " : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Archived  ·  "
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Archivée  ·  "
           }
         }
       }
@@ -926,6 +1007,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Augmenter le retrait"
+          }
+        }
+      }
+    },
+    "aujourd'hui à %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "today at %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "aujourd'hui à %@"
           }
         }
       }
@@ -1396,6 +1493,22 @@
         }
       }
     },
+    "complémentaire de votre couleur" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "complementary to your color"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "complémentaire de votre couleur"
+          }
+        }
+      }
+    },
     "Complémentaire de votre couleur" : {
       "localizations" : {
         "en" : {
@@ -1444,22 +1557,6 @@
         }
       }
     },
-    "Créer" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Create"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Créer"
-          }
-        }
-      }
-    },
     "Créée %@  ·  modifiée %@" : {
       "localizations" : {
         "en" : {
@@ -1488,6 +1585,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Créée le %@\nModifiée le %@"
+          }
+        }
+      }
+    },
+    "Créer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créer"
+          }
+        }
+      }
+    },
+    "Dans « %@ »" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In “%@”"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dans « %@ »"
           }
         }
       }
@@ -1568,119 +1697,8 @@
         }
       }
     },
-    "Dans « %@ »" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In “%@”"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dans « %@ »"
-          }
-        }
-      }
-    },
-    "Depuis la photothèque" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "From Photo Library"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Depuis la photothèque"
-          }
-        }
-      }
-    },
-    "Depuis un fichier…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "From a File…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Depuis un fichier…"
-          }
-        }
-      }
-    },
-    "Diminuer le retrait" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Decrease Indent"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diminuer le retrait"
-          }
-        }
-      }
-    },
-    "Dossier introuvable : choisissez-le de nouveau" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Folder not found: choose it again"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dossier introuvable : choisissez-le de nouveau"
-          }
-        }
-      }
-    },
-    "Dossier écrit par une version plus récente : mettez Void Notes à jour sur ce Mac" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Folder written by a newer version: update Void Notes on this Mac"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dossier écrit par une version plus récente : mettez Void Notes à jour sur ce Mac"
-          }
-        }
-      }
-    },
-    "Dossier écrit par une version plus récente : mettez Void Notes à jour sur cet iPhone" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Folder written by a newer version: update Void Notes on this iPhone"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dossier écrit par une version plus récente : mettez Void Notes à jour sur cet iPhone"
-          }
-        }
-      }
-    },
     "Décisions" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1788,6 +1806,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dépliées"
+          }
+        }
+      }
+    },
+    "Depuis la photothèque" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From Photo Library"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Depuis la photothèque"
+          }
+        }
+      }
+    },
+    "Depuis un fichier…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From a File…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Depuis un fichier…"
           }
         }
       }
@@ -1920,6 +1970,343 @@
         }
       }
     },
+    "déverrouiller une note" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "unlock a note"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "déverrouiller une note"
+          }
+        }
+      }
+    },
+    "Diminuer le retrait" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decrease Indent"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diminuer le retrait"
+          }
+        }
+      }
+    },
+    "Dossier écrit par une version plus récente : mettez Void Notes à jour sur ce Mac" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder written by a newer version: update Void Notes on this Mac"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dossier écrit par une version plus récente : mettez Void Notes à jour sur ce Mac"
+          }
+        }
+      }
+    },
+    "Dossier écrit par une version plus récente : mettez Void Notes à jour sur cet iPhone" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder written by a newer version: update Void Notes on this iPhone"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dossier écrit par une version plus récente : mettez Void Notes à jour sur cet iPhone"
+          }
+        }
+      }
+    },
+    "Dossier introuvable : choisissez-le de nouveau" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder not found: choose it again"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dossier introuvable : choisissez-le de nouveau"
+          }
+        }
+      }
+    },
+    "Échec : %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Échec : %@"
+          }
+        }
+      }
+    },
+    "Écoute" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute"
+          }
+        }
+      }
+    },
+    "Écoute %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recording %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute %@"
+          }
+        }
+      }
+    },
+    "Écoute commencée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening started"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute commencée"
+          }
+        }
+      }
+    },
+    "Écoute du %@ à %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening on %@ at %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute du %@ à %@"
+          }
+        }
+      }
+    },
+    "Écoute impossible" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can't Listen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute impossible"
+          }
+        }
+      }
+    },
+    "Écoute interrompue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening interrupted"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute interrompue"
+          }
+        }
+      }
+    },
+    "Écoute reprise" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening resumed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute reprise"
+          }
+        }
+      }
+    },
+    "Écoute terminée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening ended"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute terminée"
+          }
+        }
+      }
+    },
+    "Écouter" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écouter"
+          }
+        }
+      }
+    },
+    "Écouter en" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listen in"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écouter en"
+          }
+        }
+      }
+    },
+    "Écouter et transcrire" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listen and Transcribe"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écouter et transcrire"
+          }
+        }
+      }
+    },
+    "Écouter et transcrire (⇧⌘D)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listen and transcribe (⇧⌘D)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écouter et transcrire (⇧⌘D)"
+          }
+        }
+      }
+    },
+    "Écouter et transcrire…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listen and Transcribe…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écouter et transcrire…"
+          }
+        }
+      }
+    },
+    "Écriture" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Writing"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écriture"
+          }
+        }
+      }
+    },
+    "Écrivez…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Write…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écrivez…"
+          }
+        }
+      }
+    },
     "Effacer la recherche" : {
       "localizations" : {
         "en" : {
@@ -1953,6 +2340,7 @@
       }
     },
     "En bref" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1996,6 +2384,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "En tête de la liste : dépliée, elle montre toutes les notes de l'espace, quel que soit leur dossier."
+          }
+        }
+      }
+    },
+    "encodage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "encoding"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "encodage"
+          }
+        }
+      }
+    },
+    "Enregistrées automatiquement" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved automatically"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrées automatiquement"
+          }
+        }
+      }
+    },
+    "Enregistrées automatiquement sur ce Mac" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved automatically on this Mac"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrées automatiquement sur ce Mac"
           }
         }
       }
@@ -2049,38 +2485,6 @@
         }
       }
     },
-    "Enregistrées automatiquement" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Saved automatically"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enregistrées automatiquement"
-          }
-        }
-      }
-    },
-    "Enregistrées automatiquement sur ce Mac" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Saved automatically on this Mac"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enregistrées automatiquement sur ce Mac"
-          }
-        }
-      }
-    },
     "Entendre" : {
       "localizations" : {
         "en" : {
@@ -2093,6 +2497,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Entendre"
+          }
+        }
+      }
+    },
+    "Épinglée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pinned"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Épinglée"
+          }
+        }
+      }
+    },
+    "Épingler" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pin"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Épingler"
+          }
+        }
+      }
+    },
+    "Épingler la note" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pin Note"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Épingler la note"
+          }
+        }
+      }
+    },
+    "Épingler la sélection" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pin Selection"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Épingler la sélection"
           }
         }
       }
@@ -2305,6 +2773,23 @@
         }
       }
     },
+    "fichiers" : {
+      "comment" : "Folder of a note's files, next to its exported Markdown",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "files"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "fichiers"
+          }
+        }
+      }
+    },
     "Fin de l'écoute…" : {
       "localizations" : {
         "en" : {
@@ -2369,6 +2854,22 @@
         }
       }
     },
+    "Général" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Général"
+          }
+        }
+      }
+    },
     "Graisse" : {
       "localizations" : {
         "en" : {
@@ -2417,22 +2918,6 @@
         }
       }
     },
-    "Général" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "General"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Général"
-          }
-        }
-      }
-    },
     "Hier" : {
       "localizations" : {
         "en" : {
@@ -2449,6 +2934,22 @@
         }
       }
     },
+    "hier à %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "yesterday at %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "hier à %@"
+          }
+        }
+      }
+    },
     "I" : {
       "localizations" : {
         "en" : {
@@ -2461,6 +2962,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "I"
+          }
+        }
+      }
+    },
+    "iCloud Drive télécharge la dernière version…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud Drive is downloading the latest version…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud Drive télécharge la dernière version…"
           }
         }
       }
@@ -2817,22 +3334,6 @@
         }
       }
     },
-    "L'export n'a pas pu être écrit : %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The export could not be written: %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L'export n'a pas pu être écrit : %@"
-          }
-        }
-      }
-    },
     "L'écoute continue avec le micro." : {
       "localizations" : {
         "en" : {
@@ -2877,6 +3378,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'écoute demande macOS 26 ou plus récent."
+          }
+        }
+      }
+    },
+    "L'export n'a pas pu être écrit : %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The export could not be written: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'export n'a pas pu être écrit : %@"
+          }
+        }
+      }
+    },
+    "La note « %@ » n'a pas pu être enregistrée : %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The note “%1$@” could not be saved: %2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La note « %@ » n'a pas pu être enregistrée : %@"
           }
         }
       }
@@ -2973,22 +3506,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La note qui s'y trouve est supprimée définitivement."
-          }
-        }
-      }
-    },
-    "La note « %@ » n'a pas pu être enregistrée : %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The note “%1$@” could not be saved: %2$@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La note « %@ » n'a pas pu être enregistrée : %@"
           }
         }
       }
@@ -3105,6 +3622,38 @@
         }
       }
     },
+    "le %@ à %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ at %2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "le %@ à %@"
+          }
+        }
+      }
+    },
+    "le code de l'iPhone" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the iPhone’s passcode"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "le code de l'iPhone"
+          }
+        }
+      }
+    },
     "Le dossier « Void Notes » d'iCloud Drive, le même que sur le Mac. Les notes restent aussi sur cet iPhone ; arrêter ne supprime rien." : {
       "localizations" : {
         "en" : {
@@ -3117,6 +3666,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le dossier « Void Notes » d'iCloud Drive, le même que sur le Mac. Les notes restent aussi sur cet iPhone ; arrêter ne supprime rien."
+          }
+        }
+      }
+    },
+    "le fichier « %@ » est illisible" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the file “%@” can’t be read"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "le fichier « %@ » est illisible"
           }
         }
       }
@@ -3197,6 +3762,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le modèle en %@ n'est pas encore sur cet appareil. Le système le télécharge une fois et le partage avec les autres apps ; la transcription se fait ensuite entièrement sur l'appareil."
+          }
+        }
+      }
+    },
+    "le mot de passe du Mac" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the Mac’s password"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "le mot de passe du Mac"
           }
         }
       }
@@ -3320,6 +3901,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lecture, passage %lld sur %lld…"
+          }
+        }
+      }
+    },
+    "Léger" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Léger"
           }
         }
       }
@@ -3516,6 +4113,22 @@
         }
       }
     },
+    "Les notes sélectionnées vont à la corbeille. Les dossiers sont supprimés avec leurs sous-dossiers ; les notes qui y restent reviennent dans le dossier au-dessus." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The selected notes go to the trash. Folders are deleted with their subfolders; the notes left in them go back to the folder above."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les notes sélectionnées vont à la corbeille. Les dossiers sont supprimés avec leurs sous-dossiers ; les notes qui y restent reviennent dans le dossier au-dessus."
+          }
+        }
+      }
+    },
     "Les notes supprimées y restent %lld jours." : {
       "localizations" : {
         "en" : {
@@ -3540,22 +4153,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Les notes supprimées y restent %lld jours."
-          }
-        }
-      }
-    },
-    "Les notes sélectionnées vont à la corbeille. Les dossiers sont supprimés avec leurs sous-dossiers ; les notes qui y restent reviennent dans le dossier au-dessus." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The selected notes go to the trash. Folders are deleted with their subfolders; the notes left in them go back to the folder above."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les notes sélectionnées vont à la corbeille. Les dossiers sont supprimés avec leurs sous-dossiers ; les notes qui y restent reviennent dans le dossier au-dessus."
           }
         }
       }
@@ -3640,54 +4237,6 @@
         }
       }
     },
-    "Liste des notes (⌃⌘S)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notes list (⌃⌘S)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Liste des notes (⌃⌘S)"
-          }
-        }
-      }
-    },
-    "Liste numérotée" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Numbered List"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Liste numérotée"
-          }
-        }
-      }
-    },
-    "Liste numérotée (⌥⌘8)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Numbered list (⌥⌘8)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Liste numérotée (⌥⌘8)"
-          }
-        }
-      }
-    },
     "Liste à cocher" : {
       "localizations" : {
         "en" : {
@@ -3752,18 +4301,50 @@
         }
       }
     },
-    "Léger" : {
+    "Liste des notes (⌃⌘S)" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Light"
+            "value" : "Notes list (⌃⌘S)"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Léger"
+            "value" : "Liste des notes (⌃⌘S)"
+          }
+        }
+      }
+    },
+    "Liste numérotée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Numbered List"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste numérotée"
+          }
+        }
+      }
+    },
+    "Liste numérotée (⌥⌘8)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Numbered list (⌥⌘8)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste numérotée (⌥⌘8)"
           }
         }
       }
@@ -3896,22 +4477,6 @@
         }
       }
     },
-    "Mise en forme" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Formatting"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mise en forme"
-          }
-        }
-      }
-    },
     "Mise à la corbeille" : {
       "localizations" : {
         "en" : {
@@ -3924,6 +4489,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mise à la corbeille"
+          }
+        }
+      }
+    },
+    "Mise en forme" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Formatting"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mise en forme"
           }
         }
       }
@@ -4408,22 +4989,6 @@
         }
       }
     },
-    "Ouvrir Void Notes" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Void Notes"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouvrir Void Notes"
-          }
-        }
-      }
-    },
     "Ouvrir la note" : {
       "localizations" : {
         "en" : {
@@ -4440,18 +5005,18 @@
         }
       }
     },
-    "PDF ou tout autre fichier : une copie est gardée avec la note. Les images vont dans son album." : {
+    "Ouvrir Void Notes" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A PDF or any other file: a copy is kept with the note. Images go to its album."
+            "value" : "Open Void Notes"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "PDF ou tout autre fichier : une copie est gardée avec la note. Les images vont dans son album."
+            "value" : "Ouvrir Void Notes"
           }
         }
       }
@@ -4505,6 +5070,38 @@
         }
       }
     },
+    "PDF ou tout autre fichier : une copie est gardée avec la note. Les images vont dans son album." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A PDF or any other file: a copy is kept with the note. Images go to its album."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PDF ou tout autre fichier : une copie est gardée avec la note. Les images vont dans son album."
+          }
+        }
+      }
+    },
+    "Pêche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Peach"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pêche"
+          }
+        }
+      }
+    },
     "Personnel" : {
       "localizations" : {
         "en" : {
@@ -4554,6 +5151,7 @@
       }
     },
     "Points clés" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4613,22 +5211,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Préparation de l'écoute…"
-          }
-        }
-      }
-    },
-    "Pêche" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Peach"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pêche"
           }
         }
       }
@@ -4713,6 +5295,22 @@
         }
       }
     },
+    "Rédaction du résumé…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Writing the summary…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rédaction du résumé…"
+          }
+        }
+      }
+    },
     "Redémarrer Void Notes" : {
       "localizations" : {
         "en" : {
@@ -4725,6 +5323,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Redémarrer Void Notes"
+          }
+        }
+      }
+    },
+    "Réglages" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réglages"
           }
         }
       }
@@ -4857,6 +5471,102 @@
         }
       }
     },
+    "Résumé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summary"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résumé"
+          }
+        }
+      }
+    },
+    "Résumé en cours…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summarizing…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résumé en cours…"
+          }
+        }
+      }
+    },
+    "Résumé impossible" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't Summarize"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résumé impossible"
+          }
+        }
+      }
+    },
+    "Résumer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summarize"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résumer"
+          }
+        }
+      }
+    },
+    "Résumer à nouveau" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summarize Again"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résumer à nouveau"
+          }
+        }
+      }
+    },
+    "Résumer la transcription sur le Mac, avec Apple Intelligence" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summarize the transcript on this Mac, with Apple Intelligence"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résumer la transcription sur le Mac, avec Apple Intelligence"
+          }
+        }
+      }
+    },
     "Retirer l'image de la note" : {
       "localizations" : {
         "en" : {
@@ -4901,6 +5611,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Retirer le verrou"
+          }
+        }
+      }
+    },
+    "retirer le verrou d'une note" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "remove the lock from a note"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "retirer le verrou d'une note"
           }
         }
       }
@@ -4969,134 +5695,6 @@
         }
       }
     },
-    "Rédaction du résumé…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Writing the summary…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rédaction du résumé…"
-          }
-        }
-      }
-    },
-    "Réglages" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Réglages"
-          }
-        }
-      }
-    },
-    "Résumer" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Summarize"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Résumer"
-          }
-        }
-      }
-    },
-    "Résumer la transcription sur le Mac, avec Apple Intelligence" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Summarize the transcript on this Mac, with Apple Intelligence"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Résumer la transcription sur le Mac, avec Apple Intelligence"
-          }
-        }
-      }
-    },
-    "Résumer à nouveau" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Summarize Again"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Résumer à nouveau"
-          }
-        }
-      }
-    },
-    "Résumé" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Summary"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Résumé"
-          }
-        }
-      }
-    },
-    "Résumé en cours…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Summarizing…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Résumé en cours…"
-          }
-        }
-      }
-    },
-    "Résumé impossible" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Couldn't Summarize"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Résumé impossible"
-          }
-        }
-      }
-    },
     "S" : {
       "localizations" : {
         "en" : {
@@ -5129,6 +5727,22 @@
         }
       }
     },
+    "Sélectionner" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sélectionner"
+          }
+        }
+      }
+    },
     "Semi-gras" : {
       "localizations" : {
         "en" : {
@@ -5141,6 +5755,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Semi-gras"
+          }
+        }
+      }
+    },
+    "Séparateur" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Divider"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Séparateur"
+          }
+        }
+      }
+    },
+    "Séparation des voix…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Separating voices…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Séparation des voix…"
+          }
+        }
+      }
+    },
+    "Séparer les voix" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Separate Voices"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Séparer les voix"
           }
         }
       }
@@ -5269,6 +5931,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Supprimer"
+          }
+        }
+      }
+    },
+    "Supprimer « %@ » ?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete “%@”?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer « %@ » ?"
           }
         }
       }
@@ -5513,22 +6191,6 @@
         }
       }
     },
-    "Supprimer « %@ » ?" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete “%@”?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supprimer « %@ » ?"
-          }
-        }
-      }
-    },
     "Supprimer…" : {
       "localizations" : {
         "en" : {
@@ -5673,70 +6335,6 @@
         }
       }
     },
-    "Sélectionner" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sélectionner"
-          }
-        }
-      }
-    },
-    "Séparateur" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Divider"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Séparateur"
-          }
-        }
-      }
-    },
-    "Séparation des voix…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Separating voices…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Séparation des voix…"
-          }
-        }
-      }
-    },
-    "Séparer les voix" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Separate Voices"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Séparer les voix"
-          }
-        }
-      }
-    },
     "Teinte de la fenêtre" : {
       "localizations" : {
         "en" : {
@@ -5749,6 +6347,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Teinte de la fenêtre"
+          }
+        }
+      }
+    },
+    "Téléchargement du modèle des voix…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloading the voice model…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Téléchargement du modèle des voix…"
+          }
+        }
+      }
+    },
+    "Téléchargement du modèle… %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloading the model… %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Téléchargement du modèle… %@"
+          }
+        }
+      }
+    },
+    "Télécharger" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Télécharger"
+          }
+        }
+      }
+    },
+    "Télécharger le modèle de transcription ?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download the transcription model?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Télécharger le modèle de transcription ?"
           }
         }
       }
@@ -5913,70 +6575,6 @@
         }
       }
     },
-    "Téléchargement du modèle des voix…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Downloading the voice model…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Téléchargement du modèle des voix…"
-          }
-        }
-      }
-    },
-    "Téléchargement du modèle… %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Downloading the model… %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Téléchargement du modèle… %@"
-          }
-        }
-      }
-    },
-    "Télécharger" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Download"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Télécharger"
-          }
-        }
-      }
-    },
-    "Télécharger le modèle de transcription ?" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Download the transcription model?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Télécharger le modèle de transcription ?"
-          }
-        }
-      }
-    },
     "Un appel, une vidéo : tout ce que joue le Mac. macOS demande l'autorisation la première fois." : {
       "localizations" : {
         "en" : {
@@ -5993,22 +6591,6 @@
         }
       }
     },
-    "Un dossier d'iCloud Drive, le même sur chaque appareil. Les notes restent aussi sur ce Mac ; arrêter ne supprime rien." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A folder in iCloud Drive, the same on every device. The notes also stay on this Mac; stopping deletes nothing."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un dossier d'iCloud Drive, le même sur chaque appareil. Les notes restent aussi sur ce Mac ; arrêter ne supprime rien."
-          }
-        }
-      }
-    },
     "Un dossier « Void Notes » y est créé : une note par fichier Markdown, rangées comme dans la liste. La corbeille et les notes verrouillées n'en font pas partie." : {
       "localizations" : {
         "en" : {
@@ -6021,6 +6603,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Un dossier « Void Notes » y est créé : une note par fichier Markdown, rangées comme dans la liste. La corbeille et les notes verrouillées n'en font pas partie."
+          }
+        }
+      }
+    },
+    "Un dossier d'iCloud Drive, le même sur chaque appareil. Les notes restent aussi sur ce Mac ; arrêter ne supprime rien." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A folder in iCloud Drive, the same on every device. The notes also stay on this Mac; stopping deletes nothing."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un dossier d'iCloud Drive, le même sur chaque appareil. Les notes restent aussi sur ce Mac ; arrêter ne supprime rien."
           }
         }
       }
@@ -6137,6 +6735,54 @@
         }
       }
     },
+    "Vérifier l'orthographe" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check spelling"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifier l'orthographe"
+          }
+        }
+      }
+    },
+    "Vérifier la grammaire" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check grammar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifier la grammaire"
+          }
+        }
+      }
+    },
+    "Verrouillée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locked"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouillée"
+          }
+        }
+      }
+    },
     "Verrouiller" : {
       "localizations" : {
         "en" : {
@@ -6213,22 +6859,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verrouiller maintenant (⇧⌘L)"
-          }
-        }
-      }
-    },
-    "Verrouillée" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Locked"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verrouillée"
           }
         }
       }
@@ -6345,22 +6975,6 @@
         }
       }
     },
-    "Void Notes n'a pas accès au micro. Autorisez-le dans Réglages Système → Confidentialité et sécurité → Micro." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Void Notes can't use the microphone. Allow it in System Settings → Privacy & Security → Microphone."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Void Notes n'a pas accès au micro. Autorisez-le dans Réglages Système → Confidentialité et sécurité → Micro."
-          }
-        }
-      }
-    },
     "Void Notes n'a pas accès au micro. Autorisez-le dans Réglages → Apps → Void Notes β → Micro." : {
       "localizations" : {
         "en" : {
@@ -6373,6 +6987,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Void Notes n'a pas accès au micro. Autorisez-le dans Réglages → Apps → Void Notes β → Micro."
+          }
+        }
+      }
+    },
+    "Void Notes n'a pas accès au micro. Autorisez-le dans Réglages Système → Confidentialité et sécurité → Micro." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Void Notes can't use the microphone. Allow it in System Settings → Privacy & Security → Microphone."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Void Notes n'a pas accès au micro. Autorisez-le dans Réglages Système → Confidentialité et sécurité → Micro."
           }
         }
       }
@@ -6421,632 +7051,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voix %lld"
-          }
-        }
-      }
-    },
-    "Vérifier l'orthographe" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Check spelling"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vérifier l'orthographe"
-          }
-        }
-      }
-    },
-    "Vérifier la grammaire" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Check grammar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vérifier la grammaire"
-          }
-        }
-      }
-    },
-    "aujourd'hui à %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "today at %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "aujourd'hui à %@"
-          }
-        }
-      }
-    },
-    "complémentaire de votre couleur" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "complementary to your color"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "complémentaire de votre couleur"
-          }
-        }
-      }
-    },
-    "déverrouiller une note" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "unlock a note"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "déverrouiller une note"
-          }
-        }
-      }
-    },
-    "encodage" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "encoding"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "encodage"
-          }
-        }
-      }
-    },
-    "fichiers" : {
-      "comment" : "Folder of a note's files, next to its exported Markdown",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "files"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "fichiers"
-          }
-        }
-      }
-    },
-    "hier à %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "yesterday at %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "hier à %@"
-          }
-        }
-      }
-    },
-    "iCloud Drive télécharge la dernière version…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iCloud Drive is downloading the latest version…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iCloud Drive télécharge la dernière version…"
-          }
-        }
-      }
-    },
-    "le %@ à %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ at %2$@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "le %@ à %@"
-          }
-        }
-      }
-    },
-    "le code de l'iPhone" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "the iPhone’s passcode"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "le code de l'iPhone"
-          }
-        }
-      }
-    },
-    "le fichier « %@ » est illisible" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "the file “%@” can’t be read"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "le fichier « %@ » est illisible"
-          }
-        }
-      }
-    },
-    "le mot de passe du Mac" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "the Mac’s password"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "le mot de passe du Mac"
-          }
-        }
-      }
-    },
-    "retirer le verrou d'une note" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "remove the lock from a note"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "retirer le verrou d'une note"
-          }
-        }
-      }
-    },
-    "« %@ » a été écrite par une version plus récente de Void Notes : elle n'est montrée qu'en lecture. Mettez l'app à jour pour la supprimer." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "“%@” was written by a newer version of Void Notes: it is shown read-only. Update the app to delete it."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "« %@ » a été écrite par une version plus récente de Void Notes : elle n'est montrée qu'en lecture. Mettez l'app à jour pour la supprimer."
-          }
-        }
-      }
-    },
-    "« %@ » n'a pas pu être joint à la note : %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "“%1$@” could not be attached to the note: %2$@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "« %@ » n'a pas pu être joint à la note : %@"
-          }
-        }
-      }
-    },
-    "À jour — %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Up to date — %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "À jour — %@"
-          }
-        }
-      }
-    },
-    "À l'écoute" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Listening"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "À l'écoute"
-          }
-        }
-      }
-    },
-    "À la fin de l'écoute, chaque voix est nommée dans la note : « Voix 1 », « Voix 2 »… ou « Moi » et « Eux » avec le son du Mac." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When listening ends, each voice is named in the note: “Voice 1”, “Voice 2”… or “Me” and “Them” with the Mac's sound."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "À la fin de l'écoute, chaque voix est nommée dans la note : « Voix 1 », « Voix 2 »… ou « Moi » et « Eux » avec le son du Mac."
-          }
-        }
-      }
-    },
-    "Échec : %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed: %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Échec : %@"
-          }
-        }
-      }
-    },
-    "Écoute" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Listening"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écoute"
-          }
-        }
-      }
-    },
-    "Écoute %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recording %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écoute %@"
-          }
-        }
-      }
-    },
-    "Écoute commencée" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Listening started"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écoute commencée"
-          }
-        }
-      }
-    },
-    "Écoute du %@ à %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Listening on %@ at %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écoute du %@ à %@"
-          }
-        }
-      }
-    },
-    "Écoute impossible" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Can't Listen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écoute impossible"
-          }
-        }
-      }
-    },
-    "Écoute interrompue" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Listening interrupted"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écoute interrompue"
-          }
-        }
-      }
-    },
-    "Écoute reprise" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Listening resumed"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écoute reprise"
-          }
-        }
-      }
-    },
-    "Écoute terminée" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Listening ended"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écoute terminée"
-          }
-        }
-      }
-    },
-    "Écouter" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Listen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écouter"
-          }
-        }
-      }
-    },
-    "Écouter en" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Listen in"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écouter en"
-          }
-        }
-      }
-    },
-    "Écouter et transcrire" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Listen and Transcribe"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écouter et transcrire"
-          }
-        }
-      }
-    },
-    "Écouter et transcrire (⇧⌘D)" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Listen and transcribe (⇧⌘D)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écouter et transcrire (⇧⌘D)"
-          }
-        }
-      }
-    },
-    "Écouter et transcrire…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Listen and Transcribe…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écouter et transcrire…"
-          }
-        }
-      }
-    },
-    "Écriture" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Writing"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écriture"
-          }
-        }
-      }
-    },
-    "Écrivez…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Write…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écrivez…"
-          }
-        }
-      }
-    },
-    "Épingler" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pin"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Épingler"
-          }
-        }
-      }
-    },
-    "Épingler la note" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pin Note"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Épingler la note"
-          }
-        }
-      }
-    },
-    "Épingler la sélection" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pin Selection"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Épingler la sélection"
-          }
-        }
-      }
-    },
-    "Épinglée" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pinned"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Épinglée"
           }
         }
       }

@@ -1,8 +1,32 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
-    "NSFaceIDUsageDescription" : {
+    "CFBundleDisplayName" : {
+      "comment" : "Bundle display name",
       "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Void Notes"
+          }
+        }
+      }
+    },
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "VoidNotesiOS"
+          }
+        }
+      }
+    },
+    "NSFaceIDUsageDescription" : {
+      "comment" : "Privacy - Face ID Usage Description",
       "localizations" : {
         "en" : {
           "stringUnit" : {
