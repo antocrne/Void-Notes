@@ -197,7 +197,7 @@ enum NoteMarkdown {
     }
 
     /// A file name for the note: its title, without what a file name can't have.
-    static func fileName(for note: Note) -> String { safeName(note.title, otherwise: "Note") }
+    static func fileName(for note: Note) -> String { safeName(note.title, otherwise: String(localized: "Note")) }
 
     /// `name` without what a file name can't have; `otherwise` when nothing is left.
     static func safeName(_ name: String, otherwise: String) -> String {

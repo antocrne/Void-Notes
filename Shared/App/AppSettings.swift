@@ -7,9 +7,9 @@ enum ThemeChoice: String, CaseIterable, Identifiable {
     var id: String { rawValue }
     var label: String {
         switch self {
-        case .dark: "Sombre"
-        case .light: "Clair"
-        case .system: "Système"
+        case .dark: String(localized: "Sombre")
+        case .light: String(localized: "Clair")
+        case .system: String(localized: "Système")
         }
     }
 }

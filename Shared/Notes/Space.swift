@@ -3,9 +3,9 @@ import Foundation
 /// A separate set of folders and notes (Personnel, Travail…), as in Void: the list shows one
 /// space at a time. A folder and a note say which space they are in; there is always at least one.
 struct Space: Identifiable, Codable, Equatable {
-    static let defaultName = "Personnel"
+    static var defaultName: String { String(localized: "Personnel") }
     static let defaultIcon = "person"
-    static let newName = "Nouvel espace"
+    static var newName: String { String(localized: "Nouvel espace") }
 
     /// The icons offered for a space (SF Symbols).
     static let icons = [

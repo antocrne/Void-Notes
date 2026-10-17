@@ -53,7 +53,7 @@ final class NoteFileAttachment: NSTextAttachment {
     /// The card of a file that isn't an image: an icon, its name, "PDF · 1,2 Mo".
     private static func card(name: String, url: URL?) -> UIImage {
         let exists = url.map { FileManager.default.fileExists(atPath: $0.path) } == true
-        var detail = "Fichier introuvable"
+        var detail = String(localized: "Fichier introuvable")
         if exists, let url {
             let kind = (name as NSString).pathExtension.uppercased()
             let bytes = (try? url.resourceValues(forKeys: [.fileSizeKey]))?.fileSize ?? 0

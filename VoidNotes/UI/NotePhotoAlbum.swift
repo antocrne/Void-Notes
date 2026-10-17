@@ -219,7 +219,7 @@ struct NotePhotoViewer: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 10) {
-                Text(index.map { "\($0 + 1) sur \(photos.count)" } ?? "")
+                Text(index.map { String(localized: "\($0 + 1) sur \(photos.count)") } ?? "")
                     .font(.system(size: 12, design: .monospaced))
                     .foregroundStyle(Theme.secondaryText)
                 Spacer()

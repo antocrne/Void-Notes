@@ -1,0 +1,28 @@
+{
+  "sourceLanguage" : "fr",
+  "strings" : {
+    "Nouvelle note dans ${applicationName}" : {
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "New note in ${applicationName}",
+              "Add a note to ${applicationName}"
+            ]
+          }
+        },
+        "fr" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "Nouvelle note dans ${applicationName}",
+              "Ajouter une note à ${applicationName}"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

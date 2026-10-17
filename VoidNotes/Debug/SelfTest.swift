@@ -4,7 +4,8 @@ import SwiftUI
 
 /// Debug builds only: `-selfTest YES` checks the storage, the saved format and the formatting
 /// as you type (by typing in a real text view), prints one line per check and quits with the
-/// number of failures.
+/// number of failures. The checks read the French interface: launch with `-AppleLanguages '(fr)'`
+/// to keep it whatever the system's language.
 @MainActor
 enum SelfTest {
     private static var failures = 0
@@ -35,6 +36,7 @@ enum SelfTest {
         proofreading()
         await window()
         await tint()
+        failures += await ListenSelfTest.run()
         print(failures == 0 ? "Auto-test : tout passe." : "Auto-test : \(failures) échec(s).")
         exit(Int32(failures))
     }
@@ -158,6 +160,15 @@ enum SelfTest {
         let porto = model.selectedID!
         store.update(porto, content: NoteContent(text: "Porto"))
         check("Dossiers : une nouvelle note va dans le dossier de la note ouverte", store.note(porto)?.folder == portugal.id)
+        model.toggle(portugal.id)
+        model.newNote()
+        let underTravel = model.selected?.folder
+        model.toggle(travel.id)
+        model.newNote()
+        check("Dossiers : une nouvelle note va dans le dernier dossier encore ouvert, hors des dossiers s'ils sont tous fermés",
+              underTravel == travel.id && model.selected?.folder == nil, "\(String(describing: underTravel)) \(String(describing: model.selected?.folder))")
+        model.toggle(travel.id)
+        model.toggle(portugal.id)
         model.newNote(in: nil)
         let loose = model.selectedID!
         store.update(loose, content: NoteContent(text: "Sans dossier"))
@@ -446,7 +457,21 @@ enum SelfTest {
         let listed = NoteDirectory.entries(of: store)
         check("Liste pour Void : la plus récente en tête, pas de note verrouillée, titre et espace",
               listed.first?.title == "Seule" && !listed.contains { $0.id == kept.id } && listed.count <= NoteDirectory.limit
-              && listed.first?.space == store.spaces[0].name, "\(listed.map(\.title))")
+              && listed.first?.space == store.spaces[0].id && listed.first?.folder == nil, "\(listed.map(\.title))")
+        // Its tree: the folders that lead to a note, in the order of the list; an empty one left out.
+        let work = store.createFolder(named: "Travail", space: model.currentSpaceID)
+        let trips = store.createFolder(named: "Voyages", in: work.id, space: model.currentSpaceID)
+        _ = store.createFolder(named: "Vide", space: model.currentSpaceID)
+        let filed = store.create(in: trips.id, space: model.currentSpaceID)
+        store.update(filed.id, content: NoteContent(text: "Lisbonne"))
+        store.setPinned(true, for: daily.id)
+        let tree = NoteDirectory.payload(of: store)
+        let lisbon = tree.notes.first { $0.id == filed.id }
+        check("Arborescence pour Void : espaces, dossier et sous-dossier menant à une note, dossier vide absent, épinglée en tête",
+              tree.version == 2 && tree.spaces.map(\.id) == store.spaces.map(\.id)
+              && tree.folders.map(\.name) == ["Travail", "Voyages"] && tree.folders.last?.parent == work.id
+              && lisbon?.folder == trips.id && lisbon?.title == "Lisbonne" && tree.notes.first?.id == daily.id && tree.notes.first?.pinned == true,
+              "\(tree.folders.map(\.name)) · \(tree.notes.map(\.title))")
     }
 
     // MARK: Trash

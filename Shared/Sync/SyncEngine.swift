@@ -84,7 +84,7 @@ final class SyncEngine {
 
     func chooseFolder() async {
         #if os(macOS)
-        guard let url = await SyncFolderAccess.chooseFolder(prompt: "Utiliser ce dossier", message: "Choisissez ou créez un dossier « Void Notes » dans iCloud Drive : les notes y sont synchronisées entre vos appareils.") else { return }
+        guard let url = await SyncFolderAccess.chooseFolder(prompt: String(localized: "Utiliser ce dossier"), message: String(localized: "Choisissez ou créez un dossier « Void Notes » dans iCloud Drive : les notes y sont synchronisées entre vos appareils.")) else { return }
         await useFolder(url)
         #endif
     }
@@ -360,7 +360,7 @@ final class SyncEngine {
             return WritePlan(data: nil, resolvedConflicts: [])
         }
         guard let data = try? SyncCoding.encoder().encode(SyncFile(data: merged, device: Self.deviceName)) else {
-            status = .failed("encodage")
+            status = .failed(String(localized: "encodage"))
             return nil
         }
         return WritePlan(data: data, resolvedConflicts: resolved)
@@ -391,7 +391,7 @@ final class SyncEngine {
     private func syncAttachments() async {
         guard let folderURL else { return }
         let wanted = (store.notes + store.trash).compactMap { note -> (note: UUID, names: [String])? in
-            let names = Array(Set(note.attachments + note.photos))
+            let names = Array(Set(note.attachments + note.photos + note.recordings))
             return names.isEmpty ? nil : (note.id, names)
         }
         let deleted = Set(state.tracker.deletedAt.keys.compactMap(UUID.init(uuidString:)))
@@ -421,7 +421,7 @@ final class SyncEngine {
         } catch {
             // Damaged, or badly edited by hand: never overwritten, reported.
             log.error("The file doesn't read: \(error.localizedDescription, privacy: .public)")
-            status = .failed("le fichier « \(SyncFile.fileName) » est illisible")
+            status = .failed(String(localized: "le fichier « \(SyncFile.fileName) » est illisible"))
             return nil
         }
         guard file.minReaderFormat <= SyncFile.currentFormat, file.noteFormat <= NoteStore.formatVersion else {

@@ -14,6 +14,9 @@ struct NoteFile: Codable, Equatable {
     var space: UUID?
     var deleted: Date?
     var photos: [String]?
+    var recordings: [String]?
+    var transcript: NoteContent?
+    var summary: NoteContent?
     var locked: Bool?
     var archived: Bool?
     var pinned: Bool?
@@ -28,6 +31,9 @@ struct NoteFile: Codable, Equatable {
         space = note.space
         deleted = note.deleted
         photos = note.photos.isEmpty ? nil : note.photos
+        recordings = note.recordings.isEmpty ? nil : note.recordings
+        transcript = note.transcript
+        summary = note.summary
         locked = note.locked ? true : nil
         archived = note.archived ? true : nil
         pinned = note.pinned ? true : nil
@@ -38,6 +44,9 @@ struct NoteFile: Codable, Equatable {
         note.isReadOnly = version > NoteStore.formatVersion
         note.deleted = deleted
         note.photos = photos ?? []
+        note.recordings = recordings ?? []
+        note.transcript = transcript
+        note.summary = summary
         note.locked = locked ?? false
         note.archived = archived ?? false
         note.pinned = pinned ?? false
@@ -57,9 +66,9 @@ struct NoteFile: Codable, Equatable {
 @MainActor @Observable
 final class NoteStore {
     /// 2: dividers, highlighting, weights. 3: the note's folder. 4: its space. 5: the trash and
-    /// attachments. 6: the "Source :" line. 7: the album of images. 8: locked notes. 9: archived notes. 10: links. 11: pinned notes. 12: struck-through text, inline code, indented list items. Earlier files
-    /// read as they are.
-    nonisolated static let formatVersion = 12
+    /// attachments. 6: the "Source :" line. 7: the album of images. 8: locked notes. 9: archived notes. 10: links. 11: pinned notes. 12: struck-through text, inline code, indented list items. 13: the recordings, the
+    /// transcript and the summary (0.2.1). Earlier files read as they are.
+    nonisolated static let formatVersion = 13
     /// A note stays this long in the trash before it is deleted for good.
     nonisolated static let trashDays = 30
     /// Typing pauses this long before the note is written.
@@ -190,6 +199,31 @@ final class NoteStore {
         scheduleSave()
     }
 
+    /// A part of the note changed: its own text, its transcript or its summary.
+    func update(_ id: UUID, part: NotePart, content: NoteContent) {
+        guard part != .notes else { return update(id, content: content) }
+        guard let index = notes.firstIndex(where: { $0.id == id }), !notes[index].isReadOnly, notes[index].content(of: part) != content else { return }
+        if part == .transcript { notes[index].transcript = content } else { notes[index].summary = content }
+        notes[index].modified = .now
+        if index != 0 { notes.insert(notes.remove(at: index), at: 0) }
+        unsaved.insert(id)
+        scheduleSave()
+    }
+
+    /// What a tab shows changed (`Note.composite`): its first paragraph is the note's title, the
+    /// rest the part's text.
+    func update(_ id: UUID, part: NotePart, composite: NoteContent) {
+        guard part != .notes else { return update(id, content: composite) }
+        guard let note = note(id) else { return }
+        let split = composite.headLength
+        var head = composite.slice(NSRange(location: 0, length: split))
+        let body = note.content.slice(from: note.content.headLength)
+        // The line break the tab adds after a title alone isn't the note's.
+        if body.text.isEmpty, !note.content.text.hasSuffix("\n"), head.text.hasSuffix("\n") { head = head.slice(NSRange(location: 0, length: (head.text as NSString).length - 1)) }
+        update(id, content: head + body)
+        update(id, part: part, content: composite.slice(from: split))
+    }
+
     /// Adds what another app sent at the end of a note (`NoteImport.appending`): if it is on
     /// screen, it is shown anew, with it.
     func append(_ clip: NoteContent, to id: UUID) {
@@ -210,7 +244,7 @@ final class NoteStore {
             try FileManager.default.removeItem(at: url)
             changed()
         } catch {
-            errorMessage = "La note n'a pas pu être supprimée du disque : \(error.localizedDescription)"
+            errorMessage = String(localized: "La note n'a pas pu être supprimée du disque : \(error.localizedDescription)")
         }
     }
 
@@ -234,7 +268,7 @@ final class NoteStore {
 
     /// Why a later version's note stays where it is.
     static func laterVersionMessage(_ title: String) -> String {
-        "« \(title) » a été écrite par une version plus récente de Void Notes : elle n'est montrée qu'en lecture. Mettez l'app à jour pour la supprimer."
+        String(localized: "« \(title) » a été écrite par une version plus récente de Void Notes : elle n'est montrée qu'en lecture. Mettez l'app à jour pour la supprimer.")
     }
 
     /// Takes a note out of the trash, back to its folder if it is still there.
@@ -330,7 +364,7 @@ final class NoteStore {
         // A name is one path component, whatever the file was called.
         let name = name.replacingOccurrences(of: "/", with: "-").replacingOccurrences(of: ":", with: "-")
         let base = (name as NSString).deletingPathExtension, ext = (name as NSString).pathExtension
-        var candidate = name.isEmpty ? "Fichier" : name, number = 2
+        var candidate = name.isEmpty ? String(localized: "Fichier") : name, number = 2
         while FileManager.default.fileExists(atPath: folder.appendingPathComponent(candidate).path) {
             candidate = ext.isEmpty ? "\(base) \(number)" : "\(base) \(number).\(ext)"
             number += 1
@@ -340,7 +374,7 @@ final class NoteStore {
             try write(folder.appendingPathComponent(candidate))
             return candidate
         } catch {
-            errorMessage = "« \(name) » n'a pas pu être joint à la note : \(error.localizedDescription)"
+            errorMessage = String(localized: "« \(name) » n'a pas pu être joint à la note : \(error.localizedDescription)")
             return nil
         }
     }
@@ -362,6 +396,33 @@ final class NoteStore {
     private func addPhotos(named names: [String], to id: UUID) {
         guard !names.isEmpty, let index = notes.firstIndex(where: { $0.id == id }) else { return }
         notes[index].photos += names
+        touch(index)
+    }
+
+    // MARK: Recordings
+
+    /// Copies sound files into the note's folder and adds them to its recordings.
+    func addRecordings(_ files: [URL], to id: UUID) {
+        guard note(id)?.isReadOnly == false else { return }
+        let names = files.compactMap { attach($0, to: id) }
+        guard !names.isEmpty, let index = notes.firstIndex(where: { $0.id == id }) else { return }
+        notes[index].recordings += names
+        touch(index)
+    }
+
+    /// Files already in the note's folder become recordings (they were in its text).
+    func adoptRecordings(_ names: [String], in id: UUID) {
+        guard let index = notes.firstIndex(where: { $0.id == id }), !notes[index].isReadOnly else { return }
+        let new = names.filter { !notes[index].recordings.contains($0) }
+        guard !new.isEmpty else { return }
+        notes[index].recordings += new
+        save(id)
+    }
+
+    /// Takes a recording out of the note. Its file goes at the next launch, like the others.
+    func removeRecording(_ name: String, from id: UUID) {
+        guard let index = notes.firstIndex(where: { $0.id == id }), !notes[index].isReadOnly, notes[index].recordings.contains(name) else { return }
+        notes[index].recordings.removeAll { $0 == name }
         touch(index)
     }
 
@@ -387,7 +448,7 @@ final class NoteStore {
         for note in notes + trash where !note.isReadOnly {
             let folder = attachmentsDirectory(of: note.id)
             guard let files = try? FileManager.default.contentsOfDirectory(atPath: folder.path) else { continue }
-            let used = Set(note.attachments + note.photos)
+            let used = Set(note.attachments + note.photos + note.recordings)
             for file in files where !used.contains(file) { try? FileManager.default.removeItem(at: folder.appendingPathComponent(file)) }
         }
     }
@@ -610,7 +671,7 @@ final class NoteStore {
             try encoder.encode(SpacesFile(spaces: spaces)).write(to: spacesURL, options: .atomic)
             changed()
         } catch {
-            errorMessage = "Les espaces n'ont pas pu être enregistrés : \(error.localizedDescription)"
+            errorMessage = String(localized: "Les espaces n'ont pas pu être enregistrés : \(error.localizedDescription)")
         }
     }
 
@@ -639,7 +700,7 @@ final class NoteStore {
             try encoder.encode(FoldersFile(folders: folders)).write(to: foldersURL, options: .atomic)
             changed()
         } catch {
-            errorMessage = "Les dossiers n'ont pas pu être enregistrés : \(error.localizedDescription)"
+            errorMessage = String(localized: "Les dossiers n'ont pas pu être enregistrés : \(error.localizedDescription)")
         }
     }
 
@@ -698,7 +759,8 @@ final class NoteStore {
         for (id, file) in incoming {
             if let note = current[id] {
                 guard !note.isReadOnly, SyncMerge.hash(NoteFile(note)) != SyncMerge.hash(file) else { continue }
-                if note.content != file.note.content || note.photos != file.note.photos { shown.insert(id) }
+                if note.content != file.note.content || note.photos != file.note.photos || note.recordings != file.note.recordings
+                    || note.transcript != file.note.transcript || note.summary != file.note.summary { shown.insert(id) }
             }
             current[id] = file.note
             unsaved.insert(id)
@@ -745,7 +807,7 @@ final class NoteStore {
                 unsaved.remove(id)
             } catch {
                 // Stays in `unsaved`: tried again with the next change.
-                errorMessage = "La note « \(note.title) » n'a pas pu être enregistrée : \(error.localizedDescription)"
+                errorMessage = String(localized: "La note « \(note.title) » n'a pas pu être enregistrée : \(error.localizedDescription)")
             }
         }
     }

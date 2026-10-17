@@ -50,6 +50,47 @@ struct StyleRun: Codable, Equatable {
 struct NoteContent: Codable, Equatable {
     var text = ""
     var runs: [StyleRun] = []
+
+    /// Where its first paragraph — the title — ends, its line break included (UTF-16, like the runs).
+    var headLength: Int {
+        let string = text as NSString
+        return string.length == 0 ? 0 : string.paragraphRange(for: NSRange(location: 0, length: 0)).upperBound
+    }
+
+    /// The text of `range`, with its runs.
+    func slice(_ range: NSRange) -> NoteContent {
+        let string = text as NSString
+        let range = NSIntersectionRange(range, NSRange(location: 0, length: string.length))
+        let runs = runs.compactMap { run -> StyleRun? in
+            let kept = NSIntersectionRange(NSRange(location: run.start, length: run.length), range)
+            guard kept.length > 0 else { return nil }
+            var run = run
+            run.start = kept.location - range.location
+            run.length = kept.length
+            return run
+        }
+        return NoteContent(text: string.substring(with: range), runs: runs)
+    }
+
+    /// From `location` to the end.
+    func slice(from location: Int) -> NoteContent {
+        slice(NSRange(location: location, length: max(0, (text as NSString).length - location)))
+    }
+
+    static func + (lhs: NoteContent, rhs: NoteContent) -> NoteContent {
+        let shift = (lhs.text as NSString).length
+        return NoteContent(text: lhs.text + rhs.text, runs: lhs.runs + rhs.runs.map { run in
+            var run = run
+            run.start += shift
+            return run
+        })
+    }
+}
+
+/// What a note holds besides its own text: the transcript of what its
+/// listenings heard, and their summary — each shown in a tab of its own, under the title.
+enum NotePart: String, CaseIterable {
+    case notes, transcript, summary
 }
 
 struct Note: Identifiable, Equatable {
@@ -60,6 +101,14 @@ struct Note: Identifiable, Equatable {
     /// The images of the note's album, shown under its title: their names in the note's
     /// attachments folder, in the order they show.
     var photos: [String] = [] { didSet { summarize() } }
+    /// The sound recorded in the note (what the listening heard): their names
+    /// in the note's attachments folder, in the order they were made. Shown in a section of their
+    /// own, under the title, never in the text.
+    var recordings: [String] = [] { didSet { summarize() } }
+    /// What its listenings heard, apart from what is written in it; nil: never listened in.
+    var transcript: NoteContent?
+    /// The summary of the transcript; nil: never summarised.
+    var summary: NoteContent?
     /// When the note was put in the trash; nil: it isn't there.
     var deleted: Date?
     /// Put away: out of the folders and of "Toutes les notes", under "Archives". It still is a
@@ -93,6 +142,23 @@ struct Note: Identifiable, Equatable {
         summarize()
     }
 
+    /// The text of one of its parts: the note's own, its transcript, its summary.
+    func content(of part: NotePart) -> NoteContent? {
+        switch part {
+        case .notes: content
+        case .transcript: transcript
+        case .summary: summary
+        }
+    }
+
+    /// Its title, then the text of `part`: what a tab shows.
+    func composite(_ part: NotePart) -> NoteContent {
+        guard part != .notes else { return content }
+        var head = content.slice(NSRange(location: 0, length: content.headLength))
+        if !head.text.hasSuffix("\n") { head.text += "\n" }
+        return head + (content(of: part) ?? NoteContent())
+    }
+
     /// Nothing written and nothing joined.
     var isBlank: Bool { title.isEmpty }
 
@@ -102,11 +168,13 @@ struct Note: Identifiable, Equatable {
     /// Names of the files joined to the note's text, in its order.
     var attachments: [String] { content.runs.compactMap(\.attachment) }
 
-    /// Every word of the search is somewhere in the note (title included: it's its first line) or
+    /// Every word of the search is somewhere in the note (title included: it's its first line; its
+    /// transcript and summary, if any) or
     /// in one of `names` — those of the folders it is in, say —, whatever the case and the accents.
     /// A locked note is found by its title only (and by those names).
     func matches(_ words: [String], alsoIn names: [String] = []) -> Bool {
-        let fields = [locked ? title : content.text] + names
+        // Its transcript and its summary too (what the listenings heard).
+        let fields = (locked ? [title] : [content.text, transcript?.text ?? "", summary?.text ?? ""]) + names
         return words.allSatisfy { word in
             fields.contains { $0.range(of: word, options: [.caseInsensitive, .diacriticInsensitive]) != nil }
         }
@@ -141,7 +209,7 @@ struct Note: Identifiable, Equatable {
             if rest.count == 4 { break }
         }
         // A note that is only a file is called after it.
-        if title.isEmpty, let file = content.runs.lazy.compactMap(\.attachment).first ?? photos.first { title = file }
+        if title.isEmpty, let file = content.runs.lazy.compactMap(\.attachment).first ?? photos.first ?? recordings.first { title = file }
         self.title = title
         preview = locked ? "" : String(rest.joined(separator: " ").prefix(200))
     }

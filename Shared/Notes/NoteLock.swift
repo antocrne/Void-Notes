@@ -21,15 +21,15 @@ enum NoteLock {
         let context = LAContext()
         let biometrics = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
         #if os(macOS)
-        return biometrics ? "Touch ID" : "le mot de passe du Mac"
+        return biometrics ? "Touch ID" : String(localized: "le mot de passe du Mac")
         #else
-        return !biometrics ? "le code de l'iPhone" : context.biometryType == .touchID ? "Touch ID" : "Face ID"
+        return !biometrics ? String(localized: "le code de l'iPhone") : context.biometryType == .touchID ? "Touch ID" : "Face ID"
         #endif
     }
 
     static func authenticate(reason: String, completion: @escaping @MainActor (Bool) -> Void) {
         let context = LAContext()
-        context.localizedCancelTitle = "Annuler"
+        context.localizedCancelTitle = String(localized: "Annuler")
         guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) else {
             return DispatchQueue.main.async { MainActor.assumeIsolated { completion(false) } }
         }

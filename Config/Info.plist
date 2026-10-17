@@ -16,6 +16,9 @@
 			</array>
 		</dict>
 	</array>
+	<!-- The listening: the Mac's own sound (a call, a video), through a Core Audio process tap. -->
+	<key>NSAudioCaptureUsageDescription</key>
+	<string>Void Notes écoute le son du Mac (un appel, une vidéo) pour écrire dans la note ce qui est dit. La transcription se fait sur le Mac.</string>
 	<!-- A note dragged in the list, on its way to a folder: a type of its own, so that text
 	     dragged from elsewhere isn't taken for it, nor the note for text. -->
 	<key>UTExportedTypeDeclarations</key>

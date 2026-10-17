@@ -4,7 +4,7 @@ import Foundation
 enum NoteDate {
     static func label(_ date: Date, now: Date = .now, calendar: Calendar = .current) -> String {
         if calendar.isDate(date, inSameDayAs: now) { return date.formatted(date: .omitted, time: .shortened) }
-        if let yesterday = calendar.date(byAdding: .day, value: -1, to: now), calendar.isDate(date, inSameDayAs: yesterday) { return "Hier" }
+        if let yesterday = calendar.date(byAdding: .day, value: -1, to: now), calendar.isDate(date, inSameDayAs: yesterday) { return String(localized: "Hier") }
         if calendar.isDate(date, equalTo: now, toGranularity: .year) { return date.formatted(.dateTime.day().month(.abbreviated)) }
         return date.formatted(date: .numeric, time: .omitted)
     }
@@ -12,9 +12,9 @@ enum NoteDate {
     /// Under the title of a note of the trash: what becomes of it.
     static func trashMeta(daysLeft: Int) -> String {
         switch daysLeft {
-        case 0: "Dans la corbeille  ·  supprimée au prochain lancement"
-        case 1: "Dans la corbeille  ·  supprimée dans 1 jour"
-        default: "Dans la corbeille  ·  supprimée dans \(daysLeft) jours"
+        case 0: String(localized: "Dans la corbeille  ·  supprimée au prochain lancement")
+        case 1: String(localized: "Dans la corbeille  ·  supprimée dans 1 jour")
+        default: String(localized: "Dans la corbeille  ·  supprimée dans \(daysLeft) jours")
         }
     }
 
@@ -22,13 +22,13 @@ enum NoteDate {
     /// one), then when it was last changed, said the way one would — "aujourd'hui", "hier", or the
     /// day — with the time. `fullMeta` says it in full, for the tooltip.
     static func meta(created: Date, modified: Date, now: Date = .now, calendar: Calendar = .current) -> String {
-        "Créée \(created.formatted(day(created, now: now, calendar: calendar)))  ·  modifiée \(relative(modified, now: now, calendar: calendar))"
+        String(localized: "Créée \(created.formatted(day(created, now: now, calendar: calendar)))  ·  modifiée \(relative(modified, now: now, calendar: calendar))")
     }
 
     /// The dates in full, years and times included.
     static func fullMeta(created: Date, modified: Date) -> String {
         let style = Date.FormatStyle.dateTime.weekday(.wide).day().month(.wide).year().hour().minute()
-        return "Créée le \(created.formatted(style))\nModifiée le \(modified.formatted(style))"
+        return String(localized: "Créée le \(created.formatted(style))\nModifiée le \(modified.formatted(style))")
     }
 
     private static func day(_ date: Date, now: Date, calendar: Calendar) -> Date.FormatStyle {
@@ -37,8 +37,8 @@ enum NoteDate {
 
     private static func relative(_ date: Date, now: Date, calendar: Calendar) -> String {
         let time = date.formatted(date: .omitted, time: .shortened)
-        if calendar.isDate(date, inSameDayAs: now) { return "aujourd'hui à \(time)" }
-        if let yesterday = calendar.date(byAdding: .day, value: -1, to: now), calendar.isDate(date, inSameDayAs: yesterday) { return "hier à \(time)" }
-        return "le \(date.formatted(day(date, now: now, calendar: calendar))) à \(time)"
+        if calendar.isDate(date, inSameDayAs: now) { return String(localized: "aujourd'hui à \(time)") }
+        if let yesterday = calendar.date(byAdding: .day, value: -1, to: now), calendar.isDate(date, inSameDayAs: yesterday) { return String(localized: "hier à \(time)") }
+        return String(localized: "le \(date.formatted(day(date, now: now, calendar: calendar))) à \(time)")
     }
 }

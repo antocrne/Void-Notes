@@ -326,7 +326,20 @@ final class NotesModel {
     /// A new note next to the one being read: in the same folder.
     func newNote() {
         let near = store.note(selectedID)
-        newNote(in: near?.space == currentSpaceID ? near?.folder : nil)
+        newNote(in: near?.space == currentSpaceID ? openPart(of: near?.folder) : nil)
+    }
+
+    /// The deepest folder of that one's path that the list shows open: a folder closed since
+    /// keeps the new note out, and with every folder closed it is in none.
+    private func openPart(of folder: UUID?) -> UUID? {
+        var path: [UUID] = []
+        var next = store.folder(folder)
+        // `count`: a file edited by hand could make a folder its own ancestor.
+        while let folder = next, path.count <= store.folders.count {
+            path.append(folder.id)
+            next = store.folder(folder.parent)
+        }
+        return path.reversed().prefix { expanded.contains($0) }.last
     }
 
     func newNote(in folder: UUID?) {
@@ -526,9 +539,9 @@ final class NotesModel {
         if !note.locked {
             guard canAuthenticate() else {
                 #if os(macOS)
-                store.errorMessage = "Cette note ne pourrait plus être déverrouillée : ce Mac n'a ni Touch ID ni mot de passe de session."
+                store.errorMessage = String(localized: "Cette note ne pourrait plus être déverrouillée : ce Mac n'a ni Touch ID ni mot de passe de session.")
                 #else
-                store.errorMessage = "Cette note ne pourrait plus être déverrouillée : cet iPhone n'a ni Face ID ni code."
+                store.errorMessage = String(localized: "Cette note ne pourrait plus être déverrouillée : cet iPhone n'a ni Face ID ni code.")
                 #endif
                 return
             }
@@ -541,7 +554,7 @@ final class NotesModel {
     /// the note in the window by then.
     func unlock(_ id: UUID) {
         guard let note = store.note(id) ?? store.trashed(id), isConcealed(note) else { return }
-        authenticate("déverrouiller une note") { [weak self] success in
+        authenticate(String(localized: "déverrouiller une note")) { [weak self] success in
             guard let self, success, self.selectedID == id, (self.store.note(id) ?? self.store.trashed(id))?.locked == true else { return }
             self.unlocked.insert(id)
             self.editorFocusRequest += 1
@@ -556,7 +569,7 @@ final class NotesModel {
             unlocked.remove(id)
             return store.setLocked(false, for: id)
         }
-        authenticate("retirer le verrou d'une note") { [weak self] success in
+        authenticate(String(localized: "retirer le verrou d'une note")) { [weak self] success in
             if success { self?.store.setLocked(false, for: id) }
         }
     }

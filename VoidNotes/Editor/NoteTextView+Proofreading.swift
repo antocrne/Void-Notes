@@ -118,17 +118,17 @@ extension NoteTextView {
             items.append(item)
         }
         if corrections.isEmpty {
-            let item = NSMenuItem(title: "Aucune suggestion", action: nil, keyEquivalent: "")
+            let item = NSMenuItem(title: String(localized: "Aucune suggestion"), action: nil, keyEquivalent: "")
             item.isEnabled = false
             items.append(item)
         }
         items.append(.separator())
-        let ignore = NSMenuItem(title: mark.kind == .spelling ? "Ignorer l'orthographe" : "Ignorer", action: #selector(ignoreMark(_:)), keyEquivalent: "")
+        let ignore = NSMenuItem(title: mark.kind == .spelling ? String(localized: "Ignorer l'orthographe") : String(localized: "Ignorer"), action: #selector(ignoreMark(_:)), keyEquivalent: "")
         ignore.target = self
         ignore.representedObject = Correction(range: mark.range, text: "")
         items.append(ignore)
         if mark.kind == .spelling {
-            let learn = NSMenuItem(title: "Ajouter au dictionnaire", action: #selector(learnMark(_:)), keyEquivalent: "")
+            let learn = NSMenuItem(title: String(localized: "Ajouter au dictionnaire"), action: #selector(learnMark(_:)), keyEquivalent: "")
             learn.target = self
             learn.representedObject = Correction(range: mark.range, text: "")
             items.append(learn)
