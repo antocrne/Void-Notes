@@ -1,14 +1,15 @@
 #!/bin/zsh
-# Puts a built Void Notes.app in /Applications, in place of the copy there. If that copy is
-# running, it is quit first (politely, so the notes being written are saved) and not reopened.
-# Called after every build of the VoidNotes scheme (Xcode or xcodebuild), and by install.sh.
+# Puts a built Void Notes.app (or Void Notes Beta.app) in /Applications, in place of the copy
+# there. If that copy is running, it is quit first (politely, so the notes being written are
+# saved) and not reopened. Called after every build of the VoidNotes and VoidNotesBeta schemes
+# (Xcode or xcodebuild), and by install.sh and install-beta.sh.
 #   ./scripts/copy-to-applications.sh "<path>/Void Notes.app"
 set -euo pipefail
 
 APP=${1:?"usage: $0 <path>/Void Notes.app"}
-TARGET="/Applications/Void Notes.app"
-BUNDLE_ID="app.void.notes"
-RUNNING="$TARGET/Contents/MacOS/Void Notes"
+NAME=$(basename "$APP" .app)
+TARGET="/Applications/$NAME.app"
+RUNNING="$TARGET/Contents/MacOS/$NAME"
 
 [[ -d "$APP" ]] || { echo "Pas d'app à $APP"; exit 1; }
 [[ "$APP" -ef "$TARGET" ]] && exit 0

@@ -41,6 +41,9 @@ struct NoteActions: View {
                 PhotoButton(model: model, store: store)
                 ChromeButton(symbol: "paperclip", help: "Joindre un fichier (⇧⌘A)",
                              disabled: model.selected == nil || model.selected?.isReadOnly == true) { model.editor?.chooseAttachments() }
+                #if BETA
+                ListenButton(listener: .shared, note: model.selected)
+                #endif
                 // The padlock is what it does — lock the note — never a state to decipher.
                 ChromeButton(symbol: "lock",
                              help: model.selected?.locked == true ? "Verrouiller maintenant (⇧⌘L)" : "Verrouiller la note (⇧⌘L) : elle s'ouvrira avec \(NoteLock.method)",

@@ -8,6 +8,23 @@ import UIKit
 extension DebugLaunch {
     @MainActor
     static func startIOS() {
+        #if BETA
+        // `-listening YES`: the first note opened, listening in it — two sentences heard, words in
+        // flight.
+        if isDemo, UserDefaults.standard.bool(forKey: "listening") {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                guard let note = NoteStore.shared.notes.first(where: { !$0.archived }) else { return }
+                NotesModel.shared.open(note.id)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    let listener = Listener.shared
+                    listener.pretend(in: note.id, words: "et pour la suite nous verrons avec l'équipe", levels: [0.2, 0.55, 0.8, 0.45, 0.65],
+                                     startedAt: .now.addingTimeInterval(-134))
+                    listener.pretendHeard("Le budget de l'année est validé.", from: 0, to: 2)
+                    listener.pretendHeard("On se revoit mardi avec les maquettes.", from: 2.4, to: 4)
+                }
+            }
+        }
+        #endif
         let photos = UserDefaults.standard.integer(forKey: "photos")
         guard isDemo, photos > 0 else { return }
         if UserDefaults.standard.bool(forKey: "blank") { NotesModel.shared.newNote(in: nil) }

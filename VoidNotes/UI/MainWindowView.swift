@@ -22,6 +22,9 @@ struct MainWindowView: View {
             }
             content
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                #if BETA
+                .overlay(alignment: .bottom) { ListeningOverlay() }
+                #endif
                 .background(NoteSurface(drawsFrame: false))
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(Theme.stroke))
@@ -94,6 +97,9 @@ struct MainWindowView: View {
         } message: {
             Text(store.errorMessage ?? "")
         }
+        #if BETA
+        .modifier(ListeningAlerts(listener: .shared))
+        #endif
     }
 
 
@@ -101,6 +107,15 @@ struct MainWindowView: View {
         if let note = model.selected, model.isConcealed(note) {
             LockedNote(note: note)
         } else if let note = model.selected {
+            #if BETA
+            // The tab shown: a new editor for each, its own undo history.
+            let part = NoteTabs.shared.part(of: note)
+            NoteEditor(note: note, accent: settings.accent, checksSpelling: settings.checksSpelling, checksGrammar: settings.checksGrammar,
+                       searchQuery: model.query, model: model, store: store, focusRequest: model.editorFocusRequest, part: part) { content in
+                store.update(note.id, content: content)
+            }
+            .id("\(note.id)\(note.deleted == nil)\(store.revisions[note.id] ?? 0)\(settings.chromeTint == .none)\(part)")
+            #else
             NoteEditor(note: note, accent: settings.accent, checksSpelling: settings.checksSpelling, checksGrammar: settings.checksGrammar,
                        searchQuery: model.query, model: model, store: store, focusRequest: model.editorFocusRequest) { content in
                 store.update(note.id, content: content)
@@ -109,6 +124,7 @@ struct MainWindowView: View {
             // that leaves the trash, which can be written again, or that another device changed;
             // and when the frame goes from neutral to tinted or back (its grey changes).
             .id("\(note.id)\(note.deleted == nil)\(store.revisions[note.id] ?? 0)\(settings.chromeTint == .none)")
+            #endif
         } else {
             EmptyState()
         }

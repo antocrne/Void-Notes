@@ -17,6 +17,10 @@ struct NoteEditor: NSViewRepresentable {
     let store: NoteStore
     /// Changes when the text should take the keyboard.
     let focusRequest: Int
+    #if BETA
+    /// The tab shown: the note's own text, or its title and its transcript or summary.
+    var part: NotePart = .notes
+    #endif
     let onChange: (NoteContent) -> Void
 
     func makeNSView(context: Context) -> NSScrollView {
@@ -29,7 +33,13 @@ struct NoteEditor: NSViewRepresentable {
         textView.attachData = { [store] in store.attach($0, named: $1, to: id) }
         textView.addPhotos = { [store] in store.addPhotos($0, to: id) }
         textView.addPhotoData = { [store] in store.addPhoto($0, named: $1, to: id) }
+        #if BETA
+        textView.addRecordings = { [store] in store.addRecordings($0, to: id) }
+        textView.part = part
+        textView.load(note.composite(part))
+        #else
         textView.load(note.content)
+        #endif
         if note.deleted != nil { textView.dimText() }
         textView.onTyping = { [model] in if !model.writing { model.writing = true } }
         textView.searchWords = Self.words(searchQuery)
@@ -40,8 +50,18 @@ struct NoteEditor: NSViewRepresentable {
         let actions = NSHostingView(rootView: NoteActions(model: model, store: store))
         textView.accessory = actions
         textView.accessoryFloats = { [model, store] in actions.rootView = NoteActions(model: model, store: store, floating: $0) }
+        #if BETA
+        // The album, then the recordings: under the title, out of the text.
+        textView.album = NSHostingView(rootView: NoteSections(noteID: id, store: store))
+        textView.albumHeight = NoteSections.height(of: note)
+        #else
         textView.album = NSHostingView(rootView: NotePhotoAlbumSection(noteID: id, store: store))
         textView.albumHeight = note.photos.isEmpty ? 0 : NotePhotoAlbumSection.height
+        #endif
+        #if BETA
+        // Listening in this note: the words go on in this text view.
+        Listener.shared.register(textView, for: id)
+        #endif
         return scrollView
     }
 
@@ -51,13 +71,27 @@ struct NoteEditor: NSViewRepresentable {
         let words = Self.words(searchQuery)
         if textView.searchWords != words { textView.searchWords = words }
         textView.setProofreading(spelling: checksSpelling, grammar: checksGrammar)
+        #if BETA
+        textView.albumHeight = NoteSections.height(of: note)
+        #else
         textView.albumHeight = note.photos.isEmpty ? 0 : NotePhotoAlbumSection.height
+        #endif
         textView.meta = note.deleted == nil ? (note.archived ? String(localized: "Archivée  ·  ") : "") + NoteDate.meta(created: note.created, modified: note.modified)
             : NoteDate.trashMeta(daysLeft: store.daysLeft(note))
         textView.metaHelp = NoteDate.fullMeta(created: note.created, modified: note.modified)
+        #if BETA
+        let id = note.id
+        textView.onChange = { [weak textView, part, store] in
+            guard let textView else { return }
+            // A tab: its title is the note's, the rest the part's.
+            if part != .notes { return store.update(id, part: part, composite: textView.content) }
+            onChange(textView.content)
+        }
+        #else
         textView.onChange = { [weak textView] in
             if let textView { onChange(textView.content) }
         }
+        #endif
         if context.coordinator.focusRequest != focusRequest {
             context.coordinator.focusRequest = focusRequest
             DispatchQueue.main.async { [weak textView] in textView?.focus() }

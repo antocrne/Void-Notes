@@ -12,7 +12,7 @@ enum NoteExport {
     private static func files(of note: Note, store: NoteStore) -> [String] {
         let directory = store.attachmentsDirectory(of: note.id)
         var seen = Set<String>()
-        return (note.photos + note.attachments).filter {
+        return (note.photos + note.attachments + note.recordings).filter {
             seen.insert($0).inserted && FileManager.default.fileExists(atPath: directory.appendingPathComponent($0).path)
         }
     }

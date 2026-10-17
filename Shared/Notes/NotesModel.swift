@@ -326,8 +326,27 @@ final class NotesModel {
     /// A new note next to the one being read: in the same folder.
     func newNote() {
         let near = store.note(selectedID)
+        #if BETA
+        newNote(in: near?.space == currentSpaceID ? openPart(of: near?.folder) : nil)
+        #else
         newNote(in: near?.space == currentSpaceID ? near?.folder : nil)
+        #endif
     }
+
+    #if BETA
+    /// The deepest folder of that one's path that the list shows open: a folder closed since
+    /// keeps the new note out, and with every folder closed it is in none.
+    private func openPart(of folder: UUID?) -> UUID? {
+        var path: [UUID] = []
+        var next = store.folder(folder)
+        // `count`: a file edited by hand could make a folder its own ancestor.
+        while let folder = next, path.count <= store.folders.count {
+            path.append(folder.id)
+            next = store.folder(folder.parent)
+        }
+        return path.reversed().prefix { expanded.contains($0) }.last
+    }
+    #endif
 
     func newNote(in folder: UUID?) {
         let folder = store.folder(folder)?.id

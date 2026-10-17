@@ -16,6 +16,10 @@ struct VoidNotesiOSApp: App {
         #if DEBUG
         DebugLaunch.startIOS()
         #endif
+        #if BETA
+        // A listening cut short last time (the app killed): its sound goes to its note.
+        Task { @MainActor in await Listener.shared.recoverInterrupted() }
+        #endif
     }
 
     var body: some Scene {

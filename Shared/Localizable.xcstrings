@@ -17,6 +17,39 @@
         }
       }
     },
+    " :" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ":"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " :"
+          }
+        }
+      }
+    },
+    "%@ / %@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ / %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ / %@"
+          }
+        }
+      }
+    },
     "%@ — complémentaire de votre couleur" : {
       "localizations" : {
         "en" : {
@@ -221,6 +254,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aa"
+          }
+        }
+      }
+    },
+    "Actions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actions"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actions"
           }
         }
       }
@@ -513,6 +562,102 @@
         }
       }
     },
+    "Apple Intelligence a refusé de résumer un passage de cette note." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence declined to summarize a passage of this note."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence a refusé de résumer un passage de cette note."
+          }
+        }
+      }
+    },
+    "Apple Intelligence est désactivé. Activez-le dans les Réglages Système pour résumer sur le Mac." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence is turned off. Turn it on in System Settings to summarize on this Mac."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence est désactivé. Activez-le dans les Réglages Système pour résumer sur le Mac."
+          }
+        }
+      }
+    },
+    "Apple Intelligence n'a pas rendu de résumé lisible. Réessayez." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence didn't return a readable summary. Try again."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence n'a pas rendu de résumé lisible. Réessayez."
+          }
+        }
+      }
+    },
+    "Apple Intelligence n'est pas disponible pour l'instant." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence isn't available right now."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence n'est pas disponible pour l'instant."
+          }
+        }
+      }
+    },
+    "Apple Intelligence ne résume pas dans la langue de cette note." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence doesn't summarize in this note's language."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence ne résume pas dans la langue de cette note."
+          }
+        }
+      }
+    },
+    "Après l'écoute" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After Listening"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Après l'écoute"
+          }
+        }
+      }
+    },
     "Archiver" : {
       "localizations" : {
         "en" : {
@@ -609,6 +754,38 @@
         }
       }
     },
+    "Arrêter l'écoute" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop Listening"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrêter l'écoute"
+          }
+        }
+      }
+    },
+    "Arrêter l'écoute (⇧⌘D)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop listening (⇧⌘D)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrêter l'écoute (⇧⌘D)"
+          }
+        }
+      }
+    },
     "Arrêter la synchronisation" : {
       "localizations" : {
         "en" : {
@@ -637,6 +814,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucun dossier"
+          }
+        }
+      }
+    },
+    "Aucun micro n'est disponible." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No microphone is available."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun micro n'est disponible."
           }
         }
       }
@@ -753,6 +946,22 @@
         }
       }
     },
+    "Avancer de 10 secondes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forward 10 Seconds"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avancer de 10 secondes"
+          }
+        }
+      }
+    },
     "Avec %@" : {
       "localizations" : {
         "en" : {
@@ -829,6 +1038,71 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Caractères"
+          }
+        }
+      }
+    },
+    "Ce Mac ne peut pas faire tourner Apple Intelligence." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This Mac can't run Apple Intelligence."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce Mac ne peut pas faire tourner Apple Intelligence."
+          }
+        }
+      }
+    },
+    "Ce qui est dit est écrit dans la note, sur l'appareil. Aucun son n'est enregistré ni envoyé : seuls les mots restent, dans la note." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is said is written in the note, on the device. No sound is recorded or sent: only the words remain, in the note."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce qui est dit est écrit dans la note, sur l'appareil. Aucun son n'est enregistré ni envoyé : seuls les mots restent, dans la note."
+          }
+        }
+      }
+    },
+    "Ce qui est dit est écrit dans la note, sur l'appareil. Le bouton ondes de la note propose la langue à chaque écoute." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is said is written in the note, on this device. The note's waveform button offers the language each time you listen."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce qui est dit est écrit dans la note, sur l'appareil. Le bouton ondes de la note propose la langue à chaque écoute."
+          }
+        }
+      }
+    },
+    "Ce qui est dit est écrit dans la note, sur l'appareil. Le son du Mac fait entendre un appel ou une vidéo ; l'écho des haut-parleurs dans le micro est retiré. Le bouton ondes de la note propose la langue et la source à chaque écoute." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is said is written in the note, on this device. The Mac's sound lets a call or a video be heard; the speakers' echo in the microphone is removed. The note's waveform button offers the language and the source each time you listen."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce qui est dit est écrit dans la note, sur l'appareil. Le son du Mac fait entendre un appel ou une vidéo ; l'écho des haut-parleurs dans le micro est retiré. Le bouton ondes de la note propose la langue et la source à chaque écoute."
           }
         }
       }
@@ -925,6 +1199,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Changer…"
+          }
+        }
+      }
+    },
+    "Chaque nom change partout dans la note." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Each name changes everywhere in the note."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chaque nom change partout dans la note."
+          }
+        }
+      }
+    },
+    "Chaque nom change partout dans la transcription de cet enregistrement." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Each name changes everywhere in this recording's transcript."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chaque nom change partout dans la transcription de cet enregistrement."
           }
         }
       }
@@ -1261,6 +1568,22 @@
         }
       }
     },
+    "Dans « %@ »" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In “%@”"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dans « %@ »"
+          }
+        }
+      }
+    },
     "Depuis la photothèque" : {
       "localizations" : {
         "en" : {
@@ -1353,6 +1676,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dossier écrit par une version plus récente : mettez Void Notes à jour sur cet iPhone"
+          }
+        }
+      }
+    },
+    "Décisions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decisions"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Décisions"
           }
         }
       }
@@ -1613,6 +1952,38 @@
         }
       }
     },
+    "En bref" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In Brief"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En bref"
+          }
+        }
+      }
+    },
+    "En cours" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En cours"
+          }
+        }
+      }
+    },
     "En tête de la liste : dépliée, elle montre toutes les notes de l'espace, quel que soit leur dossier." : {
       "localizations" : {
         "en" : {
@@ -1625,6 +1996,55 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "En tête de la liste : dépliée, elle montre toutes les notes de l'espace, quel que soit leur dossier."
+          }
+        }
+      }
+    },
+    "Enregistrement" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recording"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrement"
+          }
+        }
+      }
+    },
+    "Enregistrement de l'audio…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saving the audio…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrement de l'audio…"
+          }
+        }
+      }
+    },
+    "Enregistrements de la note" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Note's Recordings"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrements de la note"
           }
         }
       }
@@ -1661,6 +2081,22 @@
         }
       }
     },
+    "Entendre" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hear"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entendre"
+          }
+        }
+      }
+    },
     "Espace" : {
       "localizations" : {
         "en" : {
@@ -1673,6 +2109,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Espace"
+          }
+        }
+      }
+    },
+    "Eux" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Them"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eux"
           }
         }
       }
@@ -1805,6 +2257,22 @@
         }
       }
     },
+    "Fermer le lecteur" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close the Player"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fermer le lecteur"
+          }
+        }
+      }
+    },
     "Fichier" : {
       "localizations" : {
         "en" : {
@@ -1837,6 +2305,22 @@
         }
       }
     },
+    "Fin de l'écoute…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finishing…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fin de l'écoute…"
+          }
+        }
+      }
+    },
     "Format" : {
       "localizations" : {
         "en" : {
@@ -1865,6 +2349,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "G"
+          }
+        }
+      }
+    },
+    "Garder l'enregistrement" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep the Recording"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garder l'enregistrement"
           }
         }
       }
@@ -1913,6 +2413,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gras (⌘B)"
+          }
+        }
+      }
+    },
+    "Général" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Général"
           }
         }
       }
@@ -1993,6 +2509,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ignorer l'orthographe"
+          }
+        }
+      }
+    },
+    "Il n'y a pas encore assez de texte à résumer dans cette note." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There isn't enough text to summarize in this note yet."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il n'y a pas encore assez de texte à résumer dans cette note."
           }
         }
       }
@@ -2253,6 +2785,22 @@
         }
       }
     },
+    "Joint à la note, au-dessus de la transcription : un fichier AAC léger, environ 12 Mo par heure." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attached to the note, above the transcript: a light AAC file, about 12 MB per hour."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Joint à la note, au-dessus de la transcription : un fichier AAC léger, environ 12 Mo par heure."
+          }
+        }
+      }
+    },
     "L'adresse sera écrite à l'endroit du curseur." : {
       "localizations" : {
         "en" : {
@@ -2281,6 +2829,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'export n'a pas pu être écrit : %@"
+          }
+        }
+      }
+    },
+    "L'écoute continue avec le micro." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening goes on with the microphone."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'écoute continue avec le micro."
+          }
+        }
+      }
+    },
+    "L'écoute demande iOS 26 ou plus récent." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening requires iOS 26 or later."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'écoute demande iOS 26 ou plus récent."
+          }
+        }
+      }
+    },
+    "L'écoute demande macOS 26 ou plus récent." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening requires macOS 26 or later."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'écoute demande macOS 26 ou plus récent."
           }
         }
       }
@@ -2413,6 +3009,38 @@
         }
       }
     },
+    "La séparation des voix se fait sur le Mac ; ses modèles (environ 20 Mo) sont téléchargés une fois, à la première écoute." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voices are separated on the Mac; their models (about 20 MB) are downloaded once, the first time you listen."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La séparation des voix se fait sur le Mac ; ses modèles (environ 20 Mo) sont téléchargés une fois, à la première écoute."
+          }
+        }
+      }
+    },
+    "La transcription sur l'appareil ne sait pas encore écrire en %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On-device transcription can't write in %@ yet."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La transcription sur l'appareil ne sait pas encore écrire en %@."
+          }
+        }
+      }
+    },
     "Langue" : {
       "localizations" : {
         "en" : {
@@ -2425,6 +3053,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Langue"
+          }
+        }
+      }
+    },
+    "Langue de la transcription" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transcription Language"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langue de la transcription"
           }
         }
       }
@@ -2477,6 +3121,151 @@
         }
       }
     },
+    "Le micro est pris par un appel ou par une autre app." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The microphone is in use by a call or another app."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le micro est pris par un appel ou par une autre app."
+          }
+        }
+      }
+    },
+    "Le micro n'a pas pu démarrer (code %lld)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The microphone couldn't start (code %lld)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le micro n'a pas pu démarrer (code %lld)."
+          }
+        }
+      }
+    },
+    "Le modèle d'Apple Intelligence est encore en cours de téléchargement. Réessayez dans un moment." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence's model is still downloading. Try again in a moment."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le modèle d'Apple Intelligence est encore en cours de téléchargement. Réessayez dans un moment."
+          }
+        }
+      }
+    },
+    "Le modèle de transcription en %@ n'est pas encore sur l'appareil." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The %@ transcription model isn't on this device yet."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le modèle de transcription en %@ n'est pas encore sur l'appareil."
+          }
+        }
+      }
+    },
+    "Le modèle en %@ n'est pas encore sur cet appareil. Le système le télécharge une fois et le partage avec les autres apps ; la transcription se fait ensuite entièrement sur l'appareil." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The %@ model isn't on this device yet. The system downloads it once and shares it with other apps; transcription then happens entirely on the device."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le modèle en %@ n'est pas encore sur cet appareil. Le système le télécharge une fois et le partage avec les autres apps ; la transcription se fait ensuite entièrement sur l'appareil."
+          }
+        }
+      }
+    },
+    "Le son du Mac est resté muet pendant toute l'écoute. Si un appel ou une vidéo jouait, autorisez Void Notes Beta dans Réglages Système → Confidentialité et sécurité → Enregistrement audio du système." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Mac's sound stayed silent for the whole listening. If a call or a video was playing, allow Void Notes Beta in System Settings → Privacy & Security → System Audio Recording."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le son du Mac est resté muet pendant toute l'écoute. Si un appel ou une vidéo jouait, autorisez Void Notes Beta dans Réglages Système → Confidentialité et sécurité → Enregistrement audio du système."
+          }
+        }
+      }
+    },
+    "Le son du Mac n'a pas pu être capté (%@, code %lld)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Mac's sound couldn't be captured (%@, code %lld)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le son du Mac n'a pas pu être capté (%@, code %lld)."
+          }
+        }
+      }
+    },
+    "Le son est retiré de la note ; la transcription reste." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The sound is removed from the note; the transcript stays."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le son est retiré de la note ; la transcription reste."
+          }
+        }
+      }
+    },
+    "Le son quitte la note ; la transcription reste. Le fichier est effacé au prochain lancement." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The sound leaves the note; the transcript stays. The file is erased at the next launch."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le son quitte la note ; la transcription reste. Le fichier est effacé au prochain lancement."
+          }
+        }
+      }
+    },
     "Le texte choisi ouvrira cette adresse." : {
       "localizations" : {
         "en" : {
@@ -2489,6 +3278,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le texte choisi ouvrira cette adresse."
+          }
+        }
+      }
+    },
+    "Lecteur" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Player"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lecteur"
+          }
+        }
+      }
+    },
+    "Lecture, passage %lld sur %lld…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reading, passage %lld of %lld…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lecture, passage %lld sur %lld…"
           }
         }
       }
@@ -2521,6 +3342,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Les %lld notes qui s'y trouvent sont supprimées définitivement."
+          }
+        }
+      }
+    },
+    "Les deux" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Both"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les deux"
           }
         }
       }
@@ -2713,6 +3550,22 @@
         }
       }
     },
+    "Les voix n'ont pas pu être séparées : %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The voices couldn't be separated: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les voix n'ont pas pu être séparées : %@"
+          }
+        }
+      }
+    },
     "Lien" : {
       "localizations" : {
         "en" : {
@@ -2741,6 +3594,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lien…"
+          }
+        }
+      }
+    },
+    "Lire" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lire"
           }
         }
       }
@@ -2985,6 +3854,38 @@
         }
       }
     },
+    "Micro" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Microphone"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Micro"
+          }
+        }
+      }
+    },
+    "Micro et son du Mac" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Microphone and Mac Sound"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Micro et son du Mac"
+          }
+        }
+      }
+    },
     "Mise en forme" : {
       "localizations" : {
         "en" : {
@@ -3045,6 +3946,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modifier le lien…"
+          }
+        }
+      }
+    },
+    "Moi" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Me"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moi"
           }
         }
       }
@@ -3125,6 +4042,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nom du dossier"
+          }
+        }
+      }
+    },
+    "Nommer les voix" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name Voices"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nommer les voix"
+          }
+        }
+      }
+    },
+    "Nommer les voix…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name Voices…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nommer les voix…"
           }
         }
       }
@@ -3385,6 +4334,22 @@
         }
       }
     },
+    "Onglets de la note" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Note Tabs"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onglets de la note"
+          }
+        }
+      }
+    },
     "Opération impossible" : {
       "localizations" : {
         "en" : {
@@ -3417,6 +4382,22 @@
         }
       }
     },
+    "Ouvre la note" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the note"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvre la note"
+          }
+        }
+      }
+    },
     "Ouvrir Void Notes" : {
       "localizations" : {
         "en" : {
@@ -3429,6 +4410,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ouvrir Void Notes"
+          }
+        }
+      }
+    },
+    "Ouvrir la note" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open the Note"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir la note"
           }
         }
       }
@@ -3465,6 +4462,39 @@
         }
       }
     },
+    "Pas encore arrivé" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not here yet"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas encore arrivé"
+          }
+        }
+      }
+    },
+    "Pause" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause"
+          }
+        }
+      }
+    },
     "Personnel" : {
       "localizations" : {
         "en" : {
@@ -3497,6 +4527,54 @@
         }
       }
     },
+    "Plus" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus"
+          }
+        }
+      }
+    },
+    "Points clés" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key Points"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Points clés"
+          }
+        }
+      }
+    },
+    "Position" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position"
+          }
+        }
+      }
+    },
     "Pour écrire une note sans ouvrir la fenêtre. Void Notes reste alors ouvert quand la fenêtre est fermée." : {
       "localizations" : {
         "en" : {
@@ -3509,6 +4587,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pour écrire une note sans ouvrir la fenêtre. Void Notes reste alors ouvert quand la fenêtre est fermée."
+          }
+        }
+      }
+    },
+    "Préparation de l'écoute…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Getting ready to listen…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Préparation de l'écoute…"
           }
         }
       }
@@ -3589,6 +4683,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rechercher dans les notes"
+          }
+        }
+      }
+    },
+    "Reculer de 10 secondes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back 10 Seconds"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reculer de 10 secondes"
           }
         }
       }
@@ -3685,6 +4795,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Repliées"
+          }
+        }
+      }
+    },
+    "Reprendre" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resume"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reprendre"
           }
         }
       }
@@ -3833,6 +4959,22 @@
         }
       }
     },
+    "Rédaction du résumé…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Writing the summary…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rédaction du résumé…"
+          }
+        }
+      }
+    },
     "Réglages" : {
       "localizations" : {
         "en" : {
@@ -3845,6 +4987,102 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Réglages"
+          }
+        }
+      }
+    },
+    "Résumer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summarize"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résumer"
+          }
+        }
+      }
+    },
+    "Résumer la transcription sur le Mac, avec Apple Intelligence" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summarize the transcript on this Mac, with Apple Intelligence"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résumer la transcription sur le Mac, avec Apple Intelligence"
+          }
+        }
+      }
+    },
+    "Résumer à nouveau" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summarize Again"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résumer à nouveau"
+          }
+        }
+      }
+    },
+    "Résumé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summary"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résumé"
+          }
+        }
+      }
+    },
+    "Résumé en cours…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summarizing…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résumé en cours…"
+          }
+        }
+      }
+    },
+    "Résumé impossible" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't Summarize"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résumé impossible"
           }
         }
       }
@@ -3913,6 +5151,22 @@
         }
       }
     },
+    "Seulement %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seulement %@"
+          }
+        }
+      }
+    },
     "Sombre" : {
       "localizations" : {
         "en" : {
@@ -3925,6 +5179,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sombre"
+          }
+        }
+      }
+    },
+    "Son du Mac" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mac Sound"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Son du Mac"
           }
         }
       }
@@ -4037,6 +5307,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Supprimer définitivement… (⇧⌘⌫)"
+          }
+        }
+      }
+    },
+    "Supprimer l'enregistrement ?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete the recording?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer l'enregistrement ?"
+          }
+        }
+      }
+    },
+    "Supprimer l'enregistrement…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Recording…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer l'enregistrement…"
           }
         }
       }
@@ -4393,6 +5695,38 @@
         }
       }
     },
+    "Séparation des voix…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Separating voices…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Séparation des voix…"
+          }
+        }
+      }
+    },
+    "Séparer les voix" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Separate Voices"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Séparer les voix"
+          }
+        }
+      }
+    },
     "Teinte de la fenêtre" : {
       "localizations" : {
         "en" : {
@@ -4537,6 +5871,150 @@
         }
       }
     },
+    "Toutes les voix" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All Voices"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toutes les voix"
+          }
+        }
+      }
+    },
+    "Transcription" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transcript"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transcription"
+          }
+        }
+      }
+    },
+    "Téléchargement du modèle des voix…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloading the voice model…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Téléchargement du modèle des voix…"
+          }
+        }
+      }
+    },
+    "Téléchargement du modèle… %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloading the model… %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Téléchargement du modèle… %@"
+          }
+        }
+      }
+    },
+    "Télécharger" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Télécharger"
+          }
+        }
+      }
+    },
+    "Télécharger le modèle de transcription ?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download the transcription model?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Télécharger le modèle de transcription ?"
+          }
+        }
+      }
+    },
+    "Un appel, une vidéo : tout ce que joue le Mac. macOS demande l'autorisation la première fois." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A call, a video: everything the Mac plays. macOS asks for permission the first time."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un appel, une vidéo : tout ce que joue le Mac. macOS demande l'autorisation la première fois."
+          }
+        }
+      }
+    },
+    "Un dossier d'iCloud Drive propre à la bêta, autre que celui de Void Notes, le même que sur le Mac. Les notes restent aussi sur cet iPhone ; arrêter ne supprime rien." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An iCloud Drive folder of the beta's own, not Void Notes' one, the same as on the Mac. The notes also stay on this iPhone; stopping deletes nothing."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un dossier d'iCloud Drive propre à la bêta, autre que celui de Void Notes, le même que sur le Mac. Les notes restent aussi sur cet iPhone ; arrêter ne supprime rien."
+          }
+        }
+      }
+    },
+    "Un dossier d'iCloud Drive propre à la bêta, autre que celui de Void Notes, le même sur chaque appareil. Les notes restent aussi sur ce Mac ; arrêter ne supprime rien." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An iCloud Drive folder of the beta's own, not Void Notes' one, the same on every device. The notes also stay on this Mac; stopping deletes nothing."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un dossier d'iCloud Drive propre à la bêta, autre que celui de Void Notes, le même sur chaque appareil. Les notes restent aussi sur ce Mac ; arrêter ne supprime rien."
+          }
+        }
+      }
+    },
     "Un dossier d'iCloud Drive, le même sur chaque appareil. Les notes restent aussi sur ce Mac ; arrêter ne supprime rien." : {
       "localizations" : {
         "en" : {
@@ -4569,6 +6047,22 @@
         }
       }
     },
+    "Un fichier AAC léger, environ 12 Mo par heure, joint à la note au-dessus de la transcription. Les voix sont séparées sur le Mac." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A light AAC file, about 12 MB per hour, attached to the note above the transcript. Voices are separated on the Mac."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un fichier AAC léger, environ 12 Mo par heure, joint à la note au-dessus de la transcription. Les voix sont séparées sur le Mac."
+          }
+        }
+      }
+    },
     "Un fichier par note, dans le dossier de l'app. Aucun compte ; rien ne quitte le Mac sans dossier de synchronisation. Une note supprimée reste %lld jours dans la corbeille. Fichier → « Exporter toutes les notes… » les écrit en Markdown, lisibles partout." : {
       "localizations" : {
         "en" : {
@@ -4581,6 +6075,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Un fichier par note, dans le dossier de l'app. Aucun compte ; rien ne quitte le Mac sans dossier de synchronisation. Une note supprimée reste %lld jours dans la corbeille. Fichier → « Exporter toutes les notes… » les écrit en Markdown, lisibles partout."
+          }
+        }
+      }
+    },
+    "Un passage est trop long pour le modèle d'Apple." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A passage is too long for Apple's model."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un passage est trop long pour le modèle d'Apple."
           }
         }
       }
@@ -4613,6 +6123,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Une note verrouillée n'a pas été exportée : ouvrez-la, puis Fichier → « Exporter en Markdown… »."
+          }
+        }
+      }
+    },
+    "Une seule voix entendue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only one voice heard"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une seule voix entendue"
           }
         }
       }
@@ -4841,6 +6367,38 @@
         }
       }
     },
+    "Void Notes n'a pas accès au micro. Autorisez-le dans Réglages Système → Confidentialité et sécurité → Micro." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Void Notes can't use the microphone. Allow it in System Settings → Privacy & Security → Microphone."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Void Notes n'a pas accès au micro. Autorisez-le dans Réglages Système → Confidentialité et sécurité → Micro."
+          }
+        }
+      }
+    },
+    "Void Notes n'a pas accès au micro. Autorisez-le dans Réglages → Apps → Void Notes β → Micro." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Void Notes can't use the microphone. Allow it in Settings → Apps → Void Notes β → Microphone."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Void Notes n'a pas accès au micro. Autorisez-le dans Réglages → Apps → Void Notes β → Micro."
+          }
+        }
+      }
+    },
     "Voir l'image" : {
       "localizations" : {
         "en" : {
@@ -4853,6 +6411,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voir l'image"
+          }
+        }
+      }
+    },
+    "Voix" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voices"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voix"
+          }
+        }
+      }
+    },
+    "Voix %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voice %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voix %lld"
           }
         }
       }
@@ -4901,6 +6491,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "aujourd'hui à %@"
+          }
+        }
+      }
+    },
+    "ce dossier est celui de Void Notes ; choisissez-en un autre pour la bêta" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "this is Void Notes' folder; choose another one for the beta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ce dossier est celui de Void Notes ; choisissez-en un autre pour la bêta"
           }
         }
       }
@@ -4954,6 +6560,7 @@
       }
     },
     "fichiers" : {
+      "comment" : "Folder of a note's files, next to its exported Markdown",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5129,6 +6736,38 @@
         }
       }
     },
+    "À l'écoute" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À l'écoute"
+          }
+        }
+      }
+    },
+    "À la fin de l'écoute, chaque voix est nommée dans la note : « Voix 1 », « Voix 2 »… ou « Moi » et « Eux » avec le son du Mac." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When listening ends, each voice is named in the note: “Voice 1”, “Voice 2”… or “Me” and “Them” with the Mac's sound."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À la fin de l'écoute, chaque voix est nommée dans la note : « Voix 1 », « Voix 2 »… ou « Moi » et « Eux » avec le son du Mac."
+          }
+        }
+      }
+    },
     "Échec : %@" : {
       "localizations" : {
         "en" : {
@@ -5141,6 +6780,231 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Échec : %@"
+          }
+        }
+      }
+    },
+    "Écoute" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute"
+          }
+        }
+      }
+    },
+    "Écoute %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recording %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute %@"
+          }
+        }
+      }
+    },
+    "Écoute (bêta)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening (beta)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute (bêta)"
+          }
+        }
+      }
+    },
+    "Écoute commencée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening started"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute commencée"
+          }
+        }
+      }
+    },
+    "Écoute du %@ à %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening on %@ at %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute du %@ à %@"
+          }
+        }
+      }
+    },
+    "Écoute impossible" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can't Listen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute impossible"
+          }
+        }
+      }
+    },
+    "Écoute interrompue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening interrupted"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute interrompue"
+          }
+        }
+      }
+    },
+    "Écoute reprise" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening resumed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute reprise"
+          }
+        }
+      }
+    },
+    "Écoute terminée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listening ended"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute terminée"
+          }
+        }
+      }
+    },
+    "Écouter" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écouter"
+          }
+        }
+      }
+    },
+    "Écouter en" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listen in"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écouter en"
+          }
+        }
+      }
+    },
+    "Écouter et transcrire" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listen and Transcribe"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écouter et transcrire"
+          }
+        }
+      }
+    },
+    "Écouter et transcrire (⇧⌘D)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listen and transcribe (⇧⌘D)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écouter et transcrire (⇧⌘D)"
+          }
+        }
+      }
+    },
+    "Écouter et transcrire…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listen and Transcribe…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écouter et transcrire…"
           }
         }
       }

@@ -92,6 +92,13 @@ final class SyncEngine {
     /// A new folder: the first synchronisation does as a first device would (no file: what is
     /// here is written; a file: both are put together).
     func useFolder(_ url: URL) async {
+        #if BETA
+        // The beta keeps its notes apart: never in the folder Void Notes synchronises with.
+        guard !BetaFolder.isVoidNotesFolder(url) else {
+            status = .failed(BetaFolder.refusal)
+            return
+        }
+        #endif
         do {
             try SyncFolderAccess.remember(url)
         } catch {
@@ -99,6 +106,9 @@ final class SyncEngine {
             status = .failed(error.localizedDescription)
             return
         }
+        #if BETA
+        BetaFolder.mark(url)
+        #endif
         folderURL?.stopAccessingSecurityScopedResource()
         state.reset()
         connectFolder()
@@ -391,7 +401,7 @@ final class SyncEngine {
     private func syncAttachments() async {
         guard let folderURL else { return }
         let wanted = (store.notes + store.trash).compactMap { note -> (note: UUID, names: [String])? in
-            let names = Array(Set(note.attachments + note.photos))
+            let names = Array(Set(note.attachments + note.photos + note.recordings))
             return names.isEmpty ? nil : (note.id, names)
         }
         let deleted = Set(state.tracker.deletedAt.keys.compactMap(UUID.init(uuidString:)))

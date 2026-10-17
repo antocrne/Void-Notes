@@ -1,5 +1,7 @@
 #if DEBUG
 import AppKit
+import AVFoundation
+import SwiftUI
 
 /// Debug builds only, on the Mac: what the launch arguments of `DebugLaunch` do to the window —
 /// `-snapshot name` writes a picture of it (and of Réglages with `-showSettings YES`) in the
@@ -82,6 +84,69 @@ extension DebugLaunch {
                 editor.setSelectedRange(NSRange(location: 0, length: 0))
             }
         }
+        #if BETA
+        // `-listening YES`: listening in the note shown — two sentences heard, words in flight.
+        if UserDefaults.standard.bool(forKey: "listening") {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                guard let id = NotesModel.shared.selectedID else { return }
+                let listener = Listener.shared
+                listener.pretend(in: id, words: "et pour la suite nous verrons avec l'équipe", levels: [0.2, 0.55, 0.8, 0.45, 0.65],
+                                 startedAt: .now.addingTimeInterval(-134))
+                listener.pretendHeard("Le budget de l'année est validé.", from: 0, to: 2)
+                listener.pretendHeard("On se revoit mardi avec les maquettes.", from: 2.4, to: 4)
+                NotesModel.shared.editor?.scrollToEndOfDocument(nil)
+            }
+        }
+        // `-recording YES`: a new note, a listening of two voices ended in it — the names written in
+        // its transcript, its recording in the note's section and open in the player, 42 s in
+        // (`-nameVoices YES`: naming them).
+        if UserDefaults.standard.bool(forKey: "recording") {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                NotesModel.shared.newNote()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    guard let id = NotesModel.shared.selectedID else { return }
+                    let listener = Listener.shared
+                    listener.pretend(in: id)
+                    listener.pretendHeard("Le budget de l'année est validé.", from: 0, to: 2)
+                    listener.pretendHeard("Et pour les embauches ?", from: 2.4, to: 4)
+                    listener.pretendHeard("Deux personnes au printemps, une à l'automne.", from: 7, to: 10)
+                    let file = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("demo-\(UUID().uuidString).aac")
+                    if let format = AVAudioFormat(commonFormat: .pcmFormatInt16, sampleRate: 16_000, channels: 1, interleaved: false),
+                       let recorder = try? Recorder(url: file, format: format),
+                       let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: 16_000 * 60) {
+                        buffer.frameLength = buffer.frameCapacity
+                        for _ in 0..<3 { recorder.write(buffer) }
+                        recorder.close()
+                    }
+                    Task { @MainActor in
+                        await listener.endPretending(speakers: ["Voix 1", "Voix 2", "Voix 1"], files: [file])
+                        if let note = NoteStore.shared.note(id), let name = note.recordings.first {
+                            AudioPlayback.shared.open(NoteStore.shared.attachmentsDirectory(of: id).appendingPathComponent(name), of: id, at: 42)
+                        }
+                        // `-summarized YES`: and summarised (a summary written here, not by the model).
+                        if UserDefaults.standard.bool(forKey: "summarized") {
+                            let summary = NoteSummary(brief: "Le budget de l'année est validé. Trois embauches sont prévues : deux au printemps, une à l'automne. Voix 1 publiera les offres d'emploi.")
+                            NoteStore.shared.update(id, part: .summary, content: NoteMarkdown.content(fromMarkdown: summary.markdown))
+                        }
+                        // `-tab notes|transcript|summary`: that tab shown.
+                        if let tab = UserDefaults.standard.string(forKey: "tab").flatMap(NotePart.init) { NoteTabs.shared.show(tab, in: id) }
+                        // `-nameVoices YES`: and « Nommer les voix » open.
+                        if UserDefaults.standard.bool(forKey: "nameVoices") {
+                            RecordingRequests.shared.naming = .init(voices: ["Voix 1", "Voix 2"]) { _ in }
+                        }
+                    }
+                }
+            }
+        }
+        // `-listenOptions YES`: what the note's listening button offers, in a window of its own.
+        if UserDefaults.standard.bool(forKey: "listenOptions") {
+            let panel = NSPanel(contentRect: NSRect(x: 200, y: 200, width: 380, height: 160), styleMask: [.titled], backing: .buffered, defer: false)
+            panel.contentView = NSHostingView(rootView: ListenOptions(listener: .shared, note: NotesModel.shared.selected) {}
+                .environment(AppSettings.shared))
+            panel.setContentSize(panel.contentView?.fittingSize ?? panel.frame.size)
+            panel.orderFront(nil)
+        }
+        #endif
         // Time for what was typed to be read by the spelling checker.
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             for (index, window) in NSApp.windows.filter({ $0.isVisible && $0.contentView != nil }).enumerated() {

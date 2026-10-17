@@ -798,6 +798,12 @@ final class NoteTextView: NSTextView, NSTextViewDelegate {
     /// like any other file.
     var addPhotos: (([URL]) -> Void)?
     var addPhotoData: ((Data, String) -> Void)?
+    #if BETA
+    /// Adds sound files to the note's recordings, out of the text.
+    var addRecordings: (([URL]) -> Void)?
+    /// The tab shown: the note's own text, or its title and its transcript or summary.
+    var part: NotePart = .notes
+    #endif
 
     private static func files(in pasteboard: NSPasteboard) -> [URL] {
         (pasteboard.readObjects(forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: true]) as? [URL]) ?? []
@@ -851,6 +857,13 @@ final class NoteTextView: NSTextView, NSTextViewDelegate {
             if !images.isEmpty { addPhotos(images) }
             files.removeAll { images.contains($0) }
         }
+        #if BETA
+        if let addRecordings {
+            let sounds = files.filter { RecordingText.isAudio($0.lastPathComponent) }
+            if !sounds.isEmpty { addRecordings(sounds) }
+            files.removeAll { sounds.contains($0) }
+        }
+        #endif
         insertAttachments(files.compactMap { attachFile?($0) }, at: range ?? selectedRange())
     }
 
