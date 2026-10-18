@@ -740,13 +740,12 @@ final class NoteUITextView: UITextView, UITextViewDelegate, UIGestureRecognizerD
     }
 
     /// Edits after the listening (the voices named, the summary written), the cursor kept where
-    /// it was.
+    /// it was. Not in an undo group, unlike the Mac: each `replace` forgets the keyboard's undo
+    /// (`didEdit`), which closed the group under it and threw at its end.
     func editRecording(_ edits: [(NSRange, NSAttributedString)]) {
         guard isEditable, !edits.isEmpty else { return }
         let selection = selectedRange
-        undoManager?.beginUndoGrouping()
         for (range, text) in edits.sorted(by: { $0.0.location > $1.0.location }) { replace(range, with: text) }
-        undoManager?.endUndoGrouping()
         let after = RecordingText.selection(selection, after: edits)
         selectedRange = NSRange(location: min(after.location, textStorage.length), length: 0)
         setNeedsLayout()

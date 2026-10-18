@@ -6687,18 +6687,18 @@
         }
       }
     },
-    "Un fichier AAC léger, environ 12 Mo par heure, joint à la note et synchronisé : il s'écoute sur le Mac." : {
+    "Un fichier AAC léger, environ 12 Mo par heure, joint à la note et synchronisé." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A light AAC file, about 12 MB per hour, attached to the note and synced: play it on the Mac."
+            "value" : "A light AAC file, about 12 MB per hour, attached to the note and synced."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Un fichier AAC léger, environ 12 Mo par heure, joint à la note et synchronisé : il s'écoute sur le Mac."
+            "value" : "Un fichier AAC léger, environ 12 Mo par heure, joint à la note et synchronisé."
           }
         }
       }

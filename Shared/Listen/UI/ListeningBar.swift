@@ -256,9 +256,7 @@ struct ListeningAlerts: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            #if os(macOS)
             .modifier(RecordingAlerts())
-            #endif
             .alert("Télécharger le modèle de transcription ?",
                    isPresented: Binding(get: { listener.languageToInstall != nil }, set: { if !$0, listener.phase == .idle { listener.cancelInstall() } })) {
                 Button("Télécharger") { Task { await listener.installModel() } }
@@ -349,7 +347,7 @@ struct ListenSettingsSection: View {
                 #if os(macOS)
                 Text("La séparation des voix se fait sur le Mac ; ses modèles (environ 20 Mo) sont téléchargés une fois, à la première écoute.")
                 #else
-                Text("Un fichier AAC léger, environ 12 Mo par heure, joint à la note et synchronisé : il s'écoute sur le Mac.")
+                Text("Un fichier AAC léger, environ 12 Mo par heure, joint à la note et synchronisé.")
                 #endif
             }
             #if os(macOS)
@@ -363,7 +361,6 @@ struct ListenSettingsSection: View {
     }
 }
 
-#if os(macOS)
 /// What a recording's card asks: its voices' names, whether to delete it.
 private struct RecordingAlerts: ViewModifier {
     private let requests = RecordingRequests.shared
@@ -381,4 +378,3 @@ private struct RecordingAlerts: ViewModifier {
             }
     }
 }
-#endif

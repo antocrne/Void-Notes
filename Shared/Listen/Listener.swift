@@ -152,6 +152,10 @@ final class Listener {
             if source != .mac {
                 guard await Microphone.requestAccess() else { throw ListenError.microphoneDenied }
             }
+            #if os(iOS)
+            // The microphone takes the audio session: a recording being played stops where it is.
+            AudioPlayback.shared.pause()
+            #endif
             let session = try await ListeningSession.start(
                 locale: locale, source: source, recordings: records ? folder : nil,
                 onFinal: { [weak self] channel, text, start, end in self?.heard(HeardSentence(channel: channel, text: text, start: start, end: end)) },
