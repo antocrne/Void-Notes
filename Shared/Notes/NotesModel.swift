@@ -527,6 +527,16 @@ final class NotesModel {
         setPinned(!selected.pinned, for: selected.id)
     }
 
+    // MARK: Tags
+
+    /// As in the Finder: `tag` goes on every one of `ids` — or off them all, when they all
+    /// have it. The selection stays: several colors are often given in a row.
+    func toggleTag(_ tag: NoteTag, for ids: [UUID]) {
+        let notes = ids.compactMap(store.note).filter { !$0.isBlank && !$0.isReadOnly }
+        let on = !notes.allSatisfy { $0.tags.contains(tag) }
+        for note in notes { store.setTag(tag, on, for: note.id) }
+    }
+
     // MARK: Lock
 
     /// The note is locked and hasn't been unlocked: nothing of it shows but its title.

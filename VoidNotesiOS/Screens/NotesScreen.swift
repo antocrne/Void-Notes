@@ -443,6 +443,7 @@ private struct NoteRow: View {
                 if note.locked {
                     Image(systemName: "lock.fill").font(.caption2).foregroundStyle(Theme.secondaryText).accessibilityLabel("Verrouillée")
                 }
+                TagDots(tags: note.tags, size: 8)
                 Spacer(minLength: 0)
                 Text(NoteDate.label(note.modified))
                     .font(.footnote)
@@ -527,6 +528,8 @@ struct NoteMenu: View {
         } else {
             Button("Verrouiller", systemImage: "lock") { model.lock(note.id) }
         }
+        Divider()
+        TagPalette(notes: [note])
         if !note.isBlank && !model.isConcealed(note) {
             ShareLink(item: MarkdownFile(note: note), preview: SharePreview(note.title)) {
                 Label("Exporter en Markdown", systemImage: "square.and.arrow.up")

@@ -23,6 +23,7 @@ enum SelfTest {
         trash()
         archive()
         pin()
+        tags()
         lock()
         imports()
         attachments()
@@ -597,6 +598,44 @@ enum SelfTest {
 
     // MARK: Pin
 
+    private static func tags() {
+        let directory = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("selftest-\(UUID().uuidString)/notes")
+        defer { try? FileManager.default.removeItem(at: directory.deletingLastPathComponent()) }
+        let store = NoteStore(directory: directory)
+        let tart = store.create(), shopping = store.create()
+        store.update(tart.id, content: NoteContent(text: "Tarte aux pommes"))
+        store.update(shopping.id, content: NoteContent(text: "Courses"))
+        let model = NotesModel(store: store, settings: nil)
+        let modified = store.note(tart.id)!.modified
+
+        model.toggleTag(.blue, for: [tart.id])
+        model.toggleTag(.red, for: [tart.id])
+        check("Tags : une note en prend plusieurs, dans l'ordre du Finder, sans changer de date", store.note(tart.id)?.tags == [.red, .blue]
+              && store.note(tart.id)?.modified == modified)
+        model.toggleTag(.blue, for: [tart.id])
+        check("Tags : recliquée, la couleur s'enlève", store.note(tart.id)?.tags == [.red])
+
+        model.toggleTag(.green, for: [tart.id, shopping.id])
+        model.toggleTag(.red, for: [tart.id, shopping.id])
+        check("Tags : la sélection la prend d'un coup, si une seule ne l'a pas", store.note(tart.id)?.tags == [.red, .green] && store.note(shopping.id)?.tags == [.red, .green])
+        model.toggleTag(.green, for: [tart.id, shopping.id])
+        check("Tags : toutes l'ont, la sélection la perd", store.note(tart.id)?.tags == [.red] && store.note(shopping.id)?.tags == [.red])
+
+        store.flush()
+        let url = directory.appendingPathComponent("\(tart.id.uuidString).json")
+        let file = (try? String(contentsOf: url, encoding: .utf8)) ?? ""
+        let reloaded = NoteStore(directory: directory)
+        check("Tags : enregistrés et relus", file.contains("\"tags\" : [") && reloaded.note(tart.id)?.tags == [.red], file)
+        // A color of a later version is left out; the note still reads.
+        try? file.replacingOccurrences(of: "\"red\"", with: "\"indigo\", \"red\"").write(to: url, atomically: true, encoding: .utf8)
+        check("Tags : une couleur inconnue est ignorée", NoteStore(directory: directory).note(tart.id)?.tags == [.red])
+
+        let empty = store.create()
+        model.toggleTag(.red, for: [empty.id])
+        check("Tags : une note vide n'en prend pas", store.note(empty.id)?.tags == [])
+        store.delete(empty.id)
+    }
+
     private static func pin() {
         let directory = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("selftest-\(UUID().uuidString)/notes")
         defer { try? FileManager.default.removeItem(at: directory.deletingLastPathComponent()) }
@@ -924,11 +963,12 @@ enum SelfTest {
         phone.move(second.id, to: home.id)
         phone.setArchived(true, for: first.id)
         phone.setPinned(true, for: second.id)
+        phone.setTag(.orange, true, for: second.id)
         mac.renameFolder(work.id, to: "Bureau")
         let perso = mac.createSpace(named: "Loisirs", icon: "leaf")
         await both()
         check("Synchro : rangement, archivage, épinglage, dossiers et espaces", mac.note(second.id)?.folder == home.id && mac.note(first.id)?.archived == true
-              && mac.note(second.id)?.pinned == true
+              && mac.note(second.id)?.pinned == true && mac.note(second.id)?.tags == [.orange]
               && Set(phone.folders.map(\.name)) == ["Bureau", "Maison"] && phone.spaces.map(\.name) == ["Personnel", "Loisirs"] && phone.space(perso.id) != nil,
               "\(phone.folders.map(\.name)) \(phone.spaces.map(\.name))")
         check("Synchro : ranger une note ne change pas sa date", mac.note(second.id)?.modified == phone.note(second.id)?.modified)

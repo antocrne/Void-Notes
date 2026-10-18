@@ -345,6 +345,7 @@ private struct NoteRow: View {
                 .lineLimit(1)
             if note.pinned { TitleMark(symbol: "pin.fill") }
             if note.locked { TitleMark(symbol: "lock.fill") }
+            TagDots(tags: note.tags, size: 7)
             Spacer(minLength: 0)
             Text(NoteDate.label(note.modified))
                 .font(.system(size: 11))
@@ -415,13 +416,15 @@ private struct NoteRow: View {
                         .disabled(note.isBlank || note.isReadOnly)
                 }
                 Divider()
+                TagPalette(notes: [note])
+                Divider()
                 Button("Mettre à la corbeille", role: .destructive) { withAnimation(Theme.quick) { model.delete(note) } }
                     .disabled(note.isReadOnly)
             }
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(note.isBlank ? String(localized: "Nouvelle note") : note.title)
-        .accessibilityValue([note.pinned ? String(localized: "Épinglée") : nil, note.locked ? String(localized: "Verrouillée") : nil, NoteDate.label(note.modified)].compactMap { $0 }.joined(separator: ", "))
+        .accessibilityValue([note.pinned ? String(localized: "Épinglée") : nil, note.locked ? String(localized: "Verrouillée") : nil, TagDots.label(note.tags), NoteDate.label(note.modified)].compactMap { $0 }.joined(separator: ", "))
         .accessibilityAddTraits(selected ? [.isButton, .isSelected] : .isButton)
         .accessibilityAction { model.open(note.id) }
     }
@@ -526,6 +529,8 @@ struct SelectionMenu: View {
         Button("Archiver") { withAnimation(Theme.quick) { model.archiveSelection() } }
             .disabled(notes.allSatisfy(\.archived))
         Button("Tout désélectionner") { model.clearSelection() }
+        Divider()
+        TagPalette(notes: notes)
         Divider()
         Button(model.selectedFolders.isEmpty ? "Mettre à la corbeille" : "Supprimer…", role: .destructive) {
             withAnimation(Theme.quick) { model.askToDeleteSelection() }

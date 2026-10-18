@@ -2966,6 +2966,22 @@
         }
       }
     },
+    "Gris" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gray"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gris"
+          }
+        }
+      }
+    },
     "Hier" : {
       "localizations" : {
         "en" : {
@@ -3282,6 +3298,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Italique (⌘I)"
+          }
+        }
+      }
+    },
+    "Jaune" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yellow"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jaune"
           }
         }
       }
@@ -5755,6 +5787,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rose"
+          }
+        }
+      }
+    },
+    "Rouge" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Red"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rouge"
           }
         }
       }

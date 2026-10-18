@@ -12,6 +12,8 @@ enum DebugLaunch {
     static var isRequested: Bool { isDemo || isSelfTest || snapshotName != nil }
     /// `-pinned YES`: "Liste de courses" is pinned at the top of the list.
     static var pinsDemoNote: Bool { UserDefaults.standard.bool(forKey: "pinned") }
+    /// `-tags YES`: some sample notes wear colored tags.
+    static var tagsDemoNotes: Bool { UserDefaults.standard.bool(forKey: "tags") }
 
     // MARK: Sample notes
 
@@ -45,6 +47,7 @@ enum DebugLaunch {
             var note = note
             note.folder = folder
             note.pinned = pinsDemoNote && note.title == "Liste de courses"
+            if tagsDemoNotes { note.tags = ["Carnet de voyage — Lisbonne": [.orange], "Réunion du lundi": [.red, .blue], "Liste de courses": [.green]][note.title] ?? [] }
             return note
         } + [studio, deleted, archived]
     }

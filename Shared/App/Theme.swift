@@ -146,6 +146,25 @@ enum Theme {
     static func accentSoftNS(_ choice: AccentChoice) -> PlatformColor { palettes[choice]!.softNS }
     static func swatch(_ choice: AccentChoice) -> Color { palettes[choice]!.accent }
 
+    // MARK: Tags
+
+    /// The colors of the tags: the Finder's seven, a little softer, but brighter than the accents
+    /// so that they still tell apart as small dots.
+    static func tag(_ tag: NoteTag) -> Color { tags[tag]! }
+
+    private static let tags: [NoteTag: Color] = Dictionary(uniqueKeysWithValues: NoteTag.allCases.map { tag in
+        let (light, dark): (UInt32, UInt32) = switch tag {
+        case .red: (0xE5737A, 0xF08A8F)
+        case .orange: (0xE59A5C, 0xF0AE78)
+        case .yellow: (0xD9B940, 0xE8CB5E)
+        case .green: (0x6DBA80, 0x86CE98)
+        case .blue: (0x6FA3E8, 0x8DB8F2)
+        case .purple: (0xA98BE0, 0xBDA3EE)
+        case .gray: (0x9A9AA3, 0xA4A4AE)
+        }
+        return (tag, dynamic(light: PlatformColor(hex: light), dark: PlatformColor(hex: dark)))
+    })
+
     // MARK: Logo (brand colors, fixed)
 
     static let logoGradient = [PlatformColor(hex: 0xF4F1FF), PlatformColor(hex: 0x9D8FFF), PlatformColor(hex: 0x4B3FD0)].map { Color(platform: $0) }
