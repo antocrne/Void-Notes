@@ -93,6 +93,25 @@ enum NotePart: String, CaseIterable {
     case notes, transcript, summary
 }
 
+/// A color a note is marked with, as the Finder's tags: several on one note, shown as dots after
+/// its title. Only notes have them, not folders.
+enum NoteTag: String, CaseIterable, Identifiable {
+    case red, orange, yellow, green, blue, purple, gray
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .red: String(localized: "Rouge")
+        case .orange: String(localized: "Orange")
+        case .yellow: String(localized: "Jaune")
+        case .green: String(localized: "Vert")
+        case .blue: String(localized: "Bleu")
+        case .purple: String(localized: "Violet")
+        case .gray: String(localized: "Gris")
+        }
+    }
+}
+
 struct Note: Identifiable, Equatable {
     let id: UUID
     var created: Date
@@ -117,6 +136,8 @@ struct Note: Identifiable, Equatable {
     /// Pinned at the top of the list, above "Toutes les notes" and the folders — and out of its
     /// folder there, so that it shows once. Archiving a note unpins it.
     var pinned = false
+    /// Its colors, in the order of `NoteTag.allCases`, each once.
+    var tags: [NoteTag] = []
     /// Shown only after Touch ID (or the Mac's password). The list still says its title; nothing
     /// else of it shows, and the search doesn't read its text.
     var locked = false { didSet { summarize() } }

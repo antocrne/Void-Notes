@@ -20,6 +20,9 @@ struct NoteFile: Codable, Equatable {
     var locked: Bool?
     var archived: Bool?
     var pinned: Bool?
+    /// The raw values of its `NoteTag`s: a color a later version adds is left out, not an
+    /// unreadable file.
+    var tags: [String]?
 
     init(_ note: Note) {
         id = note.id
@@ -37,6 +40,7 @@ struct NoteFile: Codable, Equatable {
         locked = note.locked ? true : nil
         archived = note.archived ? true : nil
         pinned = note.pinned ? true : nil
+        tags = note.tags.isEmpty ? nil : note.tags.map(\.rawValue)
     }
 
     var note: Note {
@@ -50,6 +54,8 @@ struct NoteFile: Codable, Equatable {
         note.locked = locked ?? false
         note.archived = archived ?? false
         note.pinned = pinned ?? false
+        let tags = Set((tags ?? []).compactMap(NoteTag.init(rawValue:)))
+        note.tags = NoteTag.allCases.filter(tags.contains)
         return note
     }
 }
@@ -67,8 +73,8 @@ struct NoteFile: Codable, Equatable {
 final class NoteStore {
     /// 2: dividers, highlighting, weights. 3: the note's folder. 4: its space. 5: the trash and
     /// attachments. 6: the "Source :" line. 7: the album of images. 8: locked notes. 9: archived notes. 10: links. 11: pinned notes. 12: struck-through text, inline code, indented list items. 13: the recordings, the
-    /// transcript and the summary (0.2.1). Earlier files read as they are.
-    nonisolated static let formatVersion = 13
+    /// transcript and the summary (0.2.1). 14: the colored tags. Earlier files read as they are.
+    nonisolated static let formatVersion = 14
     /// A note stays this long in the trash before it is deleted for good.
     nonisolated static let trashDays = 30
     /// Typing pauses this long before the note is written.
@@ -334,6 +340,17 @@ final class NoteStore {
         guard let index = notes.firstIndex(where: { $0.id == id }), !notes[index].isReadOnly, !notes[index].isBlank,
               notes[index].pinned != pinned, !(pinned && notes[index].archived) else { return }
         notes[index].pinned = pinned
+        save(id)
+    }
+
+    // MARK: Tags
+
+    /// Marks a note with a color, or takes it off. Like filing, it leaves the note's date alone.
+    func setTag(_ tag: NoteTag, _ on: Bool, for id: UUID) {
+        guard let index = notes.firstIndex(where: { $0.id == id }), !notes[index].isReadOnly, !notes[index].isBlank,
+              notes[index].tags.contains(tag) != on else { return }
+        let tags = Set(notes[index].tags).symmetricDifference([tag])
+        notes[index].tags = NoteTag.allCases.filter(tags.contains)
         save(id)
     }
 
