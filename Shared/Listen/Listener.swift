@@ -99,6 +99,11 @@ final class Listener {
         return false
     }
 
+    /// macOS 26 or iOS 26, whether the device transcribes or not.
+    static var systemIsRecent: Bool {
+        if #available(macOS 26, iOS 26, *) { true } else { false }
+    }
+
     var isActive: Bool { phase != .idle }
 
     /// Listening, or about to: what the note's button stops.

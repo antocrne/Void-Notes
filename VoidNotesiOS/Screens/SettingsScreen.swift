@@ -18,6 +18,7 @@ struct SettingsScreen: View {
                 languageSection
                 listSection
                 writingSection
+                ListenSettingsSection()
                 syncSection
                 notesSection
             }

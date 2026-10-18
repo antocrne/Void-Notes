@@ -249,7 +249,8 @@ struct ListenOptions: View {
 #endif
 
 /// What the listening asks or says: whether to download a language's model, why it couldn't
-/// start — and what a recording's card asks (its voices' names, whether to delete it).
+/// start, why a summary couldn't be written — and what a recording's card asks (its voices'
+/// names, whether to delete it).
 struct ListeningAlerts: ViewModifier {
     let listener: Listener
 
@@ -274,6 +275,11 @@ struct ListeningAlerts: ViewModifier {
                 Button("OK") {}
             } message: {
                 Text(listener.notice ?? "")
+            }
+            .alert("Résumé impossible", isPresented: Binding(get: { NoteSummaries.shared.errorMessage != nil }, set: { if !$0 { NoteSummaries.shared.errorMessage = nil } })) {
+                Button("OK") {}
+            } message: {
+                Text(NoteSummaries.shared.errorMessage ?? "")
             }
     }
 }
@@ -305,6 +311,9 @@ struct ListenSettingsSection: View {
                     #else
                     Text("Ce qui est dit est écrit dans la note, sur l'appareil. Le bouton ondes de la note propose la langue à chaque écoute.")
                     #endif
+                } else if Listener.systemIsRecent {
+                    // The system is recent enough, the device has no transcriber (a simulator).
+                    Text("Cet appareil ne propose pas la transcription d'Apple sur l'appareil.")
                 } else {
                     #if os(macOS)
                     Text("L'écoute demande macOS 26 ou plus récent.")
@@ -340,7 +349,7 @@ struct ListenSettingsSection: View {
                 #if os(macOS)
                 Text("La séparation des voix se fait sur le Mac ; ses modèles (environ 20 Mo) sont téléchargés une fois, à la première écoute.")
                 #else
-                Text("Un fichier AAC léger, environ 12 Mo par heure, joint à la note au-dessus de la transcription. Les voix sont séparées sur le Mac.")
+                Text("Un fichier AAC léger, environ 12 Mo par heure, joint à la note et synchronisé : il s'écoute sur le Mac.")
                 #endif
             }
             #if os(macOS)
@@ -369,11 +378,6 @@ private struct RecordingAlerts: ViewModifier {
                 Button("Annuler", role: .cancel) {}
             } message: {
                 Text("Le son quitte la note ; la transcription reste. Le fichier est effacé au prochain lancement.")
-            }
-            .alert("Résumé impossible", isPresented: Binding(get: { NoteSummaries.shared.errorMessage != nil }, set: { if !$0 { NoteSummaries.shared.errorMessage = nil } })) {
-                Button("OK") {}
-            } message: {
-                Text(NoteSummaries.shared.errorMessage ?? "")
             }
     }
 }

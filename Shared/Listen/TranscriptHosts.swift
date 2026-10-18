@@ -44,8 +44,7 @@ import UIKit
 extension NoteUITextView: TranscriptHost {
     var transcriptStorage: NSTextStorage? { textStorage }
     var isShown: Bool { window != nil }
-    /// The iPhone shows no tabs: the transcript goes to the note saved.
-    var shownPart: NotePart { .notes }
+    var shownPart: NotePart { part }
     var caret: Int { selectedRange.location }
     var isComposing: Bool { markedTextRange != nil }
 }

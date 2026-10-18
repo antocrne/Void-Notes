@@ -675,6 +675,22 @@
         }
       }
     },
+    "Apple Intelligence est désactivé. Activez-le dans Réglages pour résumer sur l'iPhone." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence is turned off. Turn it on in Settings to summarize on the iPhone."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence est désactivé. Activez-le dans Réglages pour résumer sur l'iPhone."
+          }
+        }
+      }
+    },
     "Apple Intelligence n'a pas rendu de résumé lisible. Réessayez." : {
       "localizations" : {
         "en" : {
@@ -1200,6 +1216,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ce qui est dit est écrit dans la note, sur l'appareil. Le son du Mac fait entendre un appel ou une vidéo ; l'écho des haut-parleurs dans le micro est retiré. Le bouton ondes de la note propose la langue et la source à chaque écoute."
+          }
+        }
+      }
+    },
+    "Cet appareil ne propose pas la transcription d'Apple sur l'appareil." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This device doesn't offer Apple's on-device transcription."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cet appareil ne propose pas la transcription d'Apple sur l'appareil."
+          }
+        }
+      }
+    },
+    "Cet iPhone ne peut pas faire tourner Apple Intelligence." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This iPhone can't run Apple Intelligence."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cet iPhone ne peut pas faire tourner Apple Intelligence."
           }
         }
       }
@@ -5519,6 +5567,22 @@
         }
       }
     },
+    "Résume la transcription sur l'iPhone, avec Apple Intelligence" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summarizes the transcript on the iPhone, with Apple Intelligence"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résume la transcription sur l'iPhone, avec Apple Intelligence"
+          }
+        }
+      }
+    },
     "Résumer" : {
       "localizations" : {
         "en" : {
@@ -6623,18 +6687,18 @@
         }
       }
     },
-    "Un fichier AAC léger, environ 12 Mo par heure, joint à la note au-dessus de la transcription. Les voix sont séparées sur le Mac." : {
+    "Un fichier AAC léger, environ 12 Mo par heure, joint à la note et synchronisé : il s'écoute sur le Mac." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A light AAC file, about 12 MB per hour, attached to the note above the transcript. Voices are separated on the Mac."
+            "value" : "A light AAC file, about 12 MB per hour, attached to the note and synced: play it on the Mac."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Un fichier AAC léger, environ 12 Mo par heure, joint à la note au-dessus de la transcription. Les voix sont séparées sur le Mac."
+            "value" : "Un fichier AAC léger, environ 12 Mo par heure, joint à la note et synchronisé : il s'écoute sur le Mac."
           }
         }
       }

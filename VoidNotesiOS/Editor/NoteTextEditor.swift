@@ -74,6 +74,8 @@ struct NoteTextEditor: UIViewRepresentable {
     let onOpenFile: (URL) -> Void
     /// true: something is typed, the buttons over the note fade; false: it's scrolled or touched.
     var onWriting: (Bool) -> Void = { _ in }
+    /// The tab shown: the note's own text, or its title and its transcript or summary.
+    var part: NotePart = .notes
     let onChange: (NoteContent) -> Void
 
     func makeUIView(context: Context) -> NoteUITextView {
@@ -83,7 +85,8 @@ struct NoteTextEditor: UIViewRepresentable {
         let id = note.id
         textView.attachmentsDirectory = store.attachmentsDirectory(of: id)
         textView.addPhotoData = { [store] in store.addPhoto($0, named: $1, to: id) }
-        textView.load(note.content)
+        textView.part = part
+        textView.load(note.composite(part))
         if note.deleted != nil { textView.dimText() }
         textView.onTyping = { [onWriting] in onWriting(true) }
         textView.onTouch = { [onWriting] in onWriting(false) }
@@ -92,7 +95,8 @@ struct NoteTextEditor: UIViewRepresentable {
         controller.textView = textView
         textView.onSelectionChange = { [controller] in controller.refresh() }
 
-        let album = UIHostingController(rootView: NotePhotoAlbumSection(noteID: id, store: store))
+        // The album, then the tabs: under the title, out of the text.
+        let album = UIHostingController(rootView: NoteSections(noteID: id, store: store))
         album.view.backgroundColor = .clear
         album.safeAreaRegions = []
         textView.album = album.view
@@ -108,8 +112,11 @@ struct NoteTextEditor: UIViewRepresentable {
         textView.inputAccessoryView = bar.view
         context.coordinator.bar = bar
 
+        // Listening in this note: the words go on in this text view.
+        Listener.shared.register(textView, for: id)
+
         // A note just made takes the keyboard; one that is read doesn't.
-        if note.isBlank, textView.isEditable {
+        if note.isBlank, part == .notes, textView.isEditable {
             DispatchQueue.main.async { [weak textView] in textView?.becomeFirstResponder() }
         }
         return textView
@@ -121,11 +128,15 @@ struct NoteTextEditor: UIViewRepresentable {
         if textView.searchWords != words { textView.searchWords = words }
         let spelling: UITextSpellCheckingType = checksSpelling ? .yes : .no
         if textView.spellCheckingType != spelling { textView.spellCheckingType = spelling }
-        textView.albumHeight = note.photos.isEmpty ? 0 : NotePhotoAlbumSection.height
+        textView.albumHeight = NoteSections.height(of: note)
         textView.meta = note.deleted == nil ? (note.archived ? String(localized: "Archivée  ·  ") : "") + NoteDate.meta(created: note.created, modified: note.modified)
             : NoteDate.trashMeta(daysLeft: store.daysLeft(note))
-        textView.onChange = { [weak textView] in
-            if let textView { onChange(textView.content) }
+        let id = note.id
+        textView.onChange = { [weak textView, part, store] in
+            guard let textView else { return }
+            // A tab: its title is the note's, the rest the part's.
+            if part != .notes { return store.update(id, part: part, composite: textView.content) }
+            onChange(textView.content)
         }
         textView.onOpenFile = onOpenFile
     }

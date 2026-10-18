@@ -38,6 +38,8 @@ struct NotesScreen: View {
                         .padding(.horizontal, 20)
                         .padding(.bottom, 6)
                 }
+                // Listening: above the spaces (in a note, above the keyboard).
+                ListeningOverlay()
                 SpaceBar()
             }
             .background(ChromeBackground().ignoresSafeArea())
@@ -67,6 +69,7 @@ struct NotesScreen: View {
                 NoteScreen()
             }
         }
+        .modifier(ListeningAlerts(listener: .shared))
         .sheet(isPresented: $showsSettings) { SettingsScreen() }
         // A note just put in the trash: « Annuler » for a few seconds, above the spaces.
         .overlay(alignment: .bottom) {
