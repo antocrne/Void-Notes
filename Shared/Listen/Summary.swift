@@ -1,5 +1,5 @@
 import Foundation
-#if os(macOS)
+#if canImport(FoundationModels)
 import FoundationModels
 import SwiftUI
 
@@ -31,17 +31,17 @@ final class NoteSummaries {
     /// Why the summary couldn't be written.
     var errorMessage: String?
 
-    /// This Mac's system can summarise (macOS 26); whether Apple Intelligence is on is said on
-    /// trying.
+    /// This system can summarise (macOS 26, iOS 26); whether Apple Intelligence is on is said
+    /// on trying.
     static var isAvailable: Bool {
-        if #available(macOS 26, *) { true } else { false }
+        if #available(macOS 26, iOS 26, *) { true } else { false }
     }
 
     /// A transcript shorter than this has nothing to summarise.
     static let shortest = 80
 
     func summarize(_ id: UUID) {
-        guard #available(macOS 26, *), working == nil else { return }
+        guard #available(macOS 26, iOS 26, *), working == nil else { return }
         let listener = Listener.shared
         let transcript = Self.plain(listener.text(of: id, part: .transcript))
         // What one wrote in the note, after its title.
@@ -94,8 +94,8 @@ enum SummaryError: LocalizedError {
 
 // MARK: - The model
 
-/// Apple Intelligence on this Mac, as Cairn's `AppleScribe` (2026-09), made lighter: no project,
-/// no subjects, no other engine. Nothing leaves the Mac.
+/// Apple Intelligence on this device, as Cairn's `AppleScribe` (2026-09), made lighter: no
+/// project, no subjects, no other engine. Nothing leaves the device.
 ///
 /// The on-device model reads 4,096 tokens, instructions and answer included — about ten minutes
 /// of talk. Longer, the transcript is read in passages: each becomes a paragraph of the summary,
@@ -103,7 +103,7 @@ enum SummaryError: LocalizedError {
 ///
 /// Answers are plain text under fixed headings, read back by `SummaryText`: in structured
 /// generation the small model kept writing until the cap, and invented (Cairn).
-@available(macOS 26, *)
+@available(macOS 26, iOS 26, *)
 struct Summarizer {
     /// Tokens of transcript per call, leaving room for the instructions, the format and the answer.
     /// `VOID_PASSAGE_BUDGET` (debug builds) lowers it, so a short test goes through the passages.
@@ -123,9 +123,17 @@ struct Summarizer {
     static func availability() -> String? {
         switch SystemLanguageModel.default.availability {
         case .available: nil
+        #if os(macOS)
         case .unavailable(.appleIntelligenceNotEnabled): String(localized: "Apple Intelligence est désactivé. Activez-le dans les Réglages Système pour résumer sur le Mac.")
+        #else
+        case .unavailable(.appleIntelligenceNotEnabled): String(localized: "Apple Intelligence est désactivé. Activez-le dans Réglages pour résumer sur l'iPhone.")
+        #endif
         case .unavailable(.modelNotReady): String(localized: "Le modèle d'Apple Intelligence est encore en cours de téléchargement. Réessayez dans un moment.")
+        #if os(macOS)
         case .unavailable(.deviceNotEligible): String(localized: "Ce Mac ne peut pas faire tourner Apple Intelligence.")
+        #else
+        case .unavailable(.deviceNotEligible): String(localized: "Cet iPhone ne peut pas faire tourner Apple Intelligence.")
+        #endif
         case .unavailable: String(localized: "Apple Intelligence n'est pas disponible pour l'instant.")
         }
     }
@@ -210,7 +218,7 @@ struct Summarizer {
 
     private func tokens(_ text: String) async throws -> Int {
         guard !text.isEmpty else { return 0 }
-        if #available(macOS 26.4, *) { return try await model.tokenCount(for: text) }
+        if #available(macOS 26.4, iOS 26.4, *) { return try await model.tokenCount(for: text) }
         // Before 26.4 the model can't count: about three characters a token, in French.
         return text.count / 3 + 1
     }

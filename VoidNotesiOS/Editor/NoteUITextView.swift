@@ -720,6 +720,37 @@ final class NoteUITextView: UITextView, UITextViewDelegate, UIGestureRecognizerD
         setTyping(body)
     }
 
+    // MARK: Listening
+
+    /// The tab shown: the note's own text, or its title and its transcript or summary.
+    var part: NotePart = .notes
+
+    /// Writes what the listening heard (`Listener`) at `location`, formatted like a paste — no
+    /// typing rule reads it. The cursor stays where it is, or goes on after the words, in view,
+    /// if it was there.
+    func insertTranscript(_ text: NSAttributedString, at location: Int) {
+        let selection = selectedRange
+        let follows = selection.length == 0 && selection.location == location
+        replace(NSRange(location: location, length: 0), with: text)
+        if follows {
+            scrollRangeToVisible(selectedRange)
+        } else {
+            selectedRange = TranscriptText.moved(selection, byInserting: text.length, at: location)
+        }
+    }
+
+    /// Edits after the listening (the voices named, the summary written), the cursor kept where
+    /// it was. Not in an undo group, unlike the Mac: each `replace` forgets the keyboard's undo
+    /// (`didEdit`), which closed the group under it and threw at its end.
+    func editRecording(_ edits: [(NSRange, NSAttributedString)]) {
+        guard isEditable, !edits.isEmpty else { return }
+        let selection = selectedRange
+        for (range, text) in edits.sorted(by: { $0.0.location > $1.0.location }) { replace(range, with: text) }
+        let after = RecordingText.selection(selection, after: edits)
+        selectedRange = NSRange(location: min(after.location, textStorage.length), length: 0)
+        setNeedsLayout()
+    }
+
     // MARK: Taps
 
     /// A tap on a checklist box doesn't move the cursor or bring the keyboard.

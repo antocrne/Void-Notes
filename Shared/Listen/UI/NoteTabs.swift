@@ -23,7 +23,6 @@ final class NoteTabs {
     static func hasTabs(_ note: Note) -> Bool { note.transcript != nil || note.summary != nil }
 }
 
-#if os(macOS)
 /// Under the title and the recordings: « Notes », « Transcription », « Résumé » — and, at the
 /// end, the button that writes the summary (or what it is doing).
 struct NoteTabBar: View {
@@ -33,7 +32,15 @@ struct NoteTabBar: View {
     private let summaries = NoteSummaries.shared
 
     /// The bar, its line included.
+    #if os(macOS)
     static let height: CGFloat = 30
+    private static let tabSize: CGFloat = 12.5
+    private static let detailSize: CGFloat = 11.5
+    #else
+    static let height: CGFloat = 40
+    private static let tabSize: CGFloat = 15
+    private static let detailSize: CGFloat = 14
+    #endif
 
     private var note: Note? { store.note(noteID) ?? store.trashed(noteID) }
 
@@ -41,7 +48,7 @@ struct NoteTabBar: View {
         let shown = note.map(tabs.part(of:)) ?? .notes
         ZStack(alignment: .bottom) {
             Rectangle()
-                .fill(Color(nsColor: Theme.dividerNS))
+                .fill(Color(platform: Theme.dividerNS))
                 .frame(height: 1)
                 .accessibilityHidden(true)
             HStack(alignment: .bottom, spacing: 18) {
@@ -64,7 +71,7 @@ struct NoteTabBar: View {
             VStack(spacing: 0) {
                 HStack(spacing: 5) {
                     Text(label)
-                        .font(.system(size: 12.5, weight: selected ? .semibold : .medium))
+                        .font(.system(size: Self.tabSize, weight: selected ? .semibold : .medium))
                         .foregroundStyle(selected ? Theme.primaryText : Theme.secondaryText)
                     if part == .transcript, Listener.shared.isListening(to: noteID) {
                         Circle().fill(Color.red).frame(width: 6, height: 6)
@@ -88,7 +95,7 @@ struct NoteTabBar: View {
             HStack(spacing: 6) {
                 ProgressView().controlSize(.mini)
                 Text(verbatim: summaries.step)
-                    .font(.system(size: 11.5))
+                    .font(.system(size: Self.detailSize))
                     .foregroundStyle(Theme.secondaryText)
                     .lineLimit(1)
             }
@@ -96,14 +103,17 @@ struct NoteTabBar: View {
         } else if NoteSummaries.isAvailable, let note, note.transcript != nil, note.deleted == nil, !note.isReadOnly {
             Button { summaries.summarize(noteID) } label: {
                 Label(note.summary == nil ? "Résumer" : "Résumer à nouveau", systemImage: "sparkles")
-                    .font(.system(size: 11.5, weight: .medium))
+                    .font(.system(size: Self.detailSize, weight: .medium))
                     .foregroundStyle(Theme.accent)
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
             .disabled(summaries.working != nil || Listener.shared.isListening(to: noteID))
+            #if os(macOS)
             .help("Résumer la transcription sur le Mac, avec Apple Intelligence")
+            #else
+            .accessibilityHint("Résume la transcription sur l'iPhone, avec Apple Intelligence")
+            #endif
         }
     }
 }
-#endif

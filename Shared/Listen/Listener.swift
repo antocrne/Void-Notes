@@ -99,6 +99,11 @@ final class Listener {
         return false
     }
 
+    /// macOS 26 or iOS 26, whether the device transcribes or not.
+    static var systemIsRecent: Bool {
+        if #available(macOS 26, iOS 26, *) { true } else { false }
+    }
+
     var isActive: Bool { phase != .idle }
 
     /// Listening, or about to: what the note's button stops.
@@ -147,6 +152,10 @@ final class Listener {
             if source != .mac {
                 guard await Microphone.requestAccess() else { throw ListenError.microphoneDenied }
             }
+            #if os(iOS)
+            // The microphone takes the audio session: a recording being played stops where it is.
+            AudioPlayback.shared.pause()
+            #endif
             let session = try await ListeningSession.start(
                 locale: locale, source: source, recordings: records ? folder : nil,
                 onFinal: { [weak self] channel, text, start, end in self?.heard(HeardSentence(channel: channel, text: text, start: start, end: end)) },

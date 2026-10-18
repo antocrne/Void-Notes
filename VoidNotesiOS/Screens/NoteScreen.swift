@@ -21,20 +21,23 @@ struct NoteScreen: View {
             if let note = model.selected, model.isConcealed(note) {
                 LockedNote(note: note)
             } else if let note = model.selected {
+                let part = NoteTabs.shared.part(of: note)
                 NoteTextEditor(note: note, accent: settings.accent, checksSpelling: settings.checksSpelling, searchQuery: model.query,
                                controller: controller, store: store, onOpenFile: { preview = $0 },
-                               onWriting: { writing in if model.writing != writing { model.writing = writing } }) { content in
+                               onWriting: { writing in if model.writing != writing { model.writing = writing } }, part: part) { content in
                     store.update(note.id, content: content)
                 }
                 // A new editor for each note — and for a note that leaves the trash, which can
                 // be written again, or that another device changed; and when the frame goes from
-                // neutral to tinted or back (its grey changes).
-                .id("\(note.id)\(note.deleted == nil)\(store.revisions[note.id] ?? 0)\(settings.chromeTint == .none)")
+                // neutral to tinted or back (its grey changes); and for each tab.
+                .id("\(note.id)\(note.deleted == nil)\(store.revisions[note.id] ?? 0)\(settings.chromeTint == .none)\(part)")
             } else {
                 Color.clear
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        // Listening: at the foot of the note, above the keyboard; the text ends above it.
+        .safeAreaInset(edge: .bottom, spacing: 0) { ListeningOverlay() }
         // The page goes on under the keyboard (and its rounded corners): no black shows between.
         .background(NoteSurface().ignoresSafeArea())
         .navigationBarTitleDisplayMode(.inline)
@@ -51,6 +54,9 @@ struct NoteScreen: View {
                         EmptyView()
                     } else {
                         Group {
+                            if Listener.isAvailable, !note.isReadOnly {
+                                ListenButton(listener: .shared, note: note)
+                            }
                             if !note.isReadOnly {
                                 Menu {
                                     Button("Photothèque", systemImage: "photo.on.rectangle") { choosingPhotos = true }

@@ -1,9 +1,10 @@
-#if os(macOS)
 import AVFoundation
 import SwiftUI
 
 /// The recordings of the notes, played one at a time for the whole app. Opened from a
-/// recording's card, the player shows at the foot of the note, where the listening bar is.
+/// recording's card, the player shows at the foot of the note, where the listening bar is. On the
+/// iPhone it plays through the audio session (screen locked too), and not while listening: the
+/// microphone has it then.
 @MainActor @Observable
 final class AudioPlayback {
     static let shared = AudioPlayback()
@@ -32,10 +33,24 @@ final class AudioPlayback {
     /// Seconds the ±10 buttons move by.
     static let step: TimeInterval = 10
 
+    private init() {
+        #if os(iOS)
+        watchSession()
+        #endif
+    }
+
     /// "Écoute 2026-10-14 15h02", for "Écoute 2026-10-14 15h02.m4a".
     nonisolated static func title(_ name: String) -> String { (name as NSString).deletingPathExtension }
 
     var isOpen: Bool { url != nil }
+    /// On the iPhone, listening takes the audio session: nothing plays meanwhile.
+    var canPlay: Bool {
+        #if os(iOS)
+        !Listener.shared.isActive
+        #else
+        true
+        #endif
+    }
     var duration: TimeInterval { url.flatMap { durations[$0] } ?? 0 }
     func isPlaying(_ url: URL) -> Bool { self.url == url && isPlaying }
 
@@ -182,6 +197,10 @@ final class AudioPlayback {
         noteID = nil
         onlyVoice = nil
         time = 0
+        #if os(iOS)
+        // The music of another app, paused for the recording, plays on.
+        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        #endif
     }
 
     /// The file is gone from its note: the player closes if it was open on it.
@@ -197,6 +216,12 @@ final class AudioPlayback {
             player.currentTime = spans(of: onlyVoice)[0].start
         }
         followVoice()
+        #if os(iOS)
+        guard canPlay else { return }
+        let session = AVAudioSession.sharedInstance()
+        try? session.setCategory(.playback, mode: .spokenAudio)
+        try? session.setActive(true)
+        #endif
         guard player.play() else { return }
         isPlaying = true
         clock?.cancel()
@@ -206,10 +231,13 @@ final class AudioPlayback {
                 guard let self, let player = self.player else { return }
                 self.followVoice()
                 guard self.isPlaying else { return }
+                let before = self.time
                 self.time = player.currentTime
                 if !player.isPlaying {
-                    // The end: back to the start, ready to play again.
                     self.isPlaying = false
+                    // Stopped before its end — a call, on the iPhone —: paused where it was.
+                    if player.duration - max(before, player.currentTime) > 0.5 { return }
+                    // The end: back to the start, ready to play again.
                     self.time = 0
                     player.currentTime = 0
                     return
@@ -217,6 +245,22 @@ final class AudioPlayback {
             }
         }
     }
+
+    #if os(iOS)
+    @ObservationIgnored private var observers: [NSObjectProtocol] = []
+
+    /// A call or Siri pauses the recording (the clock sees it stop); headphones taken off pause
+    /// it too, rather than play it out loud.
+    private func watchSession() {
+        observers = [
+            NotificationCenter.default.addObserver(forName: AVAudioSession.routeChangeNotification, object: nil, queue: .main) { [weak self] note in
+                let reason = (note.userInfo?[AVAudioSessionRouteChangeReasonKey] as? UInt).flatMap(AVAudioSession.RouteChangeReason.init(rawValue:))
+                guard reason == .oldDeviceUnavailable else { return }
+                MainActor.assumeIsolated { self?.pause() }
+            },
+        ]
+    }
+    #endif
 
     /// "1:05", "1:02:03".
     nonisolated static func clock(_ seconds: TimeInterval) -> String {
@@ -228,6 +272,7 @@ final class AudioPlayback {
 
 // MARK: - The section of the note
 
+#if os(macOS)
 /// Under the title, out of the text: the note's album of images, its recordings, then its tabs
 /// once it has a transcript — each with the line that ends it (the recordings' is the tabs').
 /// Shown in the place the text view keeps for the album.
@@ -267,6 +312,7 @@ struct NoteSections: View {
         .frame(maxHeight: .infinity, alignment: .top)
     }
 }
+#endif
 
 /// The recordings of a note: a card for each, side by side, then a line. The card's play button
 /// opens the player at the foot of the note.
@@ -276,7 +322,12 @@ struct NoteRecordingsSection: View {
     /// Ended by a line of its own — not when the tabs follow, theirs ends it.
     var ruled = true
 
+    #if os(macOS)
     static let cardHeight: CGFloat = 34
+    #else
+    /// A finger's height: the card's buttons are 44 points.
+    static let cardHeight: CGFloat = 44
+    #endif
     /// The cards, and the space under them and the line.
     static func height(ruled: Bool) -> CGFloat { cardHeight + (ruled ? 14 + 1 : 0) }
 
@@ -294,7 +345,7 @@ struct NoteRecordingsSection: View {
             .frame(height: Self.cardHeight)
             if ruled {
                 Rectangle()
-                    .fill(Color(nsColor: Theme.dividerNS))
+                    .fill(Color(platform: Theme.dividerNS))
                     .frame(height: 1)
                     .accessibilityHidden(true)
             }
@@ -305,8 +356,8 @@ struct NoteRecordingsSection: View {
 }
 
 /// A recording, small: a play button and how long it lasts — its name shows on hover, so that
-/// several sit side by side. Its menu (⋯, or a right click) names the voices of the note, shows
-/// the file, or deletes it.
+/// several sit side by side. Its menu (⋯, or a right click — a long press on the iPhone) names
+/// the voices of the note, shows the file (Mac), or deletes it.
 struct RecordingCard: View {
     let noteID: UUID
     let store: NoteStore
@@ -315,27 +366,46 @@ struct RecordingCard: View {
     private let playback = AudioPlayback.shared
     @State private var hovering = false
 
+    #if os(macOS)
+    private static let playSize: CGFloat = 24
+    private static let playFont = Font.system(size: 9.5, weight: .bold)
+    private static let detailFont = Font.system(size: 11).monospacedDigit()
+    private static let moreSize = CGSize(width: 16, height: 24)
+    private static let spacing: CGFloat = 6
+    #else
+    private static let playSize: CGFloat = 32
+    private static let playFont = Font.system(size: 12, weight: .bold)
+    private static let detailFont = Font.system(size: 13).monospacedDigit()
+    private static let moreSize = CGSize(width: 44, height: 44)
+    private static let spacing: CGFloat = 0
+    #endif
+
     private var url: URL { store.attachmentsDirectory(of: noteID).appendingPathComponent(name) }
     private var exists: Bool { FileManager.default.fileExists(atPath: url.path) }
 
     var body: some View {
         let playing = playback.isPlaying(url)
         let open = playback.url == url
-        HStack(spacing: 6) {
+        HStack(spacing: Self.spacing) {
             Button { playback.toggle(url, of: noteID) } label: {
                 Image(systemName: playing ? "pause.fill" : "play.fill")
-                    .font(.system(size: 9.5, weight: .bold))
+                    .font(Self.playFont)
                     .foregroundStyle(Theme.onAccent)
-                    .frame(width: 24, height: 24)
+                    .frame(width: Self.playSize, height: Self.playSize)
                     .background(Circle().fill(Theme.accentFill))
+                    #if os(macOS)
                     .contentShape(Circle())
+                    #else
+                    .frame(width: NoteRecordingsSection.cardHeight, height: NoteRecordingsSection.cardHeight)
+                    .contentShape(Rectangle())
+                    #endif
             }
             .buttonStyle(.plain)
-            .disabled(!exists)
+            .disabled(!exists || !playback.canPlay)
             .help(playing ? "Pause" : "Lire")
             .accessibilityLabel(playing ? "Pause" : "Lire")
             Text(verbatim: detail)
-                .font(.system(size: 11).monospacedDigit())
+                .font(Self.detailFont)
                 .foregroundStyle(exists ? Theme.primaryText : Theme.secondaryText)
                 .lineLimit(1)
                 .fixedSize()
@@ -343,17 +413,22 @@ struct RecordingCard: View {
                 Image(systemName: "ellipsis")
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundStyle(Theme.secondaryText)
-                    .frame(width: 16, height: 24)
+                    .frame(width: Self.moreSize.width, height: Self.moreSize.height)
                     .contentShape(Rectangle())
             }
+            #if os(macOS)
             .menuStyle(.button)
+            #endif
             .buttonStyle(.plain)
             .menuIndicator(.hidden)
             .fixedSize()
             .accessibilityLabel("Plus")
         }
+        // On the iPhone the buttons' own room, a finger wide, is the card's margin.
+        #if os(macOS)
         .padding(.leading, 5)
         .padding(.trailing, 2)
+        #endif
         .frame(height: NoteRecordingsSection.cardHeight)
         .fixedSize(horizontal: true, vertical: false)
         .background {
@@ -380,15 +455,17 @@ struct RecordingCard: View {
 
     @ViewBuilder private var menu: some View {
         Button(playback.isPlaying(url) ? "Pause" : "Lire", systemImage: playback.isPlaying(url) ? "pause" : "play") { playback.toggle(url, of: noteID) }
-            .disabled(!exists)
+            .disabled(!exists || !playback.canPlay)
         Button("Nommer les voix…", systemImage: "person.2") {
             let voices = Listener.shared.voices(in: noteID)
             guard !voices.isEmpty else { return }
             RecordingRequests.shared.naming = .init(voices: voices) { [noteID] names in Listener.shared.renameVoices(names, in: noteID) }
         }
         .disabled(!canEdit || Listener.shared.voices(in: noteID).isEmpty)
+        #if os(macOS)
         Button("Afficher dans le Finder", systemImage: "folder") { NSWorkspace.shared.activateFileViewerSelecting([url]) }
             .disabled(!exists)
+        #endif
         Divider()
         Button("Supprimer l'enregistrement…", systemImage: "trash", role: .destructive) {
             RecordingRequests.shared.deleting = .init { [url, name, noteID, store] in
@@ -426,19 +503,46 @@ struct PlayerBar: View {
     /// Where the knob is being dragged (0...1), before the sound goes there.
     @State private var dragging: Double?
 
+    #if os(macOS)
+    private static let buttonSize: CGFloat = 26
+    private static let spacing: CGFloat = 6
+    private static let playSize: CGFloat = 26
+    private static let playFont = Font.system(size: 12, weight: .bold)
+    private static let symbolFont = Font.system(size: 13, weight: .medium)
+    private static let titleFont = Font.system(size: 12, weight: .semibold)
+    private static let timeFont = Font.system(size: 11).monospacedDigit()
+    /// The line — taller once the voices are drawn under it.
+    private static let lineHeight: CGFloat = 12
+    private static let voicesLineHeight: CGFloat = 16
+    #else
+    /// A finger's size, for each button.
+    private static let buttonSize: CGFloat = 44
+    private static let spacing: CGFloat = 0
+    private static let playSize: CGFloat = 32
+    private static let playFont = Font.system(size: 14, weight: .bold)
+    private static let symbolFont = Font.system(size: 16, weight: .medium)
+    private static let titleFont = Font.system(size: 13, weight: .semibold)
+    private static let timeFont = Font.system(size: 12).monospacedDigit()
+    /// Tall enough to take a finger.
+    private static let lineHeight: CGFloat = 22
+    private static let voicesLineHeight: CGFloat = 24
+    #endif
+
     private var shown: TimeInterval { dragging.map { $0 * playback.duration } ?? playback.time }
 
     var body: some View {
-        HStack(spacing: 6) {
+        HStack(spacing: Self.spacing) {
             Button { playback.playPause() } label: {
                 Image(systemName: playback.isPlaying ? "pause.fill" : "play.fill")
-                    .font(.system(size: 12, weight: .bold))
+                    .font(Self.playFont)
                     .foregroundStyle(Theme.onAccent)
-                    .frame(width: 26, height: 26)
+                    .frame(width: Self.playSize, height: Self.playSize)
                     .background(Circle().fill(Theme.accentFill))
+                    .frame(width: Self.buttonSize, height: Self.buttonSize)
                     .contentShape(Circle())
             }
             .buttonStyle(.plain)
+            .disabled(!playback.canPlay)
             .help(playback.isPlaying ? "Pause" : "Lire")
             .accessibilityLabel(playback.isPlaying ? "Pause" : "Lire")
             plain("gobackward.10", help: "Reculer de 10 secondes") { playback.skip(by: -AudioPlayback.step) }
@@ -451,14 +555,14 @@ struct PlayerBar: View {
                     }
                     Spacer(minLength: 4)
                     Text(verbatim: "\(AudioPlayback.clock(shown)) / \(AudioPlayback.clock(playback.duration))")
-                        .font(.system(size: 11).monospacedDigit())
+                        .font(Self.timeFont)
                         .foregroundStyle(Theme.secondaryText)
                         .fixedSize()
                 }
                 Timeline(fraction: playback.duration > 0 ? shown / playback.duration : 0, dragging: $dragging, voices: strip) { fraction in
                     playback.seek(to: fraction * playback.duration)
                 }
-                .frame(height: playback.turns == nil ? 12 : 16)
+                .frame(height: playback.turns == nil ? Self.lineHeight : Self.voicesLineHeight)
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel("Position")
                 .accessibilityValue(Text(verbatim: "\(AudioPlayback.clock(shown)) / \(AudioPlayback.clock(playback.duration))"))
@@ -470,9 +574,14 @@ struct PlayerBar: View {
             if Voices.isAvailable { voicesButton }
             plain("xmark", help: "Fermer le lecteur") { withAnimation(Theme.quick) { playback.close() } }
         }
+        #if os(macOS)
         .padding(.leading, 12)
         .padding(.trailing, 6)
         .padding(.vertical, 7)
+        #else
+        .padding(.horizontal, 2)
+        .padding(.vertical, 2)
+        #endif
         .frame(maxWidth: 520)
         // The floating look of the listening bar.
         .background {
@@ -492,7 +601,7 @@ struct PlayerBar: View {
         if playback.separating != nil, playback.separating == playback.url {
             ProgressView()
                 .controlSize(.small)
-                .frame(width: 26, height: 26)
+                .frame(width: Self.buttonSize, height: Self.buttonSize)
                 .help(Voices.hasModels ? "Séparation des voix…" : "Téléchargement du modèle des voix…")
                 .accessibilityLabel(Voices.hasModels ? "Séparation des voix…" : "Téléchargement du modèle des voix…")
         } else if playback.turns == nil {
@@ -520,12 +629,14 @@ struct PlayerBar: View {
                 }
             } label: {
                 Image(systemName: playback.onlyVoice == nil ? "person.2.fill" : "person.fill")
-                    .font(.system(size: 13, weight: .medium))
+                    .font(Self.symbolFont)
                     .foregroundStyle(playback.onlyVoice.map { VoiceColors.color(of: $0, in: names) } ?? Theme.accent)
-                    .frame(width: 26, height: 26)
+                    .frame(width: Self.buttonSize, height: Self.buttonSize)
                     .contentShape(Rectangle())
             }
+            #if os(macOS)
             .menuStyle(.button)
+            #endif
             .buttonStyle(.plain)
             .menuIndicator(.hidden)
             .fixedSize()
@@ -549,7 +660,7 @@ struct PlayerBar: View {
     /// The recording's name — and, when it isn't of the note shown, a click goes to its note.
     @ViewBuilder private var title: some View {
         let name = Text(verbatim: playback.url.map { AudioPlayback.title($0.lastPathComponent) } ?? "")
-            .font(.system(size: 12, weight: .semibold))
+            .font(Self.titleFont)
         if let id = playback.noteID, id != model.selectedID, store.note(id) != nil {
             Button { model.open(id) } label: { name.foregroundStyle(Theme.accent).lineLimit(1).truncationMode(.middle) }
                 .buttonStyle(.plain)
@@ -562,9 +673,9 @@ struct PlayerBar: View {
     private func plain(_ symbol: String, help: LocalizedStringKey, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Image(systemName: symbol)
-                .font(.system(size: 13, weight: .medium))
+                .font(Self.symbolFont)
                 .foregroundStyle(Theme.secondaryText)
-                .frame(width: 26, height: 26)
+                .frame(width: Self.buttonSize, height: Self.buttonSize)
                 .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -693,6 +804,7 @@ struct VoiceNamesSheet: View {
     }
 
     var body: some View {
+        #if os(macOS)
         VStack(alignment: .leading, spacing: 14) {
             Text("Nommer les voix").font(.headline)
             Text("Chaque nom change partout dans la note.")
@@ -720,6 +832,34 @@ struct VoiceNamesSheet: View {
         .padding(20)
         .frame(width: 380)
         .tint(Theme.accent)
+        #else
+        NavigationStack {
+            Form {
+                Section {
+                    ForEach(naming.voices.indices, id: \.self) { index in
+                        LabeledContent {
+                            TextField(text: $names[index], prompt: Text(verbatim: naming.voices[index])) { Text(verbatim: naming.voices[index]) }
+                                .multilineTextAlignment(.trailing)
+                                .textInputAutocapitalization(.words)
+                                .submitLabel(.done)
+                        } label: {
+                            Text(verbatim: naming.voices[index]).foregroundStyle(.secondary)
+                        }
+                    }
+                } footer: {
+                    Text("Chaque nom change partout dans la note.")
+                }
+            }
+            .navigationTitle("Nommer les voix")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) { Button("Annuler", role: .cancel) { done() } }
+                ToolbarItem(placement: .confirmationAction) { Button("Renommer") { apply() } }
+            }
+        }
+        .presentationDetents([.medium, .large])
+        .tint(Theme.accent)
+        #endif
     }
 
     private func apply() {
@@ -732,4 +872,3 @@ struct VoiceNamesSheet: View {
         done()
     }
 }
-#endif

@@ -41,6 +41,23 @@
           }
         }
       }
+    },
+    "NSMicrophoneUsageDescription" : {
+      "comment" : "Privacy - Microphone Usage Description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Void Notes listens to the microphone to write what is said in the note. Transcription happens on the iPhone; the recording, if you keep it, is attached to the note."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Void Notes écoute le micro pour écrire dans la note ce qui est dit. La transcription se fait sur l'iPhone ; l'enregistrement, si vous le gardez, est joint à la note."
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
